@@ -7,4 +7,4 @@ This repo will contain the Implementation of CRUD functionality with JWT securit
 
 This project is deployed to GitHub Pages ----> [UserCRUDWithJWT](https://faisalazam.github.io/usercrudwithjwt)
 
-[Link to the project details generated via Maven](site/index.html)
+[Link to the project details generated via Maven](https://faisalazam.github.io/usercrudwithjwt/site/index.html)
