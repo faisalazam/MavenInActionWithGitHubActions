@@ -52,4 +52,16 @@
         </plugins>
     </build>
 
+    <!--    Start -> This plugin is used to create the report for Unit tests    -->
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>3.1.2</version>
+            </plugin>
+        </plugins>
+    </reporting>
+    <!--    End -> This plugin is used to create the report for Unit tests    -->
+
 </project>
