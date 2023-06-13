@@ -1,13 +1,18 @@
 name: 'Setup GitHub Runner with Java and application Code'
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      JAVA_VERSION_TO_INSTALL:
+        required: true
+        type: string
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
+      - name: 'Set up the Oracle JDK `${{ inputs.JAVA_VERSION_TO_INSTALL }}`'
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
-          release: ${{ JAVA_VERSION_TO_INSTALL }}
+          release: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
