@@ -46,14 +46,18 @@ jobs:
           website: oracle.com
           release: ${{ env.JAVA_VERSION }}
           cache: maven
-      - name: 'Packaging the application'
-        run: mvn -B --batch-mode --update-snapshots -DskipTests clean package --file pom.xml
+      - name: 'Packaging the application and generating the project site'
+        run: mvn -B --batch-mode --update-snapshots -DskipTests clean package site --file pom.xml
       - name: 'Install gh-pages'
         run: npm i gh-pages
       - name: 'Deploy with gh-pages'
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          cp README.md target/README.md
-          npx gh-pages --dist target -u "github-actions-bot <support+actions@github.com>"
+          mkdir /tmp/gh-pages
+          cp README.md /tmp/gh-pages
+          cp -r target/site /tmp/gh-pages/site
+          cp target/usercrudwithjwt*.jar* /tmp/gh-pages
+          npx gh-pages --dist /tmp/gh-pages -u "github-actions-bot <support+actions@github.com>"
+          rm -rf /tmp/gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
