@@ -11,7 +11,8 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - uses: ./.github/workflows/setup-gh-runner-with-java.yml
+      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
+        uses: ./.github/workflows/setup-gh-runner-with-java.yml
         with:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
       - name: 'Compiles the application code'
