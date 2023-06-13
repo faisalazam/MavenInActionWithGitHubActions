@@ -30,3 +30,28 @@ jobs:
           cache: maven
       - name: 'Runs the unit tests to test the application code'
         run: mvn -B test --file pom.xml
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
+        uses: actions/checkout@v3
+      - name: 'Set up the Oracle JDK 20'
+        uses: oracle-actions/setup-java@v1
+        with:
+          website: oracle.com
+          release: 20
+          cache: maven
+      - name: 'Packaging the application'
+        run: mvn -B --batch-mode --update-snapshots -DskipTests clean package --file pom.xml
+      - name: 'Install gh-pages'
+        run: npm i gh-pages
+      - name: 'Deploy with gh-pages'
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          cp README.md target/README.md
+          npx gh-pages --dist target -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
