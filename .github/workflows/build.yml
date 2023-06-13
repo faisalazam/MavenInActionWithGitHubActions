@@ -31,6 +31,9 @@ jobs:
       - name: 'Runs the unit tests to test the application code'
         run: mvn test --file pom.xml
   deploy:
+    needs:
+      - build
+      - test
     runs-on: ubuntu-latest
     permissions:
       contents: write
