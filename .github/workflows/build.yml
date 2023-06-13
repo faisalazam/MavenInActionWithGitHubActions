@@ -1,5 +1,7 @@
 name: 'CI/CD'
 on: push
+env:
+  JAVA_VERSION: 20
 
 jobs:
   build:
@@ -8,11 +10,11 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Set up the Oracle JDK 20'
+      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
-          release: 20
+          release: ${{ env.JAVA_VERSION }}
           cache: maven
       - name: 'Compiles the application code'
         run: mvn -B clean compile --file pom.xml
@@ -22,11 +24,11 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Set up the Oracle JDK 20'
+      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
-          release: 20
+          release: ${{ env.JAVA_VERSION }}
           cache: maven
       - name: 'Runs the unit tests to test the application code'
         run: mvn -B test --file pom.xml
@@ -38,11 +40,11 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Set up the Oracle JDK 20'
+      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
-          release: 20
+          release: ${{ env.JAVA_VERSION }}
           cache: maven
       - name: 'Packaging the application'
         run: mvn -B --batch-mode --update-snapshots -DskipTests clean package --file pom.xml
