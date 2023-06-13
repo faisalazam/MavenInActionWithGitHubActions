@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Set up the Oracle JDK `${{ inputs.JAVA_VERSION_TO_INSTALL }}`'
+      - name: 'Set up the Oracle JDK 20'
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
-          release: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
+          release: 20
