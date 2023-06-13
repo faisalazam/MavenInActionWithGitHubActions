@@ -13,8 +13,9 @@ jobs:
         with:
           website: oracle.com
           release: 20
+          cache: maven
       - name: 'Compiles the application code'
-        run: mvn clean package
+        run: mvn -B clean compile --file pom.xml
   test:
     runs-on: ubuntu-latest
 
@@ -26,5 +27,6 @@ jobs:
         with:
           website: oracle.com
           release: 20
+          cache: maven
       - name: 'Runs the unit tests to test the application code'
-        run: mvn test
+        run: mvn -B test --file pom.xml
