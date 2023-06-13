@@ -46,8 +46,6 @@ jobs:
       - name: 'Packaging the application and generating the project site'
         run: mvn --batch-mode --update-snapshots clean package site --file pom.xml #upload the artifacts and then skip the tests
 #        run: mvn --batch-mode --update-snapshots -DskipTests clean package site --file pom.xml
-      - name: 'Generating the test report'
-        run: mvn surefire-report:report
       - name: 'Install gh-pages'
         run: npm i gh-pages
       - name: 'Deploy with gh-pages'
