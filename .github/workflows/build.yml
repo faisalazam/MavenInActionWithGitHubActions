@@ -2,6 +2,7 @@ name: 'CI/CD'
 on: push
 env:
   JAVA_VERSION: 20
+  SETUP_GH_RUNNER_WITH_JAVA: ${{ github.repository }}/.github/workflows/setup-gh-runner-with-java.yml
 
 jobs:
   build:
@@ -10,11 +11,9 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
-        uses: oracle-actions/setup-java@v1
+      - uses: ./.github/workflows/setup-gh-runner-with-java.yml
         with:
-          website: oracle.com
-          release: ${{ env.JAVA_VERSION }}
+          JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
       - name: 'Compiles the application code'
         run: mvn clean compile --file pom.xml
   test:
