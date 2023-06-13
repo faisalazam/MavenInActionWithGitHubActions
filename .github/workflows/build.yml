@@ -1,4 +1,4 @@
-name: Builds and Tests the Java Spring Boot Application
+name: 'CI/CD'
 on: push
 
 jobs:
@@ -6,20 +6,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Get the latest code from the UserCRUDWithJWT repository'
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
       - name: 'Set up the Oracle JDK 20'
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
           release: 20
-      - name: 'Builds the application code'
+      - name: 'Compiles the application code'
         run: mvn clean package
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Get the latest code from the UserCRUDWithJWT repository'
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
       - name: 'Set up the Oracle JDK 20'
         uses: oracle-actions/setup-java@v1
