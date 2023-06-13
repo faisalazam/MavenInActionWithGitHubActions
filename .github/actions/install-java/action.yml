@@ -1,18 +1,16 @@
 name: 'Setup GitHub Runner with Java and application Code'
-on:
-  workflow_call:
-    inputs:
-      JAVA_VERSION_TO_INSTALL:
-        required: true
-        type: string
+description: 'composite run action'
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+inputs:
+  JAVA_VERSION_TO_INSTALL:
+    required: true
+    type: string
 
-    steps:
-      - name: 'Set up the Oracle JDK 20'
-        uses: oracle-actions/setup-java@v1
-        with:
-          website: oracle.com
-          release: 20
+runs:
+  using: "composite"
+  steps:
+    - name: 'Set up the Oracle JDK `${{ inputs.JAVA_VERSION_TO_INSTALL }}`'
+      uses: oracle-actions/setup-java@v1
+      with:
+        website: oracle.com
+        release: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
