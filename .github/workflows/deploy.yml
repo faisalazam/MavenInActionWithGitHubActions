@@ -12,6 +12,9 @@ on:
 
 jobs:
   deploy-to-gh-packages:
+    needs:
+      - build
+      - test
     runs-on: ubuntu-latest
 
     steps:
