@@ -2,6 +2,7 @@ name: 'JAVA CI/CD'
 on: push
 env:
   JAVA_VERSION: 20
+  UPLOADED_ARTIFACTS_DIR: 'gh-pages'
 
 jobs:
   setup-env:
@@ -54,48 +55,35 @@ jobs:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
       - name: 'TODO: upload the artifacts in the test job and then delete this action'
         run: mvn clean test --file pom.xml
-#      - name: 'Generate JaCoCo Code Coverage Badge'
-#        uses: cicirello/jacoco-badge-generator@v2
-#        with:
-#          generate-branches-badge: true
-#          colors: green yellow orange red
-#          intervals: 90 75 60
-#          badges-directory: './target/site/jacoco/jacoco-resources/badges'
       - name: 'Generating the project site with testing report as well as code coverage report'
         run: mvn site --file pom.xml
       - name: 'Packaging the application'
         run: mvn --batch-mode --update-snapshots -DskipTests package --file pom.xml #TODO: upload the artifacts in the test job and then clean package
-#      - name: 'Install gh-pages'
-#        run: npm i gh-pages
-      - name: 'Upload required files to gh-pages folder'
+      - name: 'Upload required files to ${{ env.UPLOADED_ARTIFACTS_DIR }} folder'
         uses: actions/upload-artifact@v3
         with:
-          name: gh-pages
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           retention-days: 1
           path: |
             README.md
             target/site
             target/surefire-reports
             target/*-SNAPSHOT*.jar*
-#        run: ./.github/scripts/deploy-to-gh-pages.sh
-#        shell: bash
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'Download the uploaded artifacts to gh-pages folder'
+      - name: 'Download the uploaded artifacts to ${{ env.UPLOADED_ARTIFACTS_DIR }} folder'
         uses: actions/download-artifact@v3
         with:
-          name: gh-pages
-#          path: path/to/artifact
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: gh-pages
+          folder: ${{ env.UPLOADED_ARTIFACTS_DIR }}
   deploy-to-gh-packages:
     needs: setup-env
     permissions:
       contents: read
       packages: write
-    uses: ./.github/workflows/deploy.yml
+    uses: './.github/workflows/deploy.yml'
     with:
       JAVA_VERSION_TO_INSTALL: ${{ needs.setup-env.outputs.JAVA_VERSION }}
