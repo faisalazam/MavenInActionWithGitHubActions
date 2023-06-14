@@ -5,10 +5,10 @@ name: 'Publishing/deploying the packaged application'
 
 on:
   workflow_call:
-    inputs:
-      JAVA_VERSION_TO_INSTALL:
-        required: true
-        type: string
+#    inputs:
+#      JAVA_VERSION_TO_INSTALL:
+#        required: true
+#        type: string
 
 jobs:
   deploy-to-gh-packages:
