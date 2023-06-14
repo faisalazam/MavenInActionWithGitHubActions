@@ -61,5 +61,5 @@ jobs:
       contents: read
       packages: write
     uses: ./.github/workflows/deploy.yml
-    with:
-      JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
+#    with:
+#      JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}

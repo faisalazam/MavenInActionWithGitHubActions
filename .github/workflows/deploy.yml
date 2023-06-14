@@ -17,10 +17,10 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Set up the Oracle JDK `${{ inputs.JAVA_VERSION_TO_INSTALL }}`'
+      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
         uses: './.github/actions/install-java'
         with:
-          JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
+          JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
 
       - name: 'Packaging the application'
         run: mvn -DskipTests package --file pom.xml
