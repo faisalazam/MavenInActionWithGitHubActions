@@ -67,8 +67,17 @@ jobs:
         run: mvn --batch-mode --update-snapshots -DskipTests package --file pom.xml #TODO: upload the artifacts in the test job and then clean package
 #      - name: 'Install gh-pages'
 #        run: npm i gh-pages
-      - name: 'Copy required files to gh-pages folder'
-        run: ./.github/scripts/deploy-to-gh-pages.sh
+      - name: 'Upload required files to gh-pages folder'
+        uses: actions/upload-artifact@v3
+        with:
+          name: gh-pages
+          retention-days: 1
+          path: |
+            README.md
+            target/site
+            target/surefire-reports
+            target/*-SNAPSHOT*.jar*
+#        run: ./.github/scripts/deploy-to-gh-pages.sh
 #        shell: bash
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
