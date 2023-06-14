@@ -56,15 +56,6 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  setup-env:
-    runs-on: ubuntu-latest
-    outputs:
-      JAVA_VERSION: ${{steps.setup-env.outputs.JAVA_VERSION}}
-    steps:
-      - name: 'Setup Environment'
-        id: setup-env
-        run: |
-          echo "JAVA_VERSION=${{ env.JAVA_VERSION }}" >> $GITHUB_OUTPUT
   deploy-to-gh-packages:
     needs: setup-env
     permissions:
@@ -72,4 +63,4 @@ jobs:
       packages: write
     uses: ./.github/workflows/deploy.yml
     with:
-      JAVA_VERSION_TO_INSTALL: ${{ needs.setup-env.outputs.JAVA_VERSION }}
+      JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}

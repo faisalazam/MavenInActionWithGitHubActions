@@ -1,4 +1,4 @@
-![build](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/build.yml/badge.svg?event=push)
+[![CI/CD](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/build.yml/badge.svg)](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/build.yml)
 ![Known Vulnerabilities](https://snyk.io/test/github/faisalazam/usercrudwithjwt/badge.svg)
 
 
