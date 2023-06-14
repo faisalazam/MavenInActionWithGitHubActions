@@ -10,4 +10,8 @@ class UserCRUDWithJWTApplicationTests {
     void contextLoads() {
     }
 
+    @Test
+    public void applicationStarts() {
+        UserCRUDWithJWTApplication.main(new String[]{});
+    }
 }

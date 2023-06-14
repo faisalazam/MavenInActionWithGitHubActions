@@ -1,0 +1,45 @@
+name: 'Tests the application Code and uploads the results'
+description: 'composite run action'
+
+inputs:
+  JAVA_VERSION_TO_INSTALL:
+    required: true
+    type: string
+    description: 'Java version to be installed'
+  UPLOADED_ARTIFACTS_DIR:
+    required: true
+    type: string
+    description: 'Uploads artifacts directory'
+  ACTION_NAME:
+    required: true
+    type: string
+    description: 'Defines which type of mvn command will be executed'
+
+runs:
+  using: "composite"
+  steps:
+    - name: 'Set up the Oracle JDK `${{ inputs.JAVA_VERSION_TO_INSTALL }}`'
+      uses: './.github/actions/install-java'
+      with:
+        JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
+    - name: 'Download the uploaded artifacts to `${{ inputs.UPLOADED_ARTIFACTS_DIR }}` folder'
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
+        path: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
+    - name: 'Genrates the code coverage report'
+      if: ${{ ACTION_NAME == "GENERATE-COVERAGE-REPORT" }}
+      run: mvn jacoco:report --file pom.xml
+    - name: 'Genrates the tests report'
+      if: ${{ ACTION_NAME == "GENERATE-TESTS-REPORT" }}
+      run: mvn -Dskip.ut=true surefire-report:report --file pom.xml
+    - name: 'Genrates the project''s site'
+      if: ${{ ACTION_NAME == "GENERATE-PROJECT-SITE" }}
+      run: mvn -Dskip.ut=true site --file pom.xml
+    - name: 'Uploads the results to ${{ inputs.UPLOADED_ARTIFACTS_DIR }} folder'
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
+        retention-days: 1
+        path: |
+          target/
