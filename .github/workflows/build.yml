@@ -124,8 +124,6 @@ jobs:
           retention-days: 1
           path: |
             README.md
-            target/site
-            target/surefire-reports
             target/*-SNAPSHOT*.jar*
       - name: 'Download the uploaded artifacts to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
         uses: actions/download-artifact@v3
