@@ -23,11 +23,13 @@ runs:
       with:
         JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
     - name: 'Runs the unit tests'
-      if: ${{ RUN_UNIT_TESTS == TRUE }}
+      if: ${{ inputs.RUN_UNIT_TESTS == TRUE }}
       run: mvn -Djacoco.haltOnFailure=false test --file pom.xml
+      shell: bash
     - name: 'Runs the integration tests'
-      if: ${{ RUN_UNIT_TESTS != TRUE }}
+      if: ${{ inputs.RUN_UNIT_TESTS != TRUE }}
       run: mvn -Dskip.ut=true -Djacoco.haltOnFailure=false verify --file pom.xml
+      shell: bash
     - name: 'Uploads the results to ${{ inputs.UPLOADED_ARTIFACTS_DIR }} folder'
       uses: actions/upload-artifact@v3
       with:
