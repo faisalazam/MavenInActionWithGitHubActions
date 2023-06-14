@@ -1,4 +1,6 @@
 [![JAVA CI/CD](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/build.yml/badge.svg)](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/build.yml)
+[![Instructions Coverage](https://faisalazam.github.io/usercrudwithjwt/site/jacoco/jacoco-resources/badges/jacoco.svg)](https://faisalazam.github.io/usercrudwithjwt/site/jacoco/index.html)
+[![Branches Coverage](https://faisalazam.github.io/usercrudwithjwt/site/jacoco/jacoco-resources/badges/branches.svg)](https://faisalazam.github.io/usercrudwithjwt/site/jacoco/index.html)
 [![pages-build-deployment](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/pages/pages-build-deployment)
 ![Known Vulnerabilities](https://snyk.io/test/github/faisalazam/usercrudwithjwt/badge.svg)
 
