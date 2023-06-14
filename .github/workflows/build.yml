@@ -57,19 +57,24 @@ jobs:
       - name: 'Generate JaCoCo Code Coverage Badge'
         uses: cicirello/jacoco-badge-generator@v2
         with:
-          jacoco-csv-file: target/site/jacoco/jacoco.csv
-          badges-directory: target/site/jacoco/jacoco-resources/badges
+          jacoco-csv-file: './target/site/jacoco/jacoco.csv'
+          badges-directory: './target/site/jacoco/jacoco-resources/badges'
       - name: 'Generating the project site with testing report as well as code coverage report'
         run: mvn site --file pom.xml
       - name: 'Packaging the application'
         run: mvn --batch-mode --update-snapshots -DskipTests package --file pom.xml #TODO: upload the artifacts in the test job and then clean package
-      - name: 'Install gh-pages'
-        run: npm i gh-pages
-      - name: 'Deploy with gh-pages'
+#      - name: 'Install gh-pages'
+#        run: npm i gh-pages
+      - name: 'Copy required files to gh-pages folder'
         run: ./.github/scripts/deploy-to-gh-pages.sh
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        shell: bash
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'Deploy to GitHub Pages'
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: /tmp/gh-pages
   deploy-to-gh-packages:
     needs: setup-env
     permissions:
