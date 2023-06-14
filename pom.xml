@@ -67,6 +67,30 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
+                    <!--   Start -> To set the minimum code coverage threshold  -->
+                    <!--   The jacoco:check goal is bound to verify,
+                    so we can run the Maven command mvn clean verify to check whether the rules are respected or not.-->
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.80</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                    <!--   End -> To set the minimum code coverage threshold  -->
                 </executions>
             </plugin>
             <!--     End -> Plugin for mvn jacoco:report -> to generate the code coverage report       -->
