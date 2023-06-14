@@ -57,6 +57,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   deploy-to-gh-packages:
+    permissions:
+      contents: read
+      packages: write
     uses: ./.github/workflows/deploy.yml
     with:
       JAVA_VERSION_TO_INSTALL: 20
+#      JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}

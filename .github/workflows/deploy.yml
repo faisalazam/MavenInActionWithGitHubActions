@@ -13,9 +13,9 @@ on:
 jobs:
   deploy-to-gh-packages:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+#    permissions:
+#      contents: read
+#      packages: write
 
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
