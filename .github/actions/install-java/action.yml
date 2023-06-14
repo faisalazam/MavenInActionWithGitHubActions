@@ -5,6 +5,7 @@ inputs:
   JAVA_VERSION_TO_INSTALL:
     required: true
     type: string
+    description: 'Java version to be installed'
 
 runs:
   using: "composite"

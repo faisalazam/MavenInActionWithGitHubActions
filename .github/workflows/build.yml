@@ -45,9 +45,7 @@ jobs:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
       - name: 'TODO: upload the artifacts in the test job and then delete this action'
         run: mvn clean test --file pom.xml
-      - name: 'Generating the code coverage report'
-        run: mvn jacoco:report --file pom.xml
-      - name: 'Generating the project site'
+      - name: 'Generating the project site with testing report as well as code coverage report'
         run: mvn site --file pom.xml
       - name: 'Packaging the application'
         run: mvn --batch-mode --update-snapshots -DskipTests package --file pom.xml #TODO: upload the artifacts in the test job and then clean package
