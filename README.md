@@ -1,4 +1,5 @@
 [![CI/CD](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/build.yml/badge.svg)](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/build.yml)
+[![pages-build-deployment](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/faisalazam/usercrudwithjwt/actions/workflows/pages/pages-build-deployment)
 ![Known Vulnerabilities](https://snyk.io/test/github/faisalazam/usercrudwithjwt/badge.svg)
 
 
