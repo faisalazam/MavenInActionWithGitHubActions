@@ -56,8 +56,16 @@
                 </configuration>
             </plugin>
             <!--     End -> This plugin is included just to define the `skip.ut` variable, so that we can skip unit tests whenever we want       -->
-            <!--     End -> Do I need this to run Integration tests       -->
-
+            <!--     Start -> This plugin will be used to run Integration tests separately from unit tests      -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <reportsDirectory>target/site/integration-tests</reportsDirectory>
+                </configuration>
+            </plugin>
+            <!--     End -> This plugin will be used to run Integration tests separately from unit tests      -->
             <!--     Start -> Plugin for mvn site       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // and your code will be called in exactly the same way as if it were processing a real HTTP request
 // but without the cost of starting the server. To do that, use Spring’s MockMvc and ask for that to be injected for
 // you by using the @AutoConfigureMockMvc annotation on the test case.
-class GreetingControllerIntegrationTest {
+class GreetingControllerIT {
     @Autowired
     private MockMvc mockMvc;
 

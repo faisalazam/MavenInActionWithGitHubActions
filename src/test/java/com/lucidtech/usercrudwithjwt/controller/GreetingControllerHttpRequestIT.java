@@ -13,7 +13,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 //It is nice to have a sanity check, but you should also write some tests that assert the behavior of your application.
 // To do that, you could start the application and listen for a connection (as it would do in production)
 // and then send an HTTP request and assert the response.
-class GreetingControllerHttpRequestIntegrationTest {
+class GreetingControllerHttpRequestIT {
     @Value(value = "${local.server.port}")
     private int port;
 
