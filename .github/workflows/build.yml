@@ -81,11 +81,16 @@ jobs:
 #        shell: bash
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'Download the uploaded artifacts to gh-pages folder'
+        uses: actions/download-artifact@v3
+        with:
+          name: gh-pages
+#          path: path/to/artifact
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: /tmp/gh-pages
+          folder: gh-pages
   deploy-to-gh-packages:
     needs: setup-env
     permissions:
