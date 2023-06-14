@@ -65,6 +65,7 @@ jobs:
         run: |
           echo "::set-output name=JAVA_VERSION::${{ env.JAVA_VERSION }}";
   deploy-to-gh-packages:
+    needs: setup-env
     permissions:
       contents: read
       packages: write
