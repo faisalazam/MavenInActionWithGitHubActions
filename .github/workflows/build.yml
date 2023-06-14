@@ -57,6 +57,7 @@ jobs:
       - name: 'Generate JaCoCo Code Coverage Badge'
         uses: cicirello/jacoco-badge-generator@v2
         with:
+          generate-branches-badge: true
           jacoco-csv-file: './target/site/jacoco/jacoco.csv'
           badges-directory: './target/site/jacoco/jacoco-resources/badges'
       - name: 'Generating the project site with testing report as well as code coverage report'
