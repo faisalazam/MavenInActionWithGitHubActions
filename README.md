@@ -7,6 +7,8 @@ This repo will contain the Implementation of CRUD functionality with JWT securit
 
 This project is deployed to GitHub Pages ----> [UserCRUDWithJWT](https://faisalazam.github.io/usercrudwithjwt)
 
-[Link to the test results](https://faisalazam.github.io/usercrudwithjwt/site/surefire-report.html)
+[Test Result](https://faisalazam.github.io/usercrudwithjwt/site/surefire-report.html)
 <br />
-[Link to the project details generated via Maven](https://faisalazam.github.io/usercrudwithjwt/site/index.html)
+[Code Coverage](https://faisalazam.github.io/usercrudwithjwt/site/jacoco/index.html)
+<br />
+[Project Details generated via Maven](https://faisalazam.github.io/usercrudwithjwt/site/index.html)
