@@ -1,38 +1,34 @@
 # This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
 
-name: Maven Package
+name: 'Maven Package'
 
-on: push
+on:
+  workflow_call:
+    inputs:
+      JAVA_VERSION_TO_INSTALL:
+        required: true
+        type: string
 
 jobs:
-  build:
+  deploy-to-gh-packages:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
 
     steps:
-      - name: 'Get the latest code from the UserCRUDWithJWT repository'
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Set up the Oracle JDK 20'
-        uses: oracle-actions/setup-java@v1
+      - name: 'Set up the Oracle JDK `${{ inputs.JAVA_VERSION_TO_INSTALL }}`'
+        uses: './.github/actions/install-java'
         with:
-          website: oracle.com
-          release: 20
-#          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-#          settings-path: ${{ github.workspace }} # location for the settings.xml file
+          JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+      - name: 'Packaging the application'
+        run: mvn -DskipTests package --file pom.xml
 
-#      - name: Publish to GitHub Packages Apache Maven
-#        run: mvn deploy #-s $GITHUB_WORKSPACE/settings.xml
-#        env:
-#          GITHUB_TOKEN: ${{ github.token }}
-      - name: Publish package
-        run: mvn --batch-mode deploy
+      - name: 'Publishing/deploying the packaged application'
+        run: mvn --batch-mode -DskipTests deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-#          remove me
