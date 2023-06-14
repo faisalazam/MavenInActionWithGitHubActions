@@ -62,5 +62,4 @@ jobs:
       packages: write
     uses: ./.github/workflows/deploy.yml
     with:
-      JAVA_VERSION_TO_INSTALL: 20
-#      JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
+      JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
