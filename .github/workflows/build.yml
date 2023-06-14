@@ -58,6 +58,8 @@ jobs:
         uses: cicirello/jacoco-badge-generator@v2
         with:
           generate-branches-badge: true
+          colors: green yellow orange red
+          intervals: 90 75 60
           jacoco-csv-file: './target/site/jacoco/jacoco.csv'
           badges-directory: './target/site/jacoco/jacoco-resources/badges'
       - name: 'Generating the project site with testing report as well as code coverage report'
