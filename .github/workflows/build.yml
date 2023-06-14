@@ -116,8 +116,8 @@ jobs:
 #        run: mvn test --file pom.xml
   deploy-to-gh-pages:
     needs:
-      - build
-      - test
+      - unit-tests
+      - integration-tests
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -156,7 +156,10 @@ jobs:
         with:
           folder: ${{ env.UPLOADED_ARTIFACTS_DIR }}
   deploy-to-gh-packages:
-    needs: setup-env
+    needs:
+     - setup-env
+     - unit-tests
+     - integration-tests
     permissions:
       contents: read
       packages: write
