@@ -5,6 +5,8 @@ on:
     branches: [ master ]
 env:
   JAVA_VERSION: 20
+  BRANCHES_COVERAGE_THRESHOLD: "60%"
+  INSTRUCTIONS_COVERAGE_THRESHOLD: "60%"
 
 jobs:
   build:
@@ -26,6 +28,8 @@ jobs:
         uses: cicirello/jacoco-badge-generator@v2
         with:
           generate-branches-badge: true
+          fail-if-branches-less-than: ${{ env.BRANCHES_COVERAGE_THRESHOLD }}
+          fail-if-coverage-less-than: ${{ env.INSTRUCTIONS_COVERAGE_THRESHOLD }}
           badges-directory: './target/site/jacoco/jacoco-resources/badges'
 
       - name: 'Log coverage percentage'
