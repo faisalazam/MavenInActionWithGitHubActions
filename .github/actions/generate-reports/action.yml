@@ -27,15 +27,15 @@ runs:
       with:
         name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
         path: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
-    - name: 'Genrates the code coverage report'
+    - name: 'Generates the code coverage report'
       if: ${{ inputs.ACTION_NAME == 'GENERATE-COVERAGE-REPORT' }}
       run: mvn jacoco:report --file pom.xml
       shell: bash
-    - name: 'Genrates the tests report'
+    - name: 'Generates the tests report'
       if: ${{ inputs.ACTION_NAME == 'GENERATE-TESTS-REPORT' }}
       run: mvn -Dskip.ut=true surefire-report:report --file pom.xml
       shell: bash
-    - name: 'Genrates the project''s site'
+    - name: 'Generates the project''s site'
       if: ${{ inputs.ACTION_NAME == 'GENERATE-PROJECT-SITE' }}
       run: mvn -Dskip.ut=true site --file pom.xml
       shell: bash

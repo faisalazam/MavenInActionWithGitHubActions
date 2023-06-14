@@ -69,6 +69,10 @@ jobs:
           ACTION_NAME: "GENERATE-COVERAGE-REPORT"
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+      - name: 'Log code coverage percentage'
+        run: |
+          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+          echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
 
   generate-tests-report:
     runs-on: ubuntu-latest
