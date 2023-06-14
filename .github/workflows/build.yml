@@ -28,7 +28,7 @@ jobs:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
       - name: 'Runs the unit tests to test the application code'
         run: mvn test --file pom.xml
-  deploy:
+  deploy-to-gh-pages:
     needs:
       - build
       - test
@@ -56,3 +56,10 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  deploy-to-gh-packages:
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/deploy.yml
+    with:
+      JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}

@@ -1,0 +1,31 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+
+name: 'Publishing/deploying the packaged application'
+
+on:
+  workflow_call:
+    inputs:
+      JAVA_VERSION_TO_INSTALL:
+        required: true
+        type: string
+
+jobs:
+  deploy-to-gh-packages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
+        uses: actions/checkout@v3
+      - name: 'Set up the Oracle JDK `${{ inputs.JAVA_VERSION_TO_INSTALL }}`'
+        uses: './.github/actions/install-java'
+        with:
+          JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
+
+      - name: 'Packaging the application'
+        run: mvn -DskipTests package --file pom.xml
+
+      - name: 'Publishing/deploying the packaged application'
+        run: mvn --batch-mode -DskipTests deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
