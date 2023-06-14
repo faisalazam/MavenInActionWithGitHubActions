@@ -37,7 +37,7 @@ jobs:
       - name: 'Runs the unit tests and uploads the results'
         uses: './.github/actions/run-tests-and-upload-results'
         with:
-          RUN_UNIT_TESTS: TRUE
+          RUN_UNIT_TESTS: true
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
 
@@ -50,7 +50,7 @@ jobs:
       - name: 'Runs the integration tests and uploads the results'
         uses: './.github/actions/run-tests-and-upload-results'
         with:
-          RUN_UNIT_TESTS: FALSE
+          RUN_UNIT_TESTS: false
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
 
