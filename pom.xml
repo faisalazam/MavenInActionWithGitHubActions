@@ -16,6 +16,7 @@
     <properties>
         <skip.ut>false</skip.ut>
         <java.version>20</java.version>
+        <maven.compiler.release>20</maven.compiler.release>
     </properties>
     <dependencies>
         <dependency>
@@ -44,6 +45,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--    Specifying the maven compiler as otherwise it might use the older version   -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
             </plugin>
 
             <!--     Start -> This plugin is included just to define the `skip.ut` variable, so that we can skip unit tests whenever we want       -->
