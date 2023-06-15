@@ -10,10 +10,6 @@ inputs:
     required: true
     type: string
     description: 'Uploads artifacts directory'
-  ACTION_NAME:
-    required: true
-    type: string
-    description: 'Defines which type of mvn command will be executed'
 
 runs:
   using: "composite"
@@ -22,13 +18,17 @@ runs:
       uses: './.github/actions/install-java'
       with:
         JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
-    - name: 'Download the uploaded artifacts to `${{ inputs.UPLOADED_ARTIFACTS_DIR }}` folder'
+    - name: 'Download the uploaded `ut` and `it` artifacts'
       uses: actions/download-artifact@v3
       with:
-        name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
         path: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
+    - name: 'Copy the `ut` and `it` artifacts into the `target` folder'
+      run: |
+        mkdir target
+        cp -r ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-ut/* target
+        cp -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-it/* target
+      shell: bash
     - name: 'Generates the project''s site'
-      if: ${{ inputs.ACTION_NAME == 'GENERATE-PROJECT-SITE' }}
       run: mvn -Dskip.ut=true site --file pom.xml
       shell: bash
     - name: 'Uploads the results to ${{ inputs.UPLOADED_ARTIFACTS_DIR }} folder'
@@ -37,5 +37,5 @@ runs:
         name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
         retention-days: 1
         path: |
-          target/
+          target
           README.md

@@ -103,7 +103,6 @@ jobs:
       - name: 'Generates the project''s site'
         uses: './.github/actions/generate-reports'
         with:
-          ACTION_NAME: "GENERATE-PROJECT-SITE"
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
 

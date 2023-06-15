@@ -32,6 +32,7 @@ runs:
       shell: bash
     - name: 'Set environment variables'
       run: |
+        echo "UPLOAD_DIR=${{ inputs.UPLOADED_ARTIFACTS_DIR }}-${{ inputs.RUN_UNIT_TESTS == 'true' && 'ut' || 'it' }}" >> $GITHUB_ENV
         echo "FILES_DIR_PREFIX=${{ inputs.RUN_UNIT_TESTS == 'true' && 'unit' || 'integration' }}" >> $GITHUB_ENV
       shell: bash
     - name: '${{ env.FILES_DIR_PREFIX }}-tests'' Summary'
@@ -39,10 +40,10 @@ runs:
       uses: test-summary/action@v2
       with:
         paths: "target/site/${{ env.FILES_DIR_PREFIX }}-tests/**/TEST-*.xml"
-    - name: 'Uploads the results to ${{ inputs.UPLOADED_ARTIFACTS_DIR }} folder'
+    - name: 'Uploads the results to ${{ env.UPLOAD_DIR }} folder'
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
+        name: ${{ env.UPLOAD_DIR }}
         retention-days: 1
         path: |
-          target/
+          target
