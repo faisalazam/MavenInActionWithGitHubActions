@@ -58,6 +58,7 @@ jobs:
 
   generate-coverage-report:
     runs-on: ubuntu-latest
+    if: ${{ always() }}
     needs:
       - unit-tests
       - integration-tests
@@ -109,6 +110,7 @@ jobs:
 
   generate-tests-report:
     runs-on: ubuntu-latest
+    if: ${{ always() }}
     needs:
       - unit-tests
       - integration-tests
