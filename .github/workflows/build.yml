@@ -107,7 +107,7 @@ jobs:
           path: './target/site/jacoco/jacoco-resources/badges'
 
   deploy-to-gh-pages:
-    needs: generate-project-site
+    needs: generate-code-coverage-badge
     runs-on: ubuntu-latest
     permissions:
       contents: write
