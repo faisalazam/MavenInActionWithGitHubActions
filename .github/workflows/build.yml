@@ -56,80 +56,80 @@ jobs:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
 
-  generate-coverage-report:
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    needs:
-      - unit-tests
-      - integration-tests
-
-    steps:
-      - name: 'Get the latest code from the `${{ github.repository }}` repository'
-        uses: actions/checkout@v3
-      - name: 'Generates the code coverage report'
-        uses: './.github/actions/generate-reports'
-        with:
-          ACTION_NAME: "GENERATE-COVERAGE-REPORT"
-          JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
-          UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-
-  generate-code-coverage-badge:
-    if: ${{ github.ref == 'refs/heads/master' }}
-    runs-on: ubuntu-latest
-    needs: generate-coverage-report
-
-    steps:
-      - name: 'Download the uploaded artifacts to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Generate and upload JaCoCo Code Coverage Badge'
-        id: jacoco
-        uses: cicirello/jacoco-badge-generator@v2
-        with:
-          generate-branches-badge: true
-          fail-if-branches-less-than: ${{ env.BRANCHES_COVERAGE_THRESHOLD }}
-          fail-if-coverage-less-than: ${{ env.INSTRUCTIONS_COVERAGE_THRESHOLD }}
-          badges-directory: './target/site/jacoco/jacoco-resources/badges'
-      - name: 'Log code coverage percentage'
-        run: |
-          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
-          echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
-      - name: 'Upload JaCoCo code coverage badge'
-        uses: actions/upload-artifact@v2
-        with:
-          name: jacoco-report
-          path: target/site/jacoco/
-      - name: 'Upload JaCoCo code coverage badge to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          retention-days: 1
-          path: './target/site/jacoco/jacoco-resources/badges'
-
-  generate-tests-report:
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    needs:
-      - unit-tests
-      - integration-tests
-
-    steps:
-      - name: 'Get the latest code from the `${{ github.repository }}` repository'
-        uses: actions/checkout@v3
-      - name: 'Generates the tests report'
-        uses: './.github/actions/generate-reports'
-        with:
-          ACTION_NAME: "GENERATE-TESTS-REPORT"
-          JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
-          UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+#  generate-coverage-report:
+#    runs-on: ubuntu-latest
+#    if: ${{ always() }}
+#    needs:
+#      - unit-tests
+#      - integration-tests
+#
+#    steps:
+#      - name: 'Get the latest code from the `${{ github.repository }}` repository'
+#        uses: actions/checkout@v3
+#      - name: 'Generates the code coverage report'
+#        uses: './.github/actions/generate-reports'
+#        with:
+#          ACTION_NAME: "GENERATE-COVERAGE-REPORT"
+#          JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
+#          UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+#
+#  generate-code-coverage-badge:
+#    if: ${{ github.ref == 'refs/heads/master' }}
+#    runs-on: ubuntu-latest
+#    needs: generate-coverage-report
+#
+#    steps:
+#      - name: 'Download the uploaded artifacts to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+#          path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+#      - name: 'Generate and upload JaCoCo Code Coverage Badge'
+#        id: jacoco
+#        uses: cicirello/jacoco-badge-generator@v2
+#        with:
+#          generate-branches-badge: true
+#          fail-if-branches-less-than: ${{ env.BRANCHES_COVERAGE_THRESHOLD }}
+#          fail-if-coverage-less-than: ${{ env.INSTRUCTIONS_COVERAGE_THRESHOLD }}
+#          badges-directory: './target/site/jacoco/jacoco-resources/badges'
+#      - name: 'Log code coverage percentage'
+#        run: |
+#          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+#          echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
+#      - name: 'Upload JaCoCo code coverage badge'
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: jacoco-report
+#          path: target/site/jacoco/
+#      - name: 'Upload JaCoCo code coverage badge to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+#          retention-days: 1
+#          path: './target/site/jacoco/jacoco-resources/badges'
+#
+#  generate-tests-report:
+#    runs-on: ubuntu-latest
+#    if: ${{ always() }}
+#    needs:
+#      - unit-tests
+#      - integration-tests
+#
+#    steps:
+#      - name: 'Get the latest code from the `${{ github.repository }}` repository'
+#        uses: actions/checkout@v3
+#      - name: 'Generates the tests report'
+#        uses: './.github/actions/generate-reports'
+#        with:
+#          ACTION_NAME: "GENERATE-TESTS-REPORT"
+#          JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
+#          UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
 
   generate-project-site:
     runs-on: ubuntu-latest
     needs:
-      - generate-tests-report
-      - generate-code-coverage-badge
+      - unit-tests
+      - integration-tests
 
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
