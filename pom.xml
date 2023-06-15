@@ -152,6 +152,7 @@
                     <reportSet>
                         <reports>
                             <report>report</report>
+                            <report>report-aggregate</report>
                         </reports>
                     </reportSet>
                 </reportSets>
