@@ -119,16 +119,6 @@ jobs:
         uses: './.github/actions/install-java'
         with:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
-#      - name: 'Packaging the application'
-#        run: mvn --batch-mode --update-snapshots -DskipTests package --file pom.xml #TODO: upload the artifacts in the test job and then clean package
-#      - name: 'Upload required files to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-#          retention-days: 1
-#          path: |
-#            README.md
-#            target/*-SNAPSHOT*.jar*
       - name: 'Download the uploaded artifacts to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
         uses: actions/download-artifact@v3
         with:
