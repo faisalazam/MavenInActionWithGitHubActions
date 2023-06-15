@@ -39,6 +39,7 @@ runs:
       if: always()
       uses: test-summary/action@v2
       with:
+        show: "all"
         paths: "target/site/${{ env.FILES_DIR_PREFIX }}-tests/**/TEST-*.xml"
     - name: 'Uploads the results to ${{ env.UPLOAD_DIR }} folder'
       uses: actions/upload-artifact@v3
