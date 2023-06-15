@@ -82,12 +82,6 @@ jobs:
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Copy the artifacts into the `target` folder'
-        run: |
-          mkdir target
-          cp -r ${{ env.UPLOADED_ARTIFACTS_DIR }}/* target
-          ls -lart ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          ls -lart target
       - name: 'Generate and upload JaCoCo Code Coverage Badge'
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
@@ -96,15 +90,11 @@ jobs:
           fail-if-branches-less-than: ${{ env.BRANCHES_COVERAGE_THRESHOLD }}
           fail-if-coverage-less-than: ${{ env.INSTRUCTIONS_COVERAGE_THRESHOLD }}
           badges-directory: './target/site/jacoco/jacoco-resources/badges'
+          jacoco-csv-file: ${{ env.UPLOADED_ARTIFACTS_DIR }}/target/site/jacoco/jacoco.csv
       - name: 'Log code coverage percentage'
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
-#      - name: 'Upload JaCoCo code coverage badge'
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: jacoco-report
-#          path: target/site/jacoco/
       - name: 'Upload JaCoCo code coverage badge to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
         uses: actions/upload-artifact@v3
         with:
