@@ -20,7 +20,7 @@ class GreetingControllerTest {
     }
     @Test
     public void shouldTestGreeting3() {
-        assertTrue((new GreetingController().greeting("Faisal4")).content().contains("Faisal42"));
+        assertTrue((new GreetingController().greeting("Faisal4")).content().contains("Faisal4"));
     }
 
 }

@@ -23,6 +23,6 @@ class GreetingControllerHttpRequestIT {
     @Test
     public void greetingShouldReturnDefaultMessage() {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/greeting",
-                String.class)).contains("Worldsd");
+                String.class)).contains("World");
     }
 }
