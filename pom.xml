@@ -15,6 +15,7 @@
     <description>User CRUD with JWT Security</description>
     <properties>
         <skip.ut>false</skip.ut>
+        <badges.skip>false</badges.skip>
         <java.version>20</java.version>
         <maven.compiler.release>20</maven.compiler.release>
         <ignore.test.failures>false</ignore.test.failures>
@@ -144,6 +145,26 @@
                 </executions>
             </plugin>
             <!--     End -> Plugin for mvn jacoco:report -> to generate the code coverage report       -->
+            <plugin>
+                <groupId>com.github.bordertech.buildtools</groupId>
+                <artifactId>badger</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>badges</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${badges.skip}</skip>
+                            <outputDir>target/site/badges</outputDir>
+                            <inputFiles>
+                                <inputFile>target/checkstyle-result.xml</inputFile>
+                            </inputFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
