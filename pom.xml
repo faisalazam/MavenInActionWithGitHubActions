@@ -147,6 +147,24 @@
             <!--     End -> Plugin for mvn jacoco:report -> to generate the code coverage report       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.21.0</version>
+                <configuration>
+                    <outputDirectory>target/reports/pmd</outputDirectory>
+                    <targetDirectory>target/reports/pmd/xml</targetDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>pmd</goal>
+                            <goal>cpd</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.3.0</version>
                 <executions>
@@ -172,6 +190,8 @@
                             <skip>${badges.skip}</skip>
                             <outputDir>target/site/badges</outputDir>
                             <inputFiles>
+                                <inputFile>target/reports/pmd/xml/pmd.xml</inputFile>
+                                <inputFile>target/reports/pmd/xml/cpd.xml</inputFile>
                                 <inputFile>target/checkstyle-result.xml</inputFile>
                             </inputFiles>
                         </configuration>
@@ -183,6 +203,15 @@
 
     <reporting>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.21.0</version>
+                <configuration>
+                    <outputDirectory>target/reports/pmd</outputDirectory>
+                    <targetDirectory>target/reports/pmd/xml</targetDirectory>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
