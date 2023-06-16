@@ -36,6 +36,4 @@ runs:
       with:
         name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
         retention-days: 1
-        path: |
-          target
-          README.md
+        path: target

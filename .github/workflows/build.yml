@@ -89,8 +89,8 @@ jobs:
           generate-branches-badge: true
           fail-if-branches-less-than: ${{ env.BRANCHES_COVERAGE_THRESHOLD }}
           fail-if-coverage-less-than: ${{ env.INSTRUCTIONS_COVERAGE_THRESHOLD }}
-          badges-directory: './target/site/jacoco/jacoco-resources/badges'
-          jacoco-csv-file: ${{ env.UPLOADED_ARTIFACTS_DIR }}/target/site/jacoco/jacoco.csv
+          badges-directory: 'site/badges/jacoco/svgs'
+          jacoco-csv-file: ${{ env.UPLOADED_ARTIFACTS_DIR }}/site/jacoco/jacoco.csv
       - name: 'Log code coverage percentage'
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
@@ -100,7 +100,7 @@ jobs:
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           retention-days: 1
-          path: './target/site/jacoco/jacoco-resources/badges'
+          path: 'site/badges/jacoco'
 
   deploy-to-gh-pages:
     needs: generate-code-coverage-badge
@@ -120,6 +120,13 @@ jobs:
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+      - name: 'Copy the `README.md` file to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
+        run: cp README.md ${{ env.UPLOADED_ARTIFACTS_DIR }}
+      - name: 'Copy the Jacoco badges file to the relevant folder'
+        run: |
+          mkdir -p ${{ env.UPLOADED_ARTIFACTS_DIR }}/site/jacoco/jacoco-resources/badges
+          cp ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs/* ${{ env.UPLOADED_ARTIFACTS_DIR }}/site/jacoco/jacoco-resources/badges
+          rm -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4
