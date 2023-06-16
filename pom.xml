@@ -190,8 +190,6 @@
                             <skip>${badges.skip}</skip>
                             <outputDir>target/site/badges</outputDir>
                             <inputFiles>
-                                <inputFile>target/reports/pmd/xml/pmd.xml</inputFile>
-                                <inputFile>target/reports/pmd/xml/cpd.xml</inputFile>
                                 <inputFile>target/checkstyle-result.xml</inputFile>
                             </inputFiles>
                         </configuration>
