@@ -6,6 +6,7 @@
 [![PMD](https://faisalazam.github.io/usercrudwithjwt/site/badges/pmd.svg)](https://faisalazam.github.io/usercrudwithjwt/site/pmd.html)
 [![checkstyle](https://faisalazam.github.io/usercrudwithjwt/site/badges/checkstyle-result.svg)](https://faisalazam.github.io/usercrudwithjwt/site/checkstyle.html)
 ![Known Vulnerabilities](https://snyk.io/test/github/faisalazam/usercrudwithjwt/badge.svg)
+[![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/apache/maven.svg?label=License)](https://faisalazam.github.io/usercrudwithjwt/LICENSE)
 
 
 # usercrudwithjwt

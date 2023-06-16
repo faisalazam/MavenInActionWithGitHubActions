@@ -122,6 +122,8 @@ jobs:
           path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
       - name: 'Copy the `README.md` file to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
         run: cp README.md ${{ env.UPLOADED_ARTIFACTS_DIR }}
+      - name: 'Copy the `LICENSE` file to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
+        run: cp LICENSE ${{ env.UPLOADED_ARTIFACTS_DIR }}
       - name: 'Copy the Jacoco badges file to the relevant folder'
         run: |
           mkdir -p ${{ env.UPLOADED_ARTIFACTS_DIR }}/site/jacoco/jacoco-resources/badges
