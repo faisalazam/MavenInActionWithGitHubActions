@@ -89,6 +89,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
+                    <argLine>${failsafe.jacoco.exec.file.name.arg}</argLine>
                     <skipTests>${skip.integration.tests}</skipTests>
                     <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
                     <reportsDirectory>${integration.tests.results.directory}</reportsDirectory>
@@ -145,12 +146,26 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
+                        <id>before-integration-test-execution</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${jacoco.it.exec}</destFile>
+                            <propertyName>failsafe.jacoco.exec.file.name.arg</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>after-integration-test-execution</id>
+                        <phase>post-integration-test</phase>
                         <goals>
                             <goal>report</goal>
-                            <goal>report-aggregate</goal>
                         </goals>
+                        <configuration>
+                            <dataFile>${jacoco.it.exec}</dataFile>
+                            <outputDirectory>${jacoco.it.reporting.directory}</outputDirectory>
+                        </configuration>
                     </execution>
                     <!--   Start -> To set the minimum code coverage threshold  -->
                     <!--   The jacoco:check goal is bound to verify,
