@@ -238,7 +238,7 @@
                             </reportsDirectories>
                         </configuration>
                         <reports>
-                            <report>report</report>
+                            <report>report-only</report>
                         </reports>
                     </reportSet>
                     <reportSet>
