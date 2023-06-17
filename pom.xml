@@ -167,6 +167,35 @@
                             <outputDirectory>${jacoco.it.reporting.directory}</outputDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>merge-unit-and-integration</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>merge</goal>
+                        </goals>
+                        <configuration>
+                            <fileSets>
+                                <fileSet>
+                                    <directory>${jacoco.execs.directory}/</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </fileSet>
+                            </fileSets>
+                            <destFile>${jacoco.merged.exec}</destFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-merged-report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${jacoco.merged.exec}</dataFile>
+                            <outputDirectory>${jacoco.merged.reporting.directory}</outputDirectory>
+                        </configuration>
+                    </execution>
                     <!--   Start -> To set the minimum code coverage threshold  -->
                     <!--   The jacoco:check goal is bound to verify,
                     so we can run the Maven command mvn clean verify to check whether the rules are respected or not.-->
