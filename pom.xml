@@ -14,9 +14,10 @@
     <name>User CRUD with JWT Security</name>
     <description>User CRUD with JWT Security</description>
     <properties>
-        <skip.ut>false</skip.ut>
         <badges.skip>false</badges.skip>
         <java.version>20</java.version>
+        <skip.unit.tests>false</skip.unit.tests>
+        <skip.integration.tests>false</skip.integration.tests>
         <maven.compiler.release>20</maven.compiler.release>
         <ignore.test.failures>false</ignore.test.failures>
     </properties>
@@ -59,8 +60,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
                 <configuration>
-                    <skipTests>${skip.ut}</skipTests>
+                    <skipTests>${skip.unit.tests}</skipTests>
                     <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
                     <reportsDirectory>target/site/unit-tests</reportsDirectory>
                 </configuration>
@@ -72,6 +74,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
+                    <skipTests>${skip.integration.tests}</skipTests>
                     <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
                     <reportsDirectory>target/site/integration-tests</reportsDirectory>
                 </configuration>
@@ -281,5 +284,39 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <profiles>
+        <!-- profile for Unit test only -->
+        <profile>
+            <id>ut</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!--profile for Integration test only -->
+        <profile>
+            <id>it</id>
+            <properties>
+                <skip.unit.tests>true</skip.unit.tests>
+                <skip.integration.tests>false</skip.integration.tests>
+            </properties>
+        </profile>
+        <!-- Both Unit and Integration tests combined -->
+        <profile>
+            <id>uit</id>
+            <properties>
+                <skip.unit.tests>false</skip.unit.tests>
+                <skip.integration.tests>false</skip.integration.tests>
+            </properties>
+        </profile>
+        <!-- No test execution required at all -->
+        <profile>
+            <id>nt</id>
+            <properties>
+                <skip.unit.tests>true</skip.unit.tests>
+                <skip.integration.tests>true</skip.integration.tests>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

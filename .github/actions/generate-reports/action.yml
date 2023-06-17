@@ -29,7 +29,7 @@ runs:
         cp -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-it/* target
       shell: bash
     - name: 'Generates the project''s site'
-      run: mvn -Dskip.ut=true site --file pom.xml
+      run: mvn site -P nt --file pom.xml
       shell: bash
     - name: 'Uploads the results to ${{ inputs.UPLOADED_ARTIFACTS_DIR }} folder'
       uses: actions/upload-artifact@v3
