@@ -20,6 +20,11 @@
         <skip.integration.tests>false</skip.integration.tests>
         <maven.compiler.release>20</maven.compiler.release>
         <ignore.test.failures>false</ignore.test.failures>
+        <target.directory>${project.build.directory}</target.directory>
+        <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
+        <tests.results.directory>${target.directory}/test-results</tests.results.directory>
+        <unit.tests.results.directory>${tests.results.directory}/unit-tests</unit.tests.results.directory>
+        <integration.tests.results.directory>${tests.results.directory}/integration-tests</integration.tests.results.directory>
     </properties>
     <dependencies>
         <dependency>
@@ -64,7 +69,7 @@
                 <configuration>
                     <skipTests>${skip.unit.tests}</skipTests>
                     <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
-                    <reportsDirectory>target/site/unit-tests</reportsDirectory>
+                    <reportsDirectory>${unit.tests.results.directory}</reportsDirectory>
                 </configuration>
             </plugin>
             <!--     End -> This plugin is included just to define the `skip.ut` variable, so that we can skip unit tests whenever we want       -->
@@ -76,7 +81,7 @@
                 <configuration>
                     <skipTests>${skip.integration.tests}</skipTests>
                     <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
-                    <reportsDirectory>target/site/integration-tests</reportsDirectory>
+                    <reportsDirectory>${integration.tests.results.directory}</reportsDirectory>
                 </configuration>
             </plugin>
             <!--     End -> This plugin will be used to run Integration tests separately from unit tests      -->
@@ -85,8 +90,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <outputDirectory>target/site/javadoc</outputDirectory>
-                    <reportOutputDirectory>target/site/javadoc</reportOutputDirectory>
+                    <outputDirectory>${target.site.directory}/javadoc</outputDirectory>
+                    <reportOutputDirectory>${target.site.directory}/javadoc</reportOutputDirectory>
                 </configuration>
             </plugin>
             <!--     End -> Plugin to generate java docs       -->
@@ -191,7 +196,7 @@
                         </goals>
                         <configuration>
                             <skip>${badges.skip}</skip>
-                            <outputDir>target/site/badges</outputDir>
+                            <outputDir>${target.site.directory}/badges</outputDir>
                             <inputFiles>
                                 <inputFile>target/checkstyle-result.xml</inputFile>
                             </inputFiles>
@@ -229,7 +234,7 @@
                         <configuration>
                             <linkXRef>true</linkXRef>
                             <reportsDirectories>
-                                <reportsDirectories>target/site/unit-tests</reportsDirectories>
+                                <reportsDirectories>${unit.tests.results.directory}</reportsDirectories>
                             </reportsDirectories>
                         </configuration>
                         <reports>
@@ -241,7 +246,7 @@
                         <configuration>
                             <linkXRef>true</linkXRef>
                             <reportsDirectories>
-                                <reportsDirectories>target/site/integration-tests</reportsDirectories>
+                                <reportsDirectories>${integration.tests.results.directory}</reportsDirectories>
                             </reportsDirectories>
                         </configuration>
                         <reports>
