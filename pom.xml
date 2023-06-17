@@ -16,13 +16,23 @@
     <properties>
         <badges.skip>false</badges.skip>
         <java.version>20</java.version>
-        <skip.unit.tests>false</skip.unit.tests>
-        <skip.integration.tests>false</skip.integration.tests>
         <maven.compiler.release>20</maven.compiler.release>
-        <ignore.test.failures>false</ignore.test.failures>
+
         <target.directory>${project.build.directory}</target.directory>
         <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
         <tests.results.directory>${target.directory}/test-results</tests.results.directory>
+
+        <jacoco.execs.directory>${tests.results.directory}/jacoco-execs</jacoco.execs.directory>
+        <jacoco.ut.exec>${jacoco.execs.directory}/ut.exec</jacoco.ut.exec>
+        <jacoco.it.exec>${jacoco.execs.directory}/it.exec</jacoco.it.exec>
+        <jacoco.merged.exec>${jacoco.execs.directory}/merged.exec</jacoco.merged.exec>
+        <jacoco.ut.reporting.directory>${target.site.directory}/jacoco</jacoco.ut.reporting.directory>
+        <jacoco.it.reporting.directory>${target.site.directory}/jacoco-it</jacoco.it.reporting.directory>
+        <jacoco.merged.reporting.directory>${target.site.directory}/jacoco-merged</jacoco.merged.reporting.directory>
+
+        <skip.unit.tests>false</skip.unit.tests>
+        <skip.integration.tests>false</skip.integration.tests>
+        <ignore.test.failures>false</ignore.test.failures>
         <unit.tests.results.directory>${tests.results.directory}/unit-tests</unit.tests.results.directory>
         <integration.tests.results.directory>${tests.results.directory}/integration-tests</integration.tests.results.directory>
     </properties>
@@ -60,19 +70,19 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
             </plugin>
-
-            <!--     Start -> This plugin is included just to define the `skip.ut` variable, so that we can skip unit tests whenever we want       -->
+            <!--     Start -> This plugin is included just to define the `skip.unit.tests` variable, so that we can skip unit tests whenever we want       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
                     <skipTests>${skip.unit.tests}</skipTests>
+                    <argLine>${surefire.jacoco.exec.file.name.arg}</argLine>
                     <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
                     <reportsDirectory>${unit.tests.results.directory}</reportsDirectory>
                 </configuration>
             </plugin>
-            <!--     End -> This plugin is included just to define the `skip.ut` variable, so that we can skip unit tests whenever we want       -->
+            <!--     End -> This plugin is included just to define the `skip.unit.tests` variable, so that we can skip unit tests whenever we want       -->
             <!--     Start -> This plugin will be used to run Integration tests separately from unit tests      -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -114,9 +124,25 @@
                 <version>0.8.10</version>
                 <executions>
                     <execution>
+                        <id>before-unit-test-execution</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                        <configuration>
+                            <destFile>${jacoco.ut.exec}</destFile>
+                            <propertyName>surefire.jacoco.exec.file.name.arg</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>after-unit-test-execution</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${jacoco.ut.exec}</dataFile>
+                            <outputDirectory>${jacoco.ut.reporting.directory}</outputDirectory>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>report</id>
