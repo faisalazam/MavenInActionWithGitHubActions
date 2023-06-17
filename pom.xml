@@ -201,22 +201,28 @@
                     so we can run the Maven command mvn clean verify to check whether the rules are respected or not.-->
                     <execution>
                         <id>jacoco-check</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
                         <configuration>
                             <rules>
                                 <rule>
-                                    <element>PACKAGE</element>
+                                    <element>CLASS</element>
+                                    <excludes>
+                                        <exclude>*Test</exclude>
+                                        <exclude>*IT</exclude>
+                                    </excludes>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.80</minimum>
+                                            <minimum>80%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
                             </rules>
+                            <dataFile>${jacoco.merged.exec}</dataFile>
                         </configuration>
                     </execution>
                     <!--   End -> To set the minimum code coverage threshold  -->
