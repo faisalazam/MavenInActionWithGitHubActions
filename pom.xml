@@ -339,9 +339,19 @@
                 <version>0.8.10</version>
                 <reportSets>
                     <reportSet>
+                        <configuration>
+                            <dataFile>${jacoco.ut.exec}</dataFile>
+                        </configuration>
                         <reports>
                             <report>report</report>
-                            <report>report-aggregate</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet>
+                        <configuration>
+                            <dataFile>${jacoco.it.exec}</dataFile>
+                        </configuration>
+                        <reports>
+                            <report>report-integration</report>
                         </reports>
                     </reportSet>
                 </reportSets>
