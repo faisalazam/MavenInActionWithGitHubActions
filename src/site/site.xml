@@ -26,7 +26,7 @@
                 <ribbonColor>gray</ribbonColor>
             </gitHub>
             <twitter>
-                <user>mfa1616</user>
+                <user>${owner.twitter.handle}</user>
                 <showUser>true</showUser>
                 <showFollowers>true</showFollowers>
             </twitter>
@@ -50,8 +50,9 @@
         </head>
 
         <links>
-            <item name="${project.name}" href="${scm.user.link}"/>
+            <item name="Get Sources" href="./scm.html"/>
         </links>
+
         <breadcrumbs>
             <!-- NOTE: see these `$$` in `href? they are not by mistake -->
             <!-- They are there because no matter what you try, href wont get the value of the variable -->
@@ -68,6 +69,6 @@
         <menu>
             <item name="JaCoCo Combined" href="jacoco-merged/index.html"/>
         </menu>
-        <footer><![CDATA[All rights reserved.]]></footer>
+        <footer>${copy.right.info}</footer>
     </body>
 </project>

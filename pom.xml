@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -66,10 +67,13 @@
 
         <owner.name>Muhammad Faisal</owner.name>
         <organization.name>LucidTech</organization.name>
+        <owner.twitter.handle>mfa1616</owner.twitter.handle>
+        <scm.user.name>faisalazam</scm.user.name>
         <scm.repo.name>usercrudwithjwt</scm.repo.name>
         <scm.repo.name.for.groupId>usercrudwithjwt</scm.repo.name.for.groupId>
-        <scm.user.link>https://github.com/faisalazam</scm.user.link>
+        <scm.user.link>https://github.com/${scm.user.name}</scm.user.link>
         <scm.repo.link>${scm.user.link}/${scm.repo.name}</scm.repo.link>
+        <scm.package.url>https://maven.pkg.github.com/${scm.user.name}/${scm.repo.name}</scm.package.url>
 
         <target.directory>${project.build.directory}</target.directory>
         <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
@@ -83,7 +87,7 @@
         <jacoco.it.reporting.directory>${target.site.directory}/jacoco-it</jacoco.it.reporting.directory>
         <jacoco.merged.reporting.directory>${target.site.directory}/jacoco-merged</jacoco.merged.reporting.directory>
 
-        <javadoc.copy.right.info>Copyright© 2023-23 Muhammad Faisal. All Rights Reserved.</javadoc.copy.right.info>
+        <copy.right.info><![CDATA[Copyright© 2023 <a href="${scm.user.link}">${organization.name}</a>. All Rights Reserved.]]></copy.right.info>
 
         <skip.unit.tests>false</skip.unit.tests>
         <skip.integration.tests>false</skip.integration.tests>
@@ -110,7 +114,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/faisalazam/${scm.repo.name}</url>
+            <url>${scm.package.url}</url>
         </repository>
     </distributionManagement>
 
@@ -455,7 +459,7 @@
                     <show>private</show>
                     <linksource>true</linksource>
                     <failOnError>false</failOnError>
-                    <bottom>${javadoc.copy.right.info}</bottom>
+                    <bottom>${copy.right.info}</bottom>
                 </configuration>
             </plugin>
             <!-- Generates a list of changes from the SCM. You will probably want
