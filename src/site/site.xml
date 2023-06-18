@@ -15,7 +15,7 @@
             <topBarEnabled>true</topBarEnabled>
             <!-- The following customisation will add 'Fork me on GitHub' ribbon in the top right corner -->
             <gitHub>
-                <projectId>faisalazam/usercrudwithjwt</projectId>
+                <projectId>${scm.user.name}/${scm.repo.name}</projectId>
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>gray</ribbonColor>
             </gitHub>
@@ -29,10 +29,12 @@
 
     <body>
         <links>
-            <item name="${project.name}" href="https://github.com/faisalazam/usercrudwithjwt"/>
+            <item name="${project.name}" href="${scm.user.link}"/>
         </links>
         <breadcrumbs>
-            <item name="Muhammad Faisal" href="https://github.com/faisalazam"/>
+            <item name="${organisation.name}" href="${scm.repo.link}"/>
+            <item name="${owner.name}" href="${scm.user.link}"/>
+            <item name="${scm.repo.name}" href="${scm.repo.link}"/>
         </breadcrumbs>
         <menu>
             <item name="README" href="README.html"/>
@@ -41,5 +43,6 @@
         <menu>
             <item name="JaCoCo Combined" href="jacoco-merged/index.html"/>
         </menu>
+        <footer><![CDATA[All rights reserved.]]></footer>
     </body>
 </project>
