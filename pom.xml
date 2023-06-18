@@ -33,8 +33,6 @@
         <skip.unit.tests>false</skip.unit.tests>
         <skip.integration.tests>false</skip.integration.tests>
         <ignore.test.failures>false</ignore.test.failures>
-        <surefire.jacoco.exec.file.name.arg>''</surefire.jacoco.exec.file.name.arg>
-        <failsafe.jacoco.exec.file.name.arg>''</failsafe.jacoco.exec.file.name.arg>
         <unit.tests.results.directory>${tests.results.directory}/unit-tests</unit.tests.results.directory>
         <integration.tests.results.directory>${tests.results.directory}/integration-tests</integration.tests.results.directory>
     </properties>
