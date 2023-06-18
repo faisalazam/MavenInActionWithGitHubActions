@@ -13,6 +13,8 @@
     <custom>
         <fluidoSkin>
             <topBarEnabled>true</topBarEnabled>
+            <sideBarEnabled>true</sideBarEnabled>
+            <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
             <!-- The following customisation will add 'Fork me on GitHub' ribbon in the top right corner -->
             <gitHub>
                 <projectId>${scm.user.name}/${scm.repo.name}</projectId>
@@ -26,6 +28,17 @@
             </twitter>
         </fluidoSkin>
     </custom>
+
+    <poweredBy>
+        <logo name="IntelliJ" href="http://www.jetbrains.com/idea/"
+              title="Developed using IntelliJ" width="170px"
+              alt="developed using IntelliJ"
+              img="./images/intellij_idea_logo.png"/>
+        <logo name="Maven" href="https://maven.apache.org/"
+              title="Developed using Maven Plugins" width="170px"
+              alt="developed using Maven plugins"
+              img="./images/maven_logo.png"/>
+    </poweredBy>
 
     <body>
         <links>
