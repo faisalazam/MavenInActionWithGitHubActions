@@ -3,6 +3,7 @@ on: push
 env:
   JAVA_VERSION: 20
   UPLOADED_ARTIFACTS_DIR: 'gh-pages'
+  SITE_DIR: '${{ UPLOADED_ARTIFACTS_DIR }}/site'
   BRANCHES_COVERAGE_THRESHOLD: '60%'
   INSTRUCTIONS_COVERAGE_THRESHOLD: '60%'
 
@@ -96,7 +97,7 @@ jobs:
           fail-if-branches-less-than: ${{ env.BRANCHES_COVERAGE_THRESHOLD }}
           fail-if-coverage-less-than: ${{ env.INSTRUCTIONS_COVERAGE_THRESHOLD }}
           badges-directory: 'site/badges/jacoco/svgs'
-          jacoco-csv-file: ${{ env.UPLOADED_ARTIFACTS_DIR }}/site/jacoco/jacoco.csv
+          jacoco-csv-file: ${{ env.SITE_DIR }}/jacoco-merged/jacoco.csv
       - name: 'Log code coverage percentage'
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
@@ -126,20 +127,22 @@ jobs:
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Copy the `README.md` file to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
-        run: cp README.md ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Copy the `LICENSE` file to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
-        run: cp LICENSE ${{ env.UPLOADED_ARTIFACTS_DIR }}
+      - name: 'Copy the `README.md` file to `${{ env.SITE_DIR }}` folder'
+        run: cp README.md ${{ env.SITE_DIR }}
+      - name: 'Copy the `LICENSE` file to `${{ env.SITE_DIR }}` folder'
+        run: cp LICENSE ${{ env.SITE_DIR }}
       - name: 'Copy the Jacoco badges file to the relevant folder'
         run: |
-          mkdir -p ${{ env.UPLOADED_ARTIFACTS_DIR }}/site/jacoco/jacoco-resources/badges
-          cp ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs/* ${{ env.UPLOADED_ARTIFACTS_DIR }}/site/jacoco/jacoco-resources/badges
+          mkdir -p ${{ env.SITE_DIR }}/jacoco/jacoco-resources/badges
+          cp ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs/* ${{ env.SITE_DIR }}/jacoco-merged/jacoco-resources/badges
           rm -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          folder: ${{ env.SITE_DIR }}
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+
   deploy-to-gh-packages:
     needs:
      - setup-env

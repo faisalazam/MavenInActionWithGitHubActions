@@ -4,11 +4,9 @@ description: 'composite run action'
 inputs:
   JAVA_VERSION_TO_INSTALL:
     required: true
-    type: string
     description: 'Java version to be installed'
   UPLOADED_ARTIFACTS_DIR:
     required: true
-    type: string
     description: 'Uploads artifacts directory'
 
 runs:
