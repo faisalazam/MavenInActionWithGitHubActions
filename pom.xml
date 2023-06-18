@@ -30,12 +30,15 @@
         <jacoco.it.reporting.directory>${target.site.directory}/jacoco-it</jacoco.it.reporting.directory>
         <jacoco.merged.reporting.directory>${target.site.directory}/jacoco-merged</jacoco.merged.reporting.directory>
 
+        <javadoc.copy.right.info>Copyright© 2023-23 Muhammad Faisal. All Rights Reserved.</javadoc.copy.right.info>
+
         <skip.unit.tests>false</skip.unit.tests>
         <skip.integration.tests>false</skip.integration.tests>
         <ignore.test.failures>false</ignore.test.failures>
         <unit.tests.results.directory>${tests.results.directory}/unit-tests</unit.tests.results.directory>
         <integration.tests.results.directory>${tests.results.directory}/integration-tests</integration.tests.results.directory>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -398,6 +401,8 @@
                     <source>20</source>
                     <show>private</show>
                     <linksource>true</linksource>
+                    <failOnError>false</failOnError>
+                    <bottom>${javadoc.copy.right.info}</bottom>
                 </configuration>
             </plugin>
         </plugins>
