@@ -2,21 +2,74 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.lucidtech</groupId>
-    <artifactId>usercrudwithjwt</artifactId>
+
+    <groupId>com.${scm.repo.name.for.groupId}</groupId>
+    <artifactId>${scm.repo.name}</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>User CRUD with JWT Security</name>
     <description>User CRUD with JWT Security</description>
+    <url>${scm.repo.link}</url>
+
+    <organization>
+        <name>${organization.name}</name>
+        <url>${scm.user.link}</url>
+    </organization>
+
+    <scm>
+        <url>${scm.repo.link}</url>
+        <connection>scm:git:${scm.repo.link}.git</connection>
+        <developerConnection>scm:git:${scm.repo.link}.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>${scm.repo.link}/issues/</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>github-actions</system>
+        <url>${scm.repo.link}/actions</url>
+    </ciManagement>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>${owner.name}</name>
+            <organization>${project.organization.name}</organization>
+            <organizationUrl>${scm.user.link}</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>GMT</timezone>
+        </developer>
+    </developers>
+
     <properties>
         <badges.skip>false</badges.skip>
         <java.version>20</java.version>
         <maven.compiler.release>20</maven.compiler.release>
+
+        <owner.name>Muhammad Faisal</owner.name>
+        <organization.name>LucidTech</organization.name>
+        <scm.repo.name>usercrudwithjwt</scm.repo.name>
+        <scm.repo.name.for.groupId>usercrudwithjwt</scm.repo.name.for.groupId>
+        <scm.user.link>https://github.com/faisalazam</scm.user.link>
+        <scm.repo.link>${scm.user.link}/${scm.repo.name}</scm.repo.link>
 
         <target.directory>${project.build.directory}</target.directory>
         <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
