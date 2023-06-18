@@ -27,6 +27,12 @@ jobs:
         uses: './.github/actions/install-java'
         with:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
+      - name: 'Cache Maven packages'
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2-*
       - name: 'Compiles the application code'
         run: mvn clean compile --file pom.xml
 

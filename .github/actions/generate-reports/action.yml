@@ -28,6 +28,12 @@ runs:
         cp -r ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-ut/* target
         cp -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-it/* target
       shell: bash
+    - name: 'Cache Maven packages'
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-site-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2-*
     - name: 'Generates the project''s site'
       run: mvn site -P nt --file pom.xml
       shell: bash
