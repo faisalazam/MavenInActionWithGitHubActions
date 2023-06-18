@@ -19,6 +19,11 @@
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>gray</ribbonColor>
             </gitHub>
+            <twitter>
+                <user>mfa1616</user>
+                <showUser>true</showUser>
+                <showFollowers>true</showFollowers>
+            </twitter>
         </fluidoSkin>
     </custom>
 
