@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="${project.name}">
+<project xmlns="https://maven.apache.org/SITE/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd"
+         name="${project.name}">
+
     <publishDate format="yyyy-MM-dd" position="right"/>
     <version position="right"/>
 
@@ -41,13 +45,21 @@
     </poweredBy>
 
     <body>
+        <head>
+            <![CDATA[<script src="./js/remove-dollar-sign-from-hrefs.js" type="text/javascript"></script>]]>
+        </head>
+
         <links>
             <item name="${project.name}" href="${scm.user.link}"/>
         </links>
         <breadcrumbs>
-            <item name="${organisation.name}" href="${scm.repo.link}"/>
-            <item name="${owner.name}" href="${scm.user.link}"/>
-            <item name="${scm.repo.name}" href="${scm.repo.link}"/>
+            <!-- NOTE: see these `$$` in `href? they are not by mistake -->
+            <!-- They are there because no matter what you try, href wont get the value of the variable -->
+            <!-- With this double `$$`, variable will get evaluated but their value will start with a `$` -->
+            <!-- So, a piece of javascript has been added to remove that unnecessary `$` from the hrefs. -->
+            <item name="${organization.name}" href="$${scm.user.link}"/>
+            <item name="${owner.name}" href="$${scm.user.link}"/>
+            <item name="${scm.repo.name}" href="$${scm.repo.link}"/>
         </breadcrumbs>
         <menu>
             <item name="README" href="README.html"/>
