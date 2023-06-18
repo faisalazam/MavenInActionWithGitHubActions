@@ -110,7 +110,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/faisalazam/usercrudwithjwt</url>
+            <url>https://maven.pkg.github.com/faisalazam/${scm.repo.name}</url>
         </repository>
     </distributionManagement>
 
@@ -456,6 +456,39 @@
                     <linksource>true</linksource>
                     <failOnError>false</failOnError>
                     <bottom>${javadoc.copy.right.info}</bottom>
+                </configuration>
+            </plugin>
+            <!-- Generates a list of changes from the SCM. You will probably want
+                to restrict this somehow for real projects (e.g. by date).
+                http://maven.apache.org/plugins/maven-changelog-plugin/usage.html -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changelog-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>taglist-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <tagListOptions>
+                        <tagClasses>
+                            <tagClass>
+                                <displayName>Todo Work</displayName>
+                                <tags>
+                                    <tag>
+                                        <matchString>todo</matchString>
+                                        <matchType>ignoreCase</matchType>
+                                    </tag>
+                                    <tag>
+                                        <matchString>FIXME</matchString>
+                                        <matchType>exact</matchType>
+                                    </tag>
+                                </tags>
+                            </tagClass>
+                        </tagClasses>
+                    </tagListOptions>
                 </configuration>
             </plugin>
         </plugins>
