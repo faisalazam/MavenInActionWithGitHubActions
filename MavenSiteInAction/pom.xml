@@ -58,6 +58,8 @@
         <organization.name>LucidTech</organization.name>
         <organization.name.for.groupId>lucidtech</organization.name.for.groupId>
 
+        <owner.twitter.handle>mfa1616</owner.twitter.handle>
+
         <scm.user.name>faisalazam</scm.user.name>
         <scm.repo.name>usercrudwithjwt</scm.repo.name>
         <scm.user.link>https://github.com/${scm.user.name}</scm.user.link>
@@ -68,6 +70,9 @@
         <organization.url>${scm.user.link}</organization.url>
 
         <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
+
+        <copy.right.info>
+            <![CDATA[Copyright© 2023 <a href="${organization.url}">${organization.name}</a>. All Rights Reserved.]]></copy.right.info>
 
         <!--    Setting the encodings to avoid warnings like `Input file encoding has not been set`    -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
