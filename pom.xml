@@ -451,77 +451,77 @@
                 <version>3.3.0</version>
             </plugin>
             <!--    End -> Plugin to fix the `Unable to locate Test Source XRef to link to - DISABLED` issue coming up while generating the surefire report       -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.5.0</version>
-                <configuration>
-                    <source>20</source>
-                    <show>private</show>
-                    <linksource>true</linksource>
-                    <failOnError>false</failOnError>
-                    <bottom>${copy.right.info}</bottom>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.7</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>dependency-updates-report</report>
-                            <report>plugin-updates-report</report>
-                            <report>property-updates-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <!-- Generates a list of changes from the SCM. You will probably want
-                to restrict this somehow for real projects (e.g. by date).
-                http://maven.apache.org/plugins/maven-changelog-plugin/usage.html -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changelog-plugin</artifactId>
-                <version>2.3</version>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--                <version>3.5.0</version>-->
+<!--                <configuration>-->
+<!--                    <source>20</source>-->
+<!--                    <show>private</show>-->
+<!--                    <linksource>true</linksource>-->
+<!--                    <failOnError>false</failOnError>-->
+<!--                    <bottom>${copy.right.info}</bottom>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>versions-maven-plugin</artifactId>-->
+<!--                <version>2.7</version>-->
+<!--                <reportSets>-->
+<!--                    <reportSet>-->
+<!--                        <reports>-->
+<!--                            <report>dependency-updates-report</report>-->
+<!--                            <report>plugin-updates-report</report>-->
+<!--                            <report>property-updates-report</report>-->
+<!--                        </reports>-->
+<!--                    </reportSet>-->
+<!--                </reportSets>-->
+<!--            </plugin>-->
+<!--            &lt;!&ndash; Generates a list of changes from the SCM. You will probably want-->
+<!--                to restrict this somehow for real projects (e.g. by date).-->
+<!--                http://maven.apache.org/plugins/maven-changelog-plugin/usage.html &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-changelog-plugin</artifactId>-->
+<!--                <version>2.3</version>-->
+<!--            </plugin>-->
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>taglist-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <tagListOptions>
-                        <tagClasses>
-                            <tagClass>
-                                <displayName>Todo Work</displayName>
-                                <tags>
-                                    <tag>
-                                        <matchString>todo</matchString>
-                                        <matchType>ignoreCase</matchType>
-                                    </tag>
-                                    <tag>
-                                        <matchString>FIXME</matchString>
-                                        <matchType>exact</matchType>
-                                    </tag>
-                                </tags>
-                            </tagClass>
-                        </tagClasses>
-                    </tagListOptions>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>8.3.1</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>aggregate</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>taglist-maven-plugin</artifactId>-->
+<!--                <version>3.0.0</version>-->
+<!--                <configuration>-->
+<!--                    <tagListOptions>-->
+<!--                        <tagClasses>-->
+<!--                            <tagClass>-->
+<!--                                <displayName>Todo Work</displayName>-->
+<!--                                <tags>-->
+<!--                                    <tag>-->
+<!--                                        <matchString>todo</matchString>-->
+<!--                                        <matchType>ignoreCase</matchType>-->
+<!--                                    </tag>-->
+<!--                                    <tag>-->
+<!--                                        <matchString>FIXME</matchString>-->
+<!--                                        <matchType>exact</matchType>-->
+<!--                                    </tag>-->
+<!--                                </tags>-->
+<!--                            </tagClass>-->
+<!--                        </tagClasses>-->
+<!--                    </tagListOptions>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.owasp</groupId>-->
+<!--                <artifactId>dependency-check-maven</artifactId>-->
+<!--                <version>8.3.1</version>-->
+<!--                <reportSets>-->
+<!--                    <reportSet>-->
+<!--                        <reports>-->
+<!--                            <report>aggregate</report>-->
+<!--                        </reports>-->
+<!--                    </reportSet>-->
+<!--                </reportSets>-->
+<!--            </plugin>-->
         </plugins>
     </reporting>
 
