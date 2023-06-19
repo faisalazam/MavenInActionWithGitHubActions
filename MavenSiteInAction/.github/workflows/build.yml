@@ -1,8 +1,15 @@
 name: 'Site CI/CD'
-on: push
+on:
+  workflow_call:
+    inputs:
+      UPLOADED_ARTIFACTS_DIR:
+        required: true
+        type: string
+      SITE_DIR:
+        required: true
+        type: string
+
 env:
-  UPLOADED_ARTIFACTS_DIR: 'gh-pages'
-  SITE_DIR: 'gh-pages/site'
   MAVEN_SITE_IN_ACTION_DIR: 'gh-pages/maven-site-in-action'
 
 jobs:
@@ -20,10 +27,10 @@ jobs:
           restore-keys: ${{ runner.os }}-m2-*
       - name: 'Generates the project''s site'
         run: mvn site -P nt --file pom.xml
-      - name: 'Uploads the results to ${{ env.UPLOADED_ARTIFACTS_DIR }} folder'
+      - name: 'Uploads the results to ${{ inputs.UPLOADED_ARTIFACTS_DIR }} folder'
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
           retention-days: 1
           path: target
 
@@ -36,21 +43,21 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Download the uploaded artifacts to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
+      - name: 'Download the uploaded artifacts to `${{ inputs.UPLOADED_ARTIFACTS_DIR }}` folder'
         uses: actions/download-artifact@v3
         with:
-          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Copy the `README.md` file to `${{ env.SITE_DIR }}` folder'
-        run: cp README.md ${{ env.SITE_DIR }}
-      - name: 'Copy the `LICENSE` file to `${{ env.SITE_DIR }}` folder'
-        run: cp ../LICENSE ${{ env.SITE_DIR }}
-      - name: 'Rename `${{ env.SITE_DIR }}` to `${{ env.MAVEN_SITE_IN_ACTION_DIR }}`'
+          name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
+          path: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
+      - name: 'Copy the `README.md` file to `${{ inputs.SITE_DIR }}` folder'
+        run: cp README.md ${{ inputs.SITE_DIR }}
+      - name: 'Copy the `LICENSE` file to `${{ inputs.SITE_DIR }}` folder'
+        run: cp ../LICENSE ${{ inputs.SITE_DIR }}
+      - name: 'Rename `${{ inputs.SITE_DIR }}` to `${{ env.MAVEN_SITE_IN_ACTION_DIR }}`'
         run: |
-          mv -f ${{ env.SITE_DIR }} ${{ env.MAVEN_SITE_IN_ACTION_DIR }}
+          mv -f ${{ inputs.SITE_DIR }} ${{ env.MAVEN_SITE_IN_ACTION_DIR }}
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          folder: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
           CLEAN: true # Automatically remove deleted files from the deploy branch

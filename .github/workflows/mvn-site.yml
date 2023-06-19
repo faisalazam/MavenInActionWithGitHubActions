@@ -1,0 +1,29 @@
+name: 'Site CI/CD'
+on: push
+env:
+  UPLOADED_ARTIFACTS_DIR: 'gh-pages'
+  SITE_DIR: 'gh-pages/site'
+
+jobs:
+  setup-env:
+    runs-on: ubuntu-latest
+    outputs:
+      UPLOADED_ARTIFACTS_DIR: ${{steps.setup-env.outputs.UPLOADED_ARTIFACTS_DIR}}
+      SITE_DIR: ${{steps.setup-env.outputs.SITE_DIR}}
+    steps:
+      - name: 'Setup Environment'
+        id: setup-env
+        run: |
+          echo "UPLOADED_ARTIFACTS_DIR=${{ env.UPLOADED_ARTIFACTS_DIR }}" >> $GITHUB_OUTPUT
+          echo "SITE_DIR=${{ env.SITE_DIR }}" >> $GITHUB_OUTPUT
+
+  deploy-mvn-site-to-gh-pages:
+    needs:
+     - setup-env
+    permissions:
+      contents: read
+      packages: write
+    uses: './MavenSiteInAction/.github/workflows/build.yml'
+    with:
+      UPLOADED_ARTIFACTS_DIR: ${{ needs.setup-env.outputs.UPLOADED_ARTIFACTS_DIR }}
+      SITE_DIR: ${{ needs.setup-env.outputs.SITE_DIR }}
