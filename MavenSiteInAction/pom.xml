@@ -67,6 +67,8 @@
         <ciManagement.url>${scm.repo.link}/actions</ciManagement.url>
         <organization.url>${scm.user.link}</organization.url>
 
+        <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
+
         <!--    Setting the encodings to avoid warnings like `Input file encoding has not been set`    -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -79,6 +81,32 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <!-- Copy the readme file to the site markdown directory so that a page is generated from it. -->
+                        <id>copy-readme</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${target.site.directory}/markdown</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>README.md</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
