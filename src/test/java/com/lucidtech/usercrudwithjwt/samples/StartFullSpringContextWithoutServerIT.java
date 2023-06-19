@@ -1,5 +1,6 @@
-package com.lucidtech.usercrudwithjwt.controller;
+package com.lucidtech.usercrudwithjwt.samples;
 
+import com.lucidtech.usercrudwithjwt.controller.GreetingController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 //The @SpringBootTest annotation tells Spring Boot to look for a main
 // configuration class (one with @SpringBootApplication, for instance) and use that to start a Spring application context.
-class GreetingControllerSmokeTest {
+class StartFullSpringContextWithoutServerIT {
     @Autowired
     private GreetingController controller;
 
@@ -19,7 +20,7 @@ class GreetingControllerSmokeTest {
     }
 
     @Test
-    //To convince ourself that the context is creating our controller, we could add an assertion
+    //To convince ourselves that the context is creating our controller, we could add an assertion
     public void controllerIsNotNull() {
         assertThat(controller).isNotNull();
     }

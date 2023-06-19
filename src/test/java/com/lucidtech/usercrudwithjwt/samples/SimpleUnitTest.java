@@ -1,14 +1,16 @@
-package com.lucidtech.usercrudwithjwt.controller;
+package com.lucidtech.usercrudwithjwt.samples;
 
+import com.lucidtech.usercrudwithjwt.controller.GreetingController;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class GreetingControllerTest {
+class SimpleUnitTest {
 
     @Test
     public void shouldTestGreeting() {
-        assertTrue((new GreetingController().greeting("Faisal")).content().contains("Faisal"));
+        Assertions.assertTrue((new GreetingController().greeting("Faisal")).content().contains("Faisal"));
     }
     @Test
     public void shouldTestGreeting1() {

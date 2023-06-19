@@ -1,4 +1,4 @@
-package com.lucidtech.usercrudwithjwt.controller;
+package com.lucidtech.usercrudwithjwt.samples;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest
 //In this test, the full Spring application context is started but without the server.
 // We can narrow the tests to only the web layer by using @WebMvcTest
-class GreetingControllerWebLayerTest {
+class StartSpringContextWithWebLayerOnlyAndWithoutServerTest {
     @Autowired
     private MockMvc mockMvc;
 

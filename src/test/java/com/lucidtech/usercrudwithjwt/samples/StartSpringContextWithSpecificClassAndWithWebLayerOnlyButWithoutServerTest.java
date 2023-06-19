@@ -1,5 +1,6 @@
-package com.lucidtech.usercrudwithjwt.controller;
+package com.lucidtech.usercrudwithjwt.samples;
 
+import com.lucidtech.usercrudwithjwt.controller.GreetingController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //In this test, Spring Boot instantiates only the web layer rather than the whole context.
 // In an application with multiple controllers, you can even ask for only one to be instantiated by using,
 // for example, @WebMvcTest(GreetingController.class).
-class GreetingControllerAnotherWebLayerTest {
+class StartSpringContextWithSpecificClassAndWithWebLayerOnlyButWithoutServerTest {
     @Autowired
     private MockMvc mockMvc;
 
