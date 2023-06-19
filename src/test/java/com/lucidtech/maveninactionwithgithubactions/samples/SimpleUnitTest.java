@@ -1,6 +1,6 @@
-package com.lucidtech.usercrudwithjwt.samples;
+package com.lucidtech.maveninactionwithgithubactions.samples;
 
-import com.lucidtech.usercrudwithjwt.controller.GreetingController;
+import com.lucidtech.maveninactionwithgithubactions.controller.GreetingController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,10 +1,10 @@
-package com.lucidtech.usercrudwithjwt;
+package com.lucidtech.maveninactionwithgithubactions;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserCRUDWithJWTApplicationTests {
+class MavenInActionWithGitHubActionsApplicationTests {
 
     @Test
     void contextLoads() {
@@ -12,6 +12,6 @@ class UserCRUDWithJWTApplicationTests {
 
     @Test
     public void applicationStarts() {
-        UserCRUDWithJWTApplication.main(new String[]{});
+        MavenInActionWithGitHubActionsApplication.main(new String[]{});
     }
 }

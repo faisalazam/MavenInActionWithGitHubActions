@@ -11,8 +11,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.${scm.repo.name.for.groupId}</groupId>
-    <artifactId>${scm.repo.name}</artifactId>
+    <groupId>com.${organization.name.lowercased}.${scm.repo.name.lowercased}</groupId>
+    <artifactId>${scm.repo.name.lowercased}</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>User CRUD with JWT Security</name>
     <description>User CRUD with JWT Security</description>
@@ -67,10 +67,11 @@
 
         <owner.name>Muhammad Faisal</owner.name>
         <organization.name>LucidTech</organization.name>
+        <organization.name.lowercased>lucidtech</organization.name.lowercased>
         <owner.twitter.handle>mfa1616</owner.twitter.handle>
         <scm.user.name>faisalazam</scm.user.name>
-        <scm.repo.name>usercrudwithjwt</scm.repo.name>
-        <scm.repo.name.for.groupId>usercrudwithjwt</scm.repo.name.for.groupId>
+        <scm.repo.name>MavenInActionWithGitHubActions</scm.repo.name>
+        <scm.repo.name.lowercased>maveninactionwithgithubactions</scm.repo.name.lowercased>
         <scm.user.link>https://github.com/${scm.user.name}</scm.user.link>
         <scm.repo.link>${scm.user.link}/${scm.repo.name}</scm.repo.link>
         <scm.package.url>https://maven.pkg.github.com/${scm.user.name}/${scm.repo.name}</scm.package.url>

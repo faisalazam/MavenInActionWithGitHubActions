@@ -1,6 +1,6 @@
-package com.lucidtech.usercrudwithjwt.controller;
+package com.lucidtech.maveninactionwithgithubactions.controller;
 
-import com.lucidtech.usercrudwithjwt.model.Greeting;
+import com.lucidtech.maveninactionwithgithubactions.model.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
