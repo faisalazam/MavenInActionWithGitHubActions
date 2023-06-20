@@ -79,6 +79,9 @@
 
         <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
 
+        <skip.unit.tests>false</skip.unit.tests>
+        <ignore.test.failures>false</ignore.test.failures>
+
         <copy.right.info>
             <![CDATA[Copyright© 2023 <a href="${organization.url}">${organization.name}</a>. All Rights Reserved.]]></copy.right.info>
 
@@ -92,6 +95,7 @@
 
         <!--   Plugin Versions   -->
         <maven-site-plugin.version>4.0.0-M8</maven-site-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
     </properties>
@@ -112,6 +116,17 @@
 
     <build>
         <plugins>
+            <!--     Start -> This plugin is included just to define the `skip.unit.tests` variable, so that we can skip unit tests whenever we want       -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <skipTests>${skip.unit.tests}</skipTests>
+                    <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <!--     End -> This plugin is included just to define the `skip.unit.tests` variable, so that we can skip unit tests whenever we want       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
