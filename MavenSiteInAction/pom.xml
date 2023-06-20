@@ -4,8 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>au.com.${organization.name.lowercased}.${scm.repo.name.lowercased}</groupId>
-    <artifactId>${scm.repo.name.lowercased}</artifactId>
+    <parent>
+        <groupId>au.com.lucidtech.maveninactionwithgithubactions</groupId>
+        <artifactId>maveninactionwithgithubactions</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>au.com.lucidtech.maveninactionwithgithubactions.mavensiteinaction</groupId>
+    <artifactId>maveninactionwithgithubactions.mavensiteinaction</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Maven Site In Action With GitHub Action</name>
     <description>Setting up Maven Site plugin and automating deployment with GitHub Actions</description>
@@ -56,13 +62,11 @@
     <properties>
         <owner.name>Muhammad Faisal</owner.name>
         <organization.name>LucidTech</organization.name>
-        <organization.name.lowercased>lucidtech</organization.name.lowercased>
 
         <owner.twitter.handle>mfa1616</owner.twitter.handle>
 
         <scm.user.name>faisalazam</scm.user.name>
         <scm.repo.name>MavenInActionWithGitHubActions</scm.repo.name>
-        <scm.repo.name.lowercased>maveninactionwithgithubactions</scm.repo.name.lowercased>
         <scm.user.link>https://github.com/${scm.user.name}</scm.user.link>
         <scm.repo.link>${scm.user.link}/${scm.repo.name}</scm.repo.link>
 

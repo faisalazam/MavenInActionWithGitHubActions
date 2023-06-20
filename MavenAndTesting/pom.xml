@@ -5,17 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>au.com.lucidtech.maveninactionwithgithubactions</groupId>
+        <artifactId>maveninactionwithgithubactions</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>au.com.${organization.name.lowercased}.${scm.repo.name.lowercased}</groupId>
-    <artifactId>${scm.repo.name.lowercased}</artifactId>
+    <groupId>au.com.lucidtech.maveninactionwithgithubactions.mavenandtesting</groupId>
+    <artifactId>maveninactionwithgithubactions.mavenandtesting</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Maven Site In Action With GitHub Action</name>
-    <description>Setting up Maven Site plugin and automating deployment with GitHub Actions</description>
+    <name>Testing with Maven</name>
+    <description>Setting up Maven plugins for testing and reporting</description>
     <url>${scm.repo.link}</url>
 
     <organization>
@@ -63,13 +62,11 @@
     <properties>
         <owner.name>Muhammad Faisal</owner.name>
         <organization.name>LucidTech</organization.name>
-        <organization.name.lowercased>lucidtech</organization.name.lowercased>
 
         <owner.twitter.handle>mfa1616</owner.twitter.handle>
 
         <scm.user.name>faisalazam</scm.user.name>
         <scm.repo.name>MavenInActionWithGitHubActions</scm.repo.name>
-        <scm.repo.name.lowercased>maveninactionwithgithubactions</scm.repo.name.lowercased>
         <scm.user.link>https://github.com/${scm.user.name}</scm.user.link>
         <scm.repo.link>${scm.user.link}/${scm.repo.name}</scm.repo.link>
 
