@@ -90,7 +90,7 @@ the desired location as (in [pom.xml](pom.xml) file):
 ## Generating the Project Site for multimodule project
 
 Running the `mvn site` from the parent will actually create the `target/site` folders with proper site generation
-for each of the modules, but the problem is, when we try to navigate to the submudule's link from the
+for each of the modules, but the problem is, when we try to navigate to the submodule's link from the
 parent's site, those links will be broken. In order to fix that issue, a simple solution would be to 
 configure the stage goal. It will automatically aggregate the documentation of each module in 
 the `${project.baseURI}/target/staging` folder. The trick is to add [distributionManagement][site-distribution-url] 

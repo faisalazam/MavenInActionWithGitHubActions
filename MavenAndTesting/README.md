@@ -82,8 +82,8 @@ each plugin specified in `<build>` (parameters from `<build>` section were previ
 
 Learn more about [Site Reporting][site-reporting-url]
 
-## Using the <reportSets> Tag
-You can configure a reporting plugin using the `<reportSets>` tag. This is most commonly used to generate 
+## Using the `reportSets` Tag
+You can configure a reporting plugin using the `reportSets` tag. This is most commonly used to generate 
 reports selectively when running `mvn site`. The following (in [pom.xml](pom.xml) file) will generate only the `surefire` and `failsafe` reports:
 ```
 <reporting>
