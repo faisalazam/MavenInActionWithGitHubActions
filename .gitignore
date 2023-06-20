@@ -25,6 +25,9 @@ buildNumber.properties
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### README.md ###
+!**/src/site/markdown/README.md
+
 ### STS ###
 .apt_generated
 .factorypath

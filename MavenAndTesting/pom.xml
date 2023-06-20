@@ -75,7 +75,7 @@
         <organization.url>${scm.user.link}</organization.url>
 
         <target.directory>${project.build.directory}</target.directory>
-        <target.markdown.directory>${target.site.directory}/generated-site/markdown</target.markdown.directory>
+        <target.markdown.directory>src/site/markdown</target.markdown.directory>
 
         <skip.unit.tests>false</skip.unit.tests>
         <ignore.test.failures>false</ignore.test.failures>

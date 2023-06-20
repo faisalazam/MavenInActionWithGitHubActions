@@ -74,8 +74,7 @@
         <ciManagement.url>${scm.repo.link}/actions</ciManagement.url>
         <organization.url>${scm.user.link}</organization.url>
 
-        <target.directory>${project.build.directory}</target.directory>
-        <target.markdown.directory>${target.site.directory}/generated-site/markdown</target.markdown.directory>
+        <target.markdown.directory>src/site/markdown</target.markdown.directory>
 
         <copy.right.info>
             <![CDATA[Copyright© 2023 <a href="${organization.url}">${organization.name}</a>. All Rights Reserved.]]></copy.right.info>
