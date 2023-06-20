@@ -98,6 +98,7 @@
         <maven-site-plugin.version>4.0.0-M8</maven-site-plugin.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
     </properties>
@@ -118,6 +119,15 @@
 
     <build>
         <plugins>
+            <!--     Start -> By default your version of Maven might use an old version of the maven-compiler-plugin
+                     that is not compatible with Java 9 or later versions. To target Java 9 or later, you should at least
+                     use version 3.6.0 of the maven-compiler-plugin and set the maven.compiler.release property to the
+                     Java release you are targeting (e.g. 9, 10, 11, 12, etc.)       -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+            </plugin>
             <!--     Start -> This plugin is included just to define the `skip.unit.tests` variable, so that we can skip unit tests whenever we want       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
