@@ -70,7 +70,8 @@ the desired location as (in [pom.xml](pom.xml) file):
                         <goal>copy-resources</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>target/generated-site/markdown</outputDirectory>
+                        <overwrite>true</overwrite>
+                        <outputDirectory>src/site/markdown</outputDirectory>
                         <resources>
                             <resource>
                                 <directory>${basedir}</directory>
@@ -86,6 +87,10 @@ the desired location as (in [pom.xml](pom.xml) file):
     </plugins>
 </build>
 ```
+Note the use of `<overwrite>true</overwrite>`, setting that flag will ensure that the `README.md` file
+always gets copied to `src/site/markdown`, so that `mvn site` can pick it up from there for processing.
+We have to place the `README.md` in `src/site/markdown` as `mvn site` doesn't seem to pick it up from anywhere else.
+`src/site/markdown` can be added to `.gitignore` to avoid unnecessary committing of this file.
 
 ## Generating the Project Site for multimodule project
 

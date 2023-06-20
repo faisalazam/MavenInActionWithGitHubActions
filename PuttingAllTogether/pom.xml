@@ -180,6 +180,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
+                            <overwrite>true</overwrite>
                             <outputDirectory>${target.markdown.directory}</outputDirectory>
                             <resources>
                                 <resource>
