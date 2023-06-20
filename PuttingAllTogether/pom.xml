@@ -79,6 +79,7 @@
         <target.directory>${project.build.directory}</target.directory>
         <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
         <tests.results.directory>${target.directory}/test-results</tests.results.directory>
+        <target.markdown.directory>${target.site.directory}/generated-site/markdown</target.markdown.directory>
 
         <jacoco.execs.directory>${tests.results.directory}/jacoco-execs</jacoco.execs.directory>
         <jacoco.ut.exec>${jacoco.execs.directory}/ut.exec</jacoco.ut.exec>
@@ -179,7 +180,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${target.site.directory}/markdown</outputDirectory>
+                            <outputDirectory>${target.markdown.directory}</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}</directory>

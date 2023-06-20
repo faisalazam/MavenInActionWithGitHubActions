@@ -74,7 +74,8 @@
         <ciManagement.url>${scm.repo.link}/actions</ciManagement.url>
         <organization.url>${scm.user.link}</organization.url>
 
-        <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
+        <target.directory>${project.build.directory}</target.directory>
+        <target.markdown.directory>${target.site.directory}/generated-site/markdown</target.markdown.directory>
 
         <skip.unit.tests>false</skip.unit.tests>
         <ignore.test.failures>false</ignore.test.failures>
@@ -166,7 +167,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${target.site.directory}/markdown</outputDirectory>
+                            <outputDirectory>${target.markdown.directory}</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}</directory>
