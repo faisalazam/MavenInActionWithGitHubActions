@@ -8,6 +8,9 @@ inputs:
   UPLOADED_ARTIFACTS_DIR:
     required: true
     description: 'Uploads artifacts directory'
+  PUTTING_ALL_TOGETHER_DIR:
+    required: true
+    description: 'Directory containing the module code'
   RUN_UNIT_TESTS:
     required: true
     description: 'Run unit tests if `TRUE`, else integration tests'
@@ -19,6 +22,9 @@ runs:
       uses: './.github/actions/install-java'
       with:
         JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
+    - name: 'Change working directory `${{ inputs.PUTTING_ALL_TOGETHER_DIR }}`'
+      run: cd ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}
+      shell: bash
     - name: 'Runs the unit tests'
       if: ${{ inputs.RUN_UNIT_TESTS == 'true' }}
       run: mvn -Djacoco.haltOnFailure=false test -P ut --file pom.xml
