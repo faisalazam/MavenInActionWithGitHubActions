@@ -28,7 +28,7 @@ to the properties/fields of the plugin's Mojo. So, we can set those fields like 
 </plugin>
 ```
 
-This [parameter mapping][parameter mapping-url] can be of different types like:
+This [parameter mapping][parameter-mapping-url] can be of different types like:
 * Mapping complex objects
 * Mapping collection types
 * Mapping Maps
@@ -235,7 +235,7 @@ the reporting plugin to where to look for the test summaries and hence, followin
 [surefire-url]:https://maven.apache.org/surefire/maven-surefire-plugin/
 [failsafe-url]:https://maven.apache.org/surefire/maven-failsafe-plugin/
 [surefire-report-url]:https://maven.apache.org/surefire/maven-surefire-report-plugin/
-[parameter mapping-url]:https://maven.apache.org/guides/mini/guide-configuring-plugins.html#configuring-parameters
+[parameter-mapping-url]:https://maven.apache.org/guides/mini/guide-configuring-plugins.html#configuring-parameters
 [configuring-plugins-url]:https://maven.apache.org/guides/mini/guide-configuring-plugins.html#generic-configuration
 [maven-profiles-url]:https://maven.apache.org/guides/introduction/introduction-to-profiles.html
 [maven-site-plugin-url]:https://maven.apache.org/plugins/maven-site-plugin/

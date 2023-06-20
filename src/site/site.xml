@@ -26,7 +26,7 @@
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>gray</ribbonColor>
             </gitHub>
-            <!-- The will add the twitter link/handle in the Powered by section. -->
+            <!-- This will add the twitter link/handle in the Powered by section. -->
             <twitter>
                 <user>${owner.twitter.handle}</user>
                 <showUser>true</showUser>
@@ -70,10 +70,11 @@
             <item name="README" href="README.html"/>
         </menu>
 
+        <!--  The following parent menu will generate a link to the parent report in all the submodules' reports -->
         <menu ref="parent" inherit="top"/>
         <menu ref="modules" inherit="top"/>
         <menu ref="reports" inherit="top"/>
 
-<!--        <footer>${copy.right.info}</footer>-->
+        <footer>${copy.right.info}</footer>
     </body>
 </project>
