@@ -70,7 +70,7 @@ the desired location as (in [pom.xml](pom.xml) file):
                         <goal>copy-resources</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${target.site.directory}/markdown</outputDirectory>
+                        <outputDirectory>target/generated-site/markdown</outputDirectory>
                         <resources>
                             <resource>
                                 <directory>${basedir}</directory>
@@ -93,7 +93,7 @@ Running the `mvn site` from the parent will actually create the `target/site` fo
 for each of the modules, but the problem is, when we try to navigate to the submudule's link from the
 parent's site, those links will be broken. In order to fix that issue, a simple solution would be to 
 configure the stage goal. It will automatically aggregate the documentation of each module in 
-the `${project.baseURI}/target/staging` folder. The trick is to add [<distributionManagement>][site-distribution-url] 
+the `${project.baseURI}/target/staging` folder. The trick is to add [distributionManagement][site-distribution-url] 
 to the [parent pom](../pom.xml) of all the submodules:
 
 ```
@@ -147,5 +147,5 @@ Learn more about the [Project Info Reports Plugin][project-info-report-plugin-ur
 [site-guide-url]:https://maven.apache.org/guides/mini/guide-site.html
 [site-descriptor-url]:https://maven.apache.org/guides/mini/guide-site.html#creating-a-site-descriptor
 [project-info-report-plugin-url]:https://maven.apache.org/plugins/maven-project-info-reports-plugin/
-[maven-resources-plugin-url];https://maven.apache.org/plugins/maven-resources-plugin/
+[maven-resources-plugin-url]:https://maven.apache.org/plugins/maven-resources-plugin/
 [site-distribution-url]:https://maven.apache.org/pom.html#Site_Distribution
