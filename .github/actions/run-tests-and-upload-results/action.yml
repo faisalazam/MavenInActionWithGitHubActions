@@ -8,7 +8,7 @@ inputs:
   UPLOADED_ARTIFACTS_DIR:
     required: true
     description: 'Uploads artifacts directory'
-  PUTTING_ALL_TOGETHER_DIR:
+  MODULE_DIR:
     required: true
     description: 'Directory containing the module code'
   RUN_UNIT_TESTS:
@@ -24,11 +24,11 @@ runs:
         JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
     - name: 'Runs the unit tests'
       if: ${{ inputs.RUN_UNIT_TESTS == 'true' }}
-      run: mvn -Djacoco.haltOnFailure=false test -P ut --file ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}/pom.xml
+      run: mvn -Djacoco.haltOnFailure=false test -P ut --file ${{ inputs.MODULE_DIR }}/pom.xml
       shell: bash
     - name: 'Runs the integration tests'
       if: ${{ inputs.RUN_UNIT_TESTS == 'false' }}
-      run: mvn -Djacoco.haltOnFailure=false verify -P it --file ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}/pom.xml
+      run: mvn -Djacoco.haltOnFailure=false verify -P it --file ${{ inputs.MODULE_DIR }}/pom.xml
       shell: bash
     - name: 'Set environment variables'
       run: |
@@ -40,10 +40,10 @@ runs:
       uses: test-summary/action@v2
       with:
         show: "all"
-        paths: "${{ inputs.PUTTING_ALL_TOGETHER_DIR }}/target/test-results/${{ env.FILES_DIR_PREFIX }}-tests/**/TEST-*.xml"
+        paths: "${{ inputs.MODULE_DIR }}/target/test-results/${{ env.FILES_DIR_PREFIX }}-tests/**/TEST-*.xml"
     - name: 'Uploads the results to ${{ env.UPLOAD_DIR }} folder'
       uses: actions/upload-artifact@v3
       with:
         name: ${{ env.UPLOAD_DIR }}
         retention-days: 1
-        path: ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}/target
+        path: ${{ inputs.MODULE_DIR }}/target

@@ -9,7 +9,7 @@ on:
       JAVA_VERSION_TO_INSTALL:
         required: true
         type: string
-    PUTTING_ALL_TOGETHER_DIRECTORY:
+    MODULE_DIRECTORY:
       required: true
       type: string
 
@@ -26,9 +26,9 @@ jobs:
           JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
 
       - name: 'Packaging the application'
-        run: mvn -DskipTests package --file ${{ inputs.PUTTING_ALL_TOGETHER_DIRECTORY }}/pom.xml
+        run: mvn -DskipTests package --file ${{ inputs.MODULE_DIRECTORY }}/pom.xml
 
       - name: 'Publishing/deploying the packaged application'
-        run: mvn --batch-mode -DskipTests deploy--file ${{ inputs.PUTTING_ALL_TOGETHER_DIRECTORY }}/pom.xml
+        run: mvn --batch-mode -DskipTests deploy--file ${{ inputs.MODULE_DIRECTORY }}/pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -4,7 +4,7 @@ env:
   JAVA_VERSION: 20
   UPLOADED_ARTIFACTS_DIR: 'gh-pages'
   SITE_DIR: 'gh-pages/site'
-  PUTTING_ALL_TOGETHER_DIR: 'PuttingAllTogether'
+  MODULE_DIR: 'PuttingAllTogether'
   BRANCHES_COVERAGE_THRESHOLD: '60%'
   INSTRUCTIONS_COVERAGE_THRESHOLD: '60%'
 
@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       JAVA_VERSION: ${{steps.setup-env.outputs.JAVA_VERSION}}
-      PUTTING_ALL_TOGETHER_DIR: ${{steps.setup-env.outputs.PUTTING_ALL_TOGETHER_DIR}}
+      MODULE_DIR: ${{steps.setup-env.outputs.MODULE_DIR}}
     steps:
       - name: 'Setup Environment'
         id: setup-env
         run: |
           echo "JAVA_VERSION=${{ env.JAVA_VERSION }}" >> $GITHUB_OUTPUT
-          echo "PUTTING_ALL_TOGETHER_DIR=${{ env.PUTTING_ALL_TOGETHER_DIR }}" >> $GITHUB_OUTPUT
+          echo "MODULE_DIR=${{ env.MODULE_DIR }}" >> $GITHUB_OUTPUT
 
   build:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2-*
       - name: 'Compiles the application code'
-        run: mvn clean compile --file ${{ env.PUTTING_ALL_TOGETHER_DIR }}/pom.xml
+        run: mvn clean compile --file ${{ env.MODULE_DIR }}/pom.xml
 
   unit-tests:
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
           RUN_UNIT_TESTS: true
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          PUTTING_ALL_TOGETHER_DIR: ${{ env.PUTTING_ALL_TOGETHER_DIR }}
+          MODULE_DIR: ${{ env.MODULE_DIR }}
 
   integration-tests:
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ jobs:
           RUN_UNIT_TESTS: false
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          PUTTING_ALL_TOGETHER_DIR: ${{ env.PUTTING_ALL_TOGETHER_DIR }}
+          MODULE_DIR: ${{ env.MODULE_DIR }}
 
   generate-project-site:
     runs-on: ubuntu-latest
@@ -82,7 +82,7 @@ jobs:
         with:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          PUTTING_ALL_TOGETHER_DIR: ${{ env.PUTTING_ALL_TOGETHER_DIR }}
+          MODULE_DIR: ${{ env.MODULE_DIR }}
 
   generate-code-coverage-badge:
     if: ${{ github.ref == 'refs/heads/master' }}
@@ -160,4 +160,4 @@ jobs:
 #    uses: './.github/workflows/deploy.yml'
 #    with:
 #      JAVA_VERSION_TO_INSTALL: ${{ needs.setup-env.outputs.JAVA_VERSION }}
-#      PUTTING_ALL_TOGETHER_DIRECTORY: ${{ needs.setup-env.outputs.PUTTING_ALL_TOGETHER_DIR }}
+#      MODULE_DIRECTORY: ${{ needs.setup-env.outputs.MODULE_DIR }}

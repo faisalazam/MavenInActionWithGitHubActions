@@ -8,7 +8,7 @@ inputs:
   UPLOADED_ARTIFACTS_DIR:
     required: true
     description: 'Uploads artifacts directory'
-  PUTTING_ALL_TOGETHER_DIR:
+  MODULE_DIR:
     required: true
     description: 'Directory containing the module code'
 
@@ -25,9 +25,9 @@ runs:
         path: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
     - name: 'Copy the `ut` and `it` artifacts into the `target` folder'
       run: |
-        mkdir ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}/target
-        cp -r ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-ut/* ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}/target
-        cp -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-it/* ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}/target
+        mkdir ${{ inputs.MODULE_DIR }}/target
+        cp -r ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-ut/* ${{ inputs.MODULE_DIR }}/target
+        cp -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-it/* ${{ inputs.MODULE_DIR }}/target
       shell: bash
     - name: 'Cache Maven packages'
       uses: actions/cache@v2
@@ -36,11 +36,11 @@ runs:
         key: ${{ runner.os }}-m2-site-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2-*
     - name: 'Generates the project''s site'
-      run: mvn site -P nt --file ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}/pom.xml
+      run: mvn site -P nt --file ${{ inputs.MODULE_DIR }}/pom.xml
       shell: bash
     - name: 'Uploads the results to ${{ inputs.UPLOADED_ARTIFACTS_DIR }} folder'
       uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
         retention-days: 1
-        path: ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}/target
+        path: ${{ inputs.MODULE_DIR }}/target
