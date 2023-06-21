@@ -8,9 +8,6 @@ inputs:
   UPLOADED_ARTIFACTS_DIR:
     required: true
     description: 'Uploads artifacts directory'
-  PUTTING_ALL_TOGETHER_DIR:
-    required: true
-    description: 'Directory containing the module code'
 
 runs:
   using: "composite"
@@ -23,9 +20,6 @@ runs:
       uses: actions/download-artifact@v3
       with:
         path: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
-    - name: 'Change working directory `${{ inputs.PUTTING_ALL_TOGETHER_DIR }}`'
-      run: cd ${{ inputs.PUTTING_ALL_TOGETHER_DIR }}
-      shell: bash
     - name: 'Copy the `ut` and `it` artifacts into the `target` folder'
       run: |
         mkdir target
