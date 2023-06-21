@@ -5,6 +5,9 @@ env:
   UPLOADED_ARTIFACTS_DIR: 'gh-pages'
   SITE_DIR: 'gh-pages/site'
   MODULE_DIR: 'PuttingAllTogether'
+  TARGET_DIR: 'PuttingAllTogether/target'
+  TEST_RESULTS_DIR: 'PuttingAllTogether/target/test-results'
+  JACOCO_EXECS_DIR: 'PuttingAllTogether/target/gh-pages-*t/test-results/jacoco-execs'
   BRANCHES_COVERAGE_THRESHOLD: '60%'
   INSTRUCTIONS_COVERAGE_THRESHOLD: '60%'
 
@@ -68,11 +71,44 @@ jobs:
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           MODULE_DIR: ${{ env.MODULE_DIR }}
 
-  generate-project-site:
+  generate-combined-coverage-report:
     runs-on: ubuntu-latest
     needs:
       - unit-tests
       - integration-tests
+
+    steps:
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
+        uses: actions/checkout@v3
+      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
+        uses: './.github/actions/install-java'
+        with:
+          JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
+      - name: 'Download the ut and it test results to generate the combined coverage report'
+        # this step should be in a separate job which should depend on both ut and it
+        # so both of them are available to generate the combine coverage report
+        uses: actions/download-artifact@v3
+        with:
+          path: ${{ env.TARGET_DIR }}
+      - name: 'Display structure of downloaded files'
+        run: ls -R
+        working-directory: ${{ env.TARGET_DIR }}
+      - name: 'Place the Jacoco code coverage files in `${{ env.JACOCO_EXECS_DIR }}`'
+        run: |
+          mkdir -p ${{ env.TEST_RESULTS_DIR }}
+          cp -r ${{ env.JACOCO_EXECS_DIR }} ${{ env.TEST_RESULTS_DIR }}
+      - name: 'Generate the merged code coverage report'
+        run: mvn -Djacoco.haltOnFailure=false post-integration-test -P nt --file ${{ env.MODULE_DIR }}/pom.xml
+      - name: 'Uploads the results to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          retention-days: 1
+          path: ${{ env.TARGET_DIR }}
+
+  generate-project-site:
+    runs-on: ubuntu-latest
+    needs: generate-combined-coverage-report
 
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
@@ -142,13 +178,6 @@ jobs:
           mkdir -p ${{ env.SITE_DIR }}/jacoco-merged/jacoco-resources/badges
           cp ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs/* ${{ env.SITE_DIR }}/jacoco-merged/jacoco-resources/badges
           rm -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs
-#      - name: 'Create `INDIVIDUAL_MODULES` folder and place it in `${{ env.SITE_DIR }}` with site contents'
-#        #Adding a new `INDIVIDUAL_MODULES` folder inside `site` folder to contain individual modules deployed site.
-#        #It's just to avoid the overwriting of the contents deployed by the `parent pom` in the `gh-pages` branch.
-#        run: |
-#          mkdir -p INDIVIDUAL_MODULES/${{ env.MODULE_DIR }}
-#          mv ${{ env.SITE_DIR }}/* INDIVIDUAL_MODULES/${{ env.MODULE_DIR }}
-#          mv INDIVIDUAL_MODULES ${{ env.SITE_DIR }}
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4

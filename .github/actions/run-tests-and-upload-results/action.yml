@@ -28,7 +28,7 @@ runs:
       shell: bash
     - name: 'Runs the integration tests'
       if: ${{ inputs.RUN_UNIT_TESTS == 'false' }}
-      run: mvn -Djacoco.haltOnFailure=false verify -P it --file ${{ inputs.MODULE_DIR }}/pom.xml
+      run: mvn -Djacoco.haltOnFailure=false integration-test -P it --file ${{ inputs.MODULE_DIR }}/pom.xml
       shell: bash
     - name: 'Set environment variables'
       run: |
