@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>au.com.lucidtech.maveninactionwithgithubactions</groupId>
+        <artifactId>maveninactionwithgithubactions</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>jacocoexecution</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Testing with Maven</name>
+    <description>Setting up Maven plugins for testing and reporting</description>
+    <url>${scm.repo.link}</url>
+
+    <properties>
+        <skip.unit.tests>false</skip.unit.tests>
+        <ignore.test.failures>false</ignore.test.failures>
+        <skip.integration.tests>false</skip.integration.tests>
+
+        <!--   Plugin Versions   -->
+        <maven-jxr-plugin.version>3.3.0</maven-jxr-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-surefire-report-plugin.version>3.1.2</maven-surefire-report-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- TEST -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--     Start -> By default your version of Maven might use an old version of the maven-compiler-plugin
+                     that is not compatible with Java 9 or later versions. To target Java 9 or later, you should at least
+                     use version 3.6.0 of the maven-compiler-plugin and set the maven.compiler.release property to the
+                     Java release you are targeting (e.g. 9, 10, 11, 12, etc.)       -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <!--     Start -> This plugin is included just to define the `skip.unit.tests` variable, so that we can skip unit tests whenever we want       -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <skipTests>${skip.unit.tests}</skipTests>
+                    <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <!--     End -> This plugin is included just to define the `skip.unit.tests` variable, so that we can skip unit tests whenever we want       -->
+            <!--     Start -> This plugin will be used to run Integration tests separately from unit tests      -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <configuration>
+                    <skipTests>${skip.integration.tests}</skipTests>
+                    <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <!--     End -> This plugin will be used to run Integration tests separately from unit tests      -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <!-- Copy the readme file to the site markdown directory so that a page is generated from it. -->
+                        <id>copy-readme</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${src.markdown.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>README.md</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${maven-surefire-report-plugin.version}</version>
+                <configuration>
+                    <linkXRef>true</linkXRef>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report-only</report>
+                            <report>failsafe-report-only</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <!--    Start -> Plugin to fix the `Unable to locate Test Source XRef to link to - DISABLED` issue coming up while generating the surefire report       -->
+            <!--    It'll actually create links to the source classes in the site generated by `mvn site`       -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>${maven-jxr-plugin.version}</version>
+            </plugin>
+            <!--    End -> Plugin to fix the `Unable to locate Test Source XRef to link to - DISABLED` issue coming up while generating the surefire report       -->
+        </plugins>
+    </reporting>
+
+    <profiles>
+        <!-- profile for Unit test only -->
+        <profile>
+            <id>ut</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!--profile for Integration test only -->
+        <profile>
+            <id>it</id>
+            <properties>
+                <skip.unit.tests>true</skip.unit.tests>
+                <skip.integration.tests>false</skip.integration.tests>
+            </properties>
+        </profile>
+        <!-- Both Unit and Integration tests combined -->
+        <profile>
+            <id>uit</id>
+            <properties>
+                <skip.unit.tests>false</skip.unit.tests>
+                <skip.integration.tests>false</skip.integration.tests>
+            </properties>
+        </profile>
+        <!-- No test execution required at all -->
+        <profile>
+            <id>nt</id>
+            <properties>
+                <skip.unit.tests>true</skip.unit.tests>
+                <skip.integration.tests>true</skip.integration.tests>
+            </properties>
+        </profile>
+    </profiles>
+</project>
