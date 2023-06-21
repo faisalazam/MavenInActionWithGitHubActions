@@ -149,15 +149,15 @@ jobs:
           folder: ${{ env.SITE_DIR }}
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
-#  deploy-to-gh-packages:
-#    needs:
-#     - setup-env
-#     - unit-tests
-#     - integration-tests
-#    permissions:
-#      contents: read
-#      packages: write
-#    uses: './.github/workflows/deploy.yml'
-#    with:
-#      JAVA_VERSION_TO_INSTALL: ${{ needs.setup-env.outputs.JAVA_VERSION }}
-#      MODULE_DIRECTORY: ${{ needs.setup-env.outputs.MODULE_DIR }}
+  deploy-to-gh-packages:
+    needs:
+     - setup-env
+     - unit-tests
+     - integration-tests
+    permissions:
+      contents: read
+      packages: write
+    uses: './.github/workflows/deploy.yml'
+    with:
+      JAVA_VERSION_TO_INSTALL: ${{ needs.setup-env.outputs.JAVA_VERSION }}
+      MODULE_DIR: ${{ needs.setup-env.outputs.MODULE_DIR }}
