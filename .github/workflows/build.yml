@@ -9,7 +9,7 @@ env:
   INSTRUCTIONS_COVERAGE_THRESHOLD: '60%'
 defaults:
   run:
-    working-directory: ${{ PUTTING_ALL_TOGETHER_DIR }}
+    working-directory: ${{ env.PUTTING_ALL_TOGETHER_DIR }}
 
 jobs:
   setup-env:
