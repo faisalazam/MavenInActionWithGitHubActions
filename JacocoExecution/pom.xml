@@ -12,8 +12,8 @@
 
     <artifactId>jacocoexecution</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Testing with Maven</name>
-    <description>Setting up Maven plugins for testing and reporting</description>
+    <name>Jacoco with Maven</name>
+    <description>Setting up Maven plugins for code coverage and reporting</description>
     <url>${scm.repo.link}</url>
 
     <properties>

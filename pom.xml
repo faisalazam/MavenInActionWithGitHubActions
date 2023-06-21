@@ -22,6 +22,7 @@
     <modules>
         <module>SiteGeneration</module>
         <module>TestsExecution</module>
+        <module>JacocoExecution</module>
     </modules>
 
     <organization>
