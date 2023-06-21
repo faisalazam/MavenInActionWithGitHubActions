@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>au.com.lucidtech.maveninactionwithgithubactions.mavensiteinaction</groupId>
-    <artifactId>maveninactionwithgithubactions.mavensiteinaction</artifactId>
+    <artifactId>mavensiteinaction</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Maven Site In Action With GitHub Action</name>
     <description>Setting up Maven Site plugin and automating deployment with GitHub Actions</description>
@@ -74,8 +74,6 @@
         <ciManagement.url>${scm.repo.link}/actions</ciManagement.url>
         <organization.url>${scm.user.link}</organization.url>
 
-        <target.markdown.directory>src/site/markdown</target.markdown.directory>
-
         <copy.right.info>
             <![CDATA[Copyright© 2023 <a href="${organization.url}">${organization.name}</a>. All Rights Reserved.]]></copy.right.info>
 
@@ -105,7 +103,7 @@
                         </goals>
                         <configuration>
                             <overwrite>true</overwrite>
-                            <outputDirectory>${target.markdown.directory}</outputDirectory>
+                            <outputDirectory>${src.markdown.directory}</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}</directory>

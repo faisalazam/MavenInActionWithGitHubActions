@@ -72,6 +72,7 @@
 
         <!--  The following parent menu will generate a link to the parent report in all the submodules' reports -->
         <menu ref="parent" inherit="top"/>
+        <!--  The following modules menu will be useful in case of multimodule setup to include all the submodules' reports -->
         <menu ref="modules" inherit="top"/>
         <menu ref="reports" inherit="top"/>
 

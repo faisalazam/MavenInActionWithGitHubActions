@@ -95,7 +95,7 @@
                         </goals>
                         <configuration>
                             <overwrite>true</overwrite>
-                            <outputDirectory>${target.markdown.directory}</outputDirectory>
+                            <outputDirectory>${src.markdown.directory}</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}</directory>

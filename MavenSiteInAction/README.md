@@ -2,6 +2,15 @@
 
 The purpose of this small project is to utilize the [maven's site][maven-site-plugin-url] plugin to generate the project reports.
 
+## Generating the Project Site
+
+* To clean the `target` directory, run:
+  * `mvn clean`
+* To generate the project site, run:
+  * `mvn site`
+* To generate the project site with all the submodules, run from the pom aggregator:
+  * `mvn clean site site:stage`
+
 ## Plugins to use
 We need to add the following couple of plugins (in [pom.xml](pom.xml) file):
 ```
@@ -133,18 +142,6 @@ In order to configure a subset of the standard reports which are included by def
 </reporting>
 ```
 Learn more about the [Project Info Reports Plugin][project-info-report-plugin-url]
-
-## Generating the Project Site
-
-* To clean the `target` directory, run:
-  * `mvn clean`
-* To generate the project site, run:
-  * `mvn site`
-* To generate the project site will submodules, run from the pom aggregator:
-  * `mvn clean site site:stage`
-
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
