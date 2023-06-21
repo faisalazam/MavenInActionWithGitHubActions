@@ -1,10 +1,11 @@
-package com.lucidtech.maveninactionwithgithubactions;
+package au.com.lucidtech.testsexecution;
 
+import au.com.lucidtech.testsexecution.TestsExecutionApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MavenInActionWithGitHubActionsApplicationTests {
+class TestsExecutionApplicationTests {
 
     @Test
     void contextLoads() {
@@ -12,6 +13,6 @@ class MavenInActionWithGitHubActionsApplicationTests {
 
     @Test
     public void applicationStarts() {
-        MavenInActionWithGitHubActionsApplication.main(new String[]{});
+        TestsExecutionApplication.main(new String[]{});
     }
 }

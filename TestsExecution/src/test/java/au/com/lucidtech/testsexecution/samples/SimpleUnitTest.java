@@ -1,6 +1,6 @@
-package com.lucidtech.maveninactionwithgithubactions.samples;
+package au.com.lucidtech.testsexecution.samples;
 
-import com.lucidtech.maveninactionwithgithubactions.controller.GreetingController;
+import au.com.lucidtech.testsexecution.controller.GreetingController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

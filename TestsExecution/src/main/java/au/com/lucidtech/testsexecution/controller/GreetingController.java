@@ -1,6 +1,6 @@
-package com.lucidtech.maveninactionwithgithubactions.controller;
+package au.com.lucidtech.testsexecution.controller;
 
-import com.lucidtech.maveninactionwithgithubactions.model.Greeting;
+import au.com.lucidtech.testsexecution.model.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

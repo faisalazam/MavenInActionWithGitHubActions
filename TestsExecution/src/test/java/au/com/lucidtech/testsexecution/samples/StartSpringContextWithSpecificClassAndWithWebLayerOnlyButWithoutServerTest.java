@@ -1,5 +1,6 @@
-package com.lucidtech.maveninactionwithgithubactions.samples;
+package au.com.lucidtech.testsexecution.samples;
 
+import au.com.lucidtech.testsexecution.controller.GreetingController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,15 +12,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(GreetingController.class)
 //In this test, the full Spring application context is started but without the server.
 // We can narrow the tests to only the web layer by using @WebMvcTest
-class StartSpringContextWithWebLayerOnlyAndWithoutServerTest {
+//In this test, Spring Boot instantiates only the web layer rather than the whole context.
+// In an application with multiple controllers, you can even ask for only one to be instantiated by using,
+// for example, @WebMvcTest(GreetingController.class).
+class StartSpringContextWithSpecificClassAndWithWebLayerOnlyButWithoutServerTest {
     @Autowired
     private MockMvc mockMvc;
 
+//    @MockBean
+//    private GreetingService service;
+
     @Test
-    public void shouldReturnDefaultMessage() throws Exception {
+    public void greetingShouldReturnMessageFromService() throws Exception {
+//        when(service.greet()).thenReturn("Hello, Mock");
         this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("World")));
     }
