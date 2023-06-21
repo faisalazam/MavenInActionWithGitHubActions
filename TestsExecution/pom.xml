@@ -10,8 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>au.com.lucidtech.maveninactionwithgithubactions.mavenandtesting</groupId>
-    <artifactId>mavenandtesting</artifactId>
+    <artifactId>testsexecution</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Testing with Maven</name>
     <description>Setting up Maven plugins for testing and reporting</description>

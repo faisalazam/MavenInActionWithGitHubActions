@@ -21,7 +21,7 @@
 
     <modules>
         <module>SiteGeneration</module>
-        <module>MavenAndTesting</module>
+        <module>TestsExecution</module>
     </modules>
 
     <organization>
