@@ -18,11 +18,11 @@ This repo will contain the Implementation of CRUD functionality with JWT securit
 <br />
 [Project Reports](https://faisalazam.github.io/MavenInActionWithGitHubActions/project-reports.html)
 
-This project will consist of small maven projects and we'll keep building more complicated stuff 
+This project will consist of small maven projects, and we'll keep building more complicated stuff 
 on top of the simpler projects in this repo.
 
 I've turned it into a multimodule project.
 * SiteGeneration
-* MavenAndTest
-* MavenWithJacoco
+* TestsExecution
+* JacocoExecution
 * PuttingAllTogether

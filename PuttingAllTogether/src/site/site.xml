@@ -16,6 +16,7 @@
 
     <custom>
         <fluidoSkin>
+            <!-- This property will enable the top bar on the generated site -->
             <topBarEnabled>true</topBarEnabled>
             <sideBarEnabled>true</sideBarEnabled>
             <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
@@ -25,6 +26,7 @@
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>gray</ribbonColor>
             </gitHub>
+            <!-- This will add the twitter link/handle in the Powered by section. -->
             <twitter>
                 <user>${owner.twitter.handle}</user>
                 <showUser>true</showUser>
@@ -33,6 +35,7 @@
         </fluidoSkin>
     </custom>
 
+    <!-- PoweredBy sections, it is the section below the sidebar on the left located below the reports section-->
     <poweredBy>
         <logo name="IntelliJ" href="http://www.jetbrains.com/idea/"
               title="Developed using IntelliJ" width="170px"
@@ -62,13 +65,17 @@
             <item name="${owner.name}" href="$${scm.user.link}"/>
             <item name="${scm.repo.name}" href="$${scm.repo.link}"/>
         </breadcrumbs>
+
         <menu>
             <item name="README" href="README.html"/>
         </menu>
+
         <menu ref="reports" inherit="top"/>
+
         <menu>
             <item name="JaCoCo Combined" href="jacoco-merged/index.html"/>
         </menu>
+
         <footer>${copy.right.info}</footer>
     </body>
 </project>

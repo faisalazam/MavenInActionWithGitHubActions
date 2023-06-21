@@ -1,18 +1,18 @@
 ## Testing in action with Maven
 
-The purpose of this small project is to utilize the maven's [surefire][surefire-url], [failsafe][failsafe-url], 
-and [surefire-report][surefire-report-url] plugins 
-to run the unit tests as well as integration tests both separately and running them together, as well as generate their 
+The purpose of this small project is to utilize the maven's [surefire][surefire-url], [failsafe][failsafe-url],
+and [surefire-report][surefire-report-url] plugins
+to run the unit tests as well as integration tests both separately and running them together, as well as generate their
 separate reports and include them in the generated project reports through `mvn site`.
 
-The generated site will be deployed automatically as part of every push to the GitHub Pages. 
+The generated site will be deployed automatically as part of every push to the GitHub Pages.
 The deployment will happen using `GitHub workflows/actions`.
 
 ## Plugin Configurations
 We basically need `groupId` and `artifactId` to declare a plugin in [pom.xml](pom.xml) file.
 Important Note: Always define the `version` of each plugin used to guarantee build reproducibility.
 
-But if we need more control over the plugin's configuration, then we can make use of the `configuration` element 
+But if we need more control over the plugin's configuration, then we can make use of the `configuration` element
 and the child elements (i.e. `skipTests` and `testFailureIgnore` in the code below) of the `configuration` element will be mapped
 to the properties/fields of the plugin's Mojo. So, we can set those fields like this (in [pom.xml](pom.xml) file):
 
@@ -39,14 +39,14 @@ Learn more about [Configuring plugins][configuring-plugins-url]
 ## Maven profiles
 * There are some profiles setup which can be used switch on/off certain things.
 * To see the list of configured profiles, run `mvn help:all-profiles`
-  * Configured profiles (in [pom.xml](pom.xml) file) are:
+    * Configured profiles (in [pom.xml](pom.xml) file) are:
 
-    | Profile ID | Profile Description                                          |
-    |------------|--------------------------------------------------------------|
-    | `ut`       | It'll run only the unit tests                                |
-    | `it`       | It'll run only the integration tests                         |
-    | `uit`      | It'll run both the unit and the integration tests            |
-    | `nt`       | It'll run no tests at all (skipping execution of all tests). |
+      | Profile ID | Profile Description                                          |
+          |------------|--------------------------------------------------------------|
+      | `ut`       | It'll run only the unit tests                                |
+      | `it`       | It'll run only the integration tests                         |
+      | `uit`      | It'll run both the unit and the integration tests            |
+      | `nt`       | It'll run no tests at all (skipping execution of all tests). |
 
 Learn more about [Maven Profiles][maven-profiles-url]
 
@@ -70,20 +70,25 @@ This project follows the following basic conventions out of the box:
 |                              |                         |                                  | `mvn clean install`                         |
 
 Using the `verify` lifecycle of maven will also run the configured verification checks and will fail the build if any of the checks are not met.
- 
+
+## Running a single test
+During development, you may run a single test class repeatedly. To run this through Maven, set the test property to a 
+specific test case. `mvn -Dtest=TestCircle test`
+Learn more about [running a single test][single-test-run-url]
+
 ## Configure test reporting
 
 Configuring the reporting to include our test report in the generated site.
 
 `mvn site`
-Since [maven-site-plugin 3.4][maven-site-plugin-url], it uses the parameters defined in the `<configuration>` element of each reporting Plugin 
-specified in the `<reporting>` element, in addition to the parameters defined in the `<configuration>` element of 
+Since [maven-site-plugin 3.4][maven-site-plugin-url], it uses the parameters defined in the `<configuration>` element of each reporting Plugin
+specified in the `<reporting>` element, in addition to the parameters defined in the `<configuration>` element of
 each plugin specified in `<build>` (parameters from `<build>` section were previously ignored).
 
 Learn more about [Site Reporting][site-reporting-url]
 
-## Using the `reportSets` Tag
-You can configure a reporting plugin using the `reportSets` tag. This is most commonly used to generate 
+#### Using the `reportSets` Tag
+You can configure a reporting plugin using the `reportSets` tag. This is most commonly used to generate
 reports selectively when running `mvn site`. The following (in [pom.xml](pom.xml) file) will generate only the `surefire` and `failsafe` reports:
 ```
 <reporting>
@@ -106,15 +111,19 @@ reports selectively when running `mvn site`. The following (in [pom.xml](pom.xml
 ```
 
 ## Binding the goals and phases to achieve something different
-Another thing to learn is, to bind the goals of a plugin to certain phase of the lifecycle.
+Another thing to learn is, to bind the [goals][maven-goals-url] of a plugin to certain [phase][maven-phases-url] of the [build lifecycle][build-lifecycle-url].
 We can make use of the [executions][executions-url] tag, which is most commonly used for mojos that are intended to
 participate in some phases of the [build lifecycle][build-lifecycle-url].
 
-In the following example, we are binding the `report-only` goal of the [surefire-report][surefire-report-url] plugin to
-the `test` phase and then the `failsafe-report-only` goal of the [surefire-report][surefire-report-url] plugin to
-the `integration-test` phase. That configuration will trigger the `report-only` goal once the tests are run to generate the
-surefire report and then, the `failsafe-report-only` goal once the integration tests are run to generate the failsafe report.
-See in [pom.xml](pom.xml) file.
+In the following example, we are binding the [report-only goal][report-only-goal-url] of the [surefire-report][surefire-report-url]
+plugin to the [tset phase][test-phase-url] ([surefire:test goal][surefire-test-goal-url] 
+of [surefire][surefire-url] plugin binds to the [tset phase][test-phase-url] by default) and 
+then the [failsafe-report-only goal][failsafe-report-only-goal-url] of the [surefire-report][surefire-report-url] plugin 
+to the [integration-test phase][integration-test-phase-url] ([failsafe:integration-test goal][failsafe-integration-test-goal-url]
+of [failsafe][failsafe-url] plugin binds to the [integration-test phase][integration-test-phase-url] by default). 
+That configuration will trigger the [report-only goal][report-only-goal-url] once the tests are run to generate the 
+surefire report and then, the [failsafe-report-only goal][failsafe-report-only-goal-url] once the integration tests 
+are run to generate the failsafe report. See in [pom.xml](pom.xml) file.
 ```
 <build>
     <plugins>
@@ -157,7 +166,7 @@ See in [pom.xml](pom.xml) file.
 </build>
 ```
 
-## Read further if you custom paths for tests' results
+## Read further if you want to set custom paths for tests' results
 If you want to set the custom output directories for the tests' results, then continue reading.
 
 Following is what should go in the build section for custom paths (in [pom.xml](pom.xml) file):
@@ -170,7 +179,6 @@ Following is what should go in the build section for custom paths (in [pom.xml](
             <version>${maven-surefire-plugin.version}</version>
             <configuration>
                 <skipTests>${skip.unit.tests}</skipTests>
-                <argLine>${surefire.jacoco.exec.file.name.arg}</argLine>
                 <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
                 <reportsDirectory>${unit.tests.results.directory}</reportsDirectory>
             </configuration>
@@ -180,7 +188,6 @@ Following is what should go in the build section for custom paths (in [pom.xml](
             <artifactId>maven-failsafe-plugin</artifactId>
             <version>${maven-failsafe-plugin.version}</version>
             <configuration>
-                <argLine>${failsafe.jacoco.exec.file.name.arg}</argLine>
                 <skipTests>${skip.integration.tests}</skipTests>
                 <testFailureIgnore>${ignore.test.failures}</testFailureIgnore>
                 <reportsDirectory>${integration.tests.results.directory}</reportsDirectory>
@@ -190,9 +197,9 @@ Following is what should go in the build section for custom paths (in [pom.xml](
 </build>
 ```
 
-Now, as the generated tests' summaries as part of the tests' run are not in their default locations, so we have to tell 
-the reporting plugin to where to look for the test summaries and hence, following is what should go in the 
-reporting section (in [pom.xml](pom.xml) file): 
+Now, as the generated tests' summaries as part of the tests' run are not in their default locations, so we have to tell
+the reporting plugin to where to look for the test summaries to generate reports and hence, following is what should go
+in the reporting section (in [pom.xml](pom.xml) file):
 ```
 <reporting>
     <plugins>
@@ -242,4 +249,13 @@ reporting section (in [pom.xml](pom.xml) file):
 [maven-site-plugin-url]:https://maven.apache.org/plugins/maven-site-plugin/
 [site-reporting-url]:https://maven.apache.org/guides/mini/guide-configuring-plugins.html#configuring-reporting-plugins
 [executions-url]:https://maven.apache.org/guides/mini/guide-configuring-plugins.html#configuring-build-plugins
+[single-test-run-url]:https://maven.apache.org/surefire/maven-surefire-plugin/examples/single-test.html
 [build-lifecycle-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+[maven-goals-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#a-build-phase-is-made-up-of-plugin-goals
+[maven-phases-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#a-build-lifecycle-is-made-up-of-phases
+[surefire-test-goal-url]:https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html
+[failsafe-integration-test-goal-url]:https://maven.apache.org/surefire/maven-failsafe-plugin/integration-test-mojo.html
+[report-only-goal-url]:https://maven.apache.org/surefire/maven-surefire-report-plugin/report-only-mojo.html
+[failsafe-report-only-goal-url]:https://maven.apache.org/surefire/maven-surefire-report-plugin/failsafe-report-only-mojo.html
+[test-phase-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
+[integration-test-phase-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
