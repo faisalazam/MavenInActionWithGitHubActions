@@ -9,6 +9,9 @@ on:
       JAVA_VERSION_TO_INSTALL:
         required: true
         type: string
+    PUTTING_ALL_TOGETHER_DIRECTORY:
+      required: true
+      type: string
 
 jobs:
   deploy-to-gh-packages:
@@ -23,9 +26,9 @@ jobs:
           JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
 
       - name: 'Packaging the application'
-        run: mvn -DskipTests package --file pom.xml
+        run: mvn -DskipTests package --file ${{ inputs.PUTTING_ALL_TOGETHER_DIRECTORY }}/pom.xml
 
       - name: 'Publishing/deploying the packaged application'
-        run: mvn --batch-mode -DskipTests deploy
+        run: mvn --batch-mode -DskipTests deploy--file ${{ inputs.PUTTING_ALL_TOGETHER_DIRECTORY }}/pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
