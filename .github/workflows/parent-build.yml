@@ -3,7 +3,7 @@ on: push
 env:
   JAVA_VERSION: 20
   UPLOADED_ARTIFACTS_DIR: 'gh-pages'
-  SITE_DIR: 'gh-pages/staging'
+  STAGING_DIR: 'gh-pages/staging'
 
 jobs:
   setup-env:
@@ -63,15 +63,19 @@ jobs:
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Log folder'
+      - name: 'Copy the `README.md` file to `${{ env.STAGING_DIR }}` folder'
+        run: cp README.md ${{ env.STAGING_DIR }}
+      - name: 'Copy the `LICENSE` file to `${{ env.STAGING_DIR }}` folder'
+        run: cp LICENSE ${{ env.STAGING_DIR }}
+      - name: 'Log ${{ env.UPLOADED_ARTIFACTS_DIR }} folder'
         run: ls -lart ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Copy the `README.md` file to `${{ env.SITE_DIR }}` folder'
-        run: cp README.md ${{ env.SITE_DIR }}
-      - name: 'Copy the `LICENSE` file to `${{ env.SITE_DIR }}` folder'
-        run: cp LICENSE ${{ env.SITE_DIR }}
+      - name: 'Log ${{ env.STAGING_DIR }} folder'
+        run: ls -lart ${{ env.STAGING_DIR }}
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          # to push the contents of the deployment folder into a specific directory on the deployment branch
+          target-folder: staging
+          clean-exclude: INDIVIDUAL_MODULES

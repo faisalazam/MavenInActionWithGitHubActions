@@ -142,19 +142,21 @@ jobs:
           mkdir -p ${{ env.SITE_DIR }}/jacoco-merged/jacoco-resources/badges
           cp ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs/* ${{ env.SITE_DIR }}/jacoco-merged/jacoco-resources/badges
           rm -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs
-      - name: 'Create `INDIVIDUAL_MODULES` folder and place it in `${{ env.SITE_DIR }}` with site contents'
-        #Adding a new `INDIVIDUAL_MODULES` folder inside `site` folder to contain individual modules deployed site.
-        #It's just to avoid the overwriting of the contents deployed by the `parent pom` in the `gh-pages` branch.
-        run: |
-          mkdir -p INDIVIDUAL_MODULES/${{ env.MODULE_DIR }}
-          mv ${{ env.SITE_DIR }}/* INDIVIDUAL_MODULES/${{ env.MODULE_DIR }}
-          mv INDIVIDUAL_MODULES ${{ env.SITE_DIR }}
+#      - name: 'Create `INDIVIDUAL_MODULES` folder and place it in `${{ env.SITE_DIR }}` with site contents'
+#        #Adding a new `INDIVIDUAL_MODULES` folder inside `site` folder to contain individual modules deployed site.
+#        #It's just to avoid the overwriting of the contents deployed by the `parent pom` in the `gh-pages` branch.
+#        run: |
+#          mkdir -p INDIVIDUAL_MODULES/${{ env.MODULE_DIR }}
+#          mv ${{ env.SITE_DIR }}/* INDIVIDUAL_MODULES/${{ env.MODULE_DIR }}
+#          mv INDIVIDUAL_MODULES ${{ env.SITE_DIR }}
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ${{ env.SITE_DIR }}
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          # to push the contents of the deployment folder into a specific directory on the deployment branch
+          target-folder: INDIVIDUAL_MODULES/${{ env.MODULE_DIR }}
+          clean-exclude: staging
 
   deploy-to-gh-packages:
     needs:
