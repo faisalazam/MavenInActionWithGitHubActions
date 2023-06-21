@@ -4,12 +4,11 @@ env:
   JAVA_VERSION: 20
   UPLOADED_ARTIFACTS_DIR: 'gh-pages'
   SITE_DIR: 'gh-pages/site'
-  PUTTING_ALL_TOGETHER_DIR: './PuttingAllTogether'
   BRANCHES_COVERAGE_THRESHOLD: '60%'
   INSTRUCTIONS_COVERAGE_THRESHOLD: '60%'
 defaults:
   run:
-    working-directory: ${{ env.PUTTING_ALL_TOGETHER_DIR }}
+    working-directory: './PuttingAllTogether'
 
 jobs:
   setup-env:
