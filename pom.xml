@@ -24,6 +24,48 @@
         <module>MavenAndTesting</module>
     </modules>
 
+    <organization>
+        <name>${organization.name}</name>
+        <url>${organization.url}</url>
+    </organization>
+
+    <scm>
+        <url>${scm.repo.link}</url>
+        <connection>scm:git:${scm.repo.link}.git</connection>
+        <developerConnection>scm:git:${scm.repo.link}.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>${issueManagement.url}</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>github-actions</system>
+        <url>${ciManagement.url}</url>
+    </ciManagement>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>${owner.name}</name>
+            <organization>${project.organization.name}</organization>
+            <organizationUrl>${organization.url}</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>GMT</timezone>
+        </developer>
+    </developers>
+
     <properties>
         <owner.name>Muhammad Faisal</owner.name>
         <organization.name>LucidTech</organization.name>
@@ -35,11 +77,14 @@
         <scm.user.link>https://github.com/${scm.user.name}</scm.user.link>
         <scm.repo.link>${scm.user.link}/${scm.repo.name}</scm.repo.link>
 
-        <issueManagement.url>${scm.repo.link}/issues</issueManagement.url>
-        <ciManagement.url>${scm.repo.link}/actions</ciManagement.url>
         <organization.url>${scm.user.link}</organization.url>
+        <ciManagement.url>${scm.repo.link}/actions</ciManagement.url>
+        <issueManagement.url>${scm.repo.link}/issues</issueManagement.url>
 
+
+        <target.directory>${project.build.directory}</target.directory>
         <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
+        <target.markdown.directory>src/site/markdown</target.markdown.directory>
 
         <copy.right.info>
             <![CDATA[Copyright© 2023 <a href="${organization.url}">${organization.name}</a>. All Rights Reserved.]]></copy.right.info>
@@ -47,6 +92,10 @@
         <!--    Setting the encodings to avoid warnings like `Input file encoding has not been set`    -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!--   Setting the versions to use Java 20   -->
+        <java.version>20</java.version>
+        <maven.compiler.release>20</maven.compiler.release>
 
         <!--   Plugin Versions   -->
         <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>

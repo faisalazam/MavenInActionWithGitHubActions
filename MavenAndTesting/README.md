@@ -66,7 +66,7 @@ This project follows the following basic conventions out of the box:
 | Clean the `target` directory | Run only the unit tests | Run only the integration tests   | Run both the unit and the integration tests |
 |------------------------------|-------------------------|----------------------------------|---------------------------------------------|
 | `mvn clean`                  | `mvn test`              | `mvn integration-test -P it`, or | `mvn verify`, or                            |
-|                              |                         | `mvn verify -P it`, or           | `mvn verify -P uit` or                      |
+|                              |                         | `mvn verify -P it`               | `mvn verify -P uit` or                      |
 |                              |                         |                                  | `mvn clean install`                         |
 
 Using the `verify` lifecycle of maven will also run the configured verification checks and will fail the build if any of the checks are not met.
