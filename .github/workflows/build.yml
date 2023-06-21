@@ -1,5 +1,5 @@
 name: 'JAVA CI/CD'
-on: push
+on: release #changed from push to release to disable it temporarily
 env:
   JAVA_VERSION: 20
   UPLOADED_ARTIFACTS_DIR: 'gh-pages'
