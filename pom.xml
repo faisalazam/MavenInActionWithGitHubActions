@@ -20,7 +20,7 @@
     <url>${scm.repo.link}</url>
 
     <modules>
-        <module>MavenSiteInAction</module>
+        <module>SiteGeneration</module>
         <module>MavenAndTesting</module>
     </modules>
 

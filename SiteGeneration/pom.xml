@@ -10,8 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>au.com.lucidtech.maveninactionwithgithubactions.mavensiteinaction</groupId>
-    <artifactId>mavensiteinaction</artifactId>
+    <artifactId>sitegeneration</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Maven Site In Action With GitHub Action</name>
     <description>Setting up Maven Site plugin and automating deployment with GitHub Actions</description>

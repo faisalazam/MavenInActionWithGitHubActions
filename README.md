@@ -22,7 +22,7 @@ This project will consist of small maven projects and we'll keep building more c
 on top of the simpler projects in this repo.
 
 I've turned it into a multimodule project.
-* MavenSiteInAction
+* SiteGeneration
 * MavenAndTest
 * MavenWithJacoco
 * PuttingAllTogether

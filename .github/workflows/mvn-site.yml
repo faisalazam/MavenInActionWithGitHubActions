@@ -23,7 +23,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    uses: './MavenSiteInAction/.github/workflows/build.yml@master'
+    uses: './SiteGeneration/.github/workflows/build.yml@master'
     with:
       UPLOADED_ARTIFACTS_DIR: ${{ needs.setup-env.outputs.UPLOADED_ARTIFACTS_DIR }}
       SITE_DIR: ${{ needs.setup-env.outputs.SITE_DIR }}

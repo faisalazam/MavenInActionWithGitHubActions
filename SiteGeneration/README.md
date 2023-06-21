@@ -39,12 +39,12 @@ Learn more about [create the documentation for your project][site-guide-url]
 the project site. Resources like images, css, js required for the site can be placed in `src/site/resources/*`.
 After the site generation, these resources will be in their respective folders in `target/site/*`.
 
-Maven site can also be generated without the [site descriptor][site-xml] file, but adding it will give better control 
+Maven site can also be generated without the [site descriptor](src/site/site.xml) file, but adding it will give better control 
 over the content of the site, i.e. adding customisations as well as more links to the generated site; just as we
 added the [README.md](README.md) file to it.
 
-## Setting custom css or javascript [site descriptor][site-xml] file
-Below is just some sample code to set custom css or javascript in the [site descriptor][site-xml] file:
+## Setting custom css or javascript [site descriptor](src/site/site.xml) file
+Below is just some sample code to set custom css or javascript in the [site descriptor](src/site/site.xml) file:
 ```
 <body>
     <head>
