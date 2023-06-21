@@ -1,6 +1,6 @@
-package au.com.lucidtech.testsexecution.controller;
+package au.com.lucidtech.jacocoexecution.controller;
 
-import au.com.lucidtech.testsexecution.model.Greeting;
+import au.com.lucidtech.jacocoexecution.model.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

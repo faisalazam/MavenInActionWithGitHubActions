@@ -1,4 +1,4 @@
-package au.com.lucidtech.testsexecution.samples;
+package au.com.lucidtech.jacocoexecution.samples;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

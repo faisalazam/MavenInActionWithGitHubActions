@@ -1,11 +1,10 @@
-package au.com.lucidtech.testsexecution;
+package au.com.lucidtech.jacocoexecution;
 
-import au.com.lucidtech.testsexecution.TestsExecutionApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestsExecutionApplicationTests {
+class JacocoExecutionApplicationTests {
 
     @Test
     void contextLoads() {
@@ -13,6 +12,6 @@ class TestsExecutionApplicationTests {
 
     @Test
     public void applicationStarts() {
-        TestsExecutionApplication.main(new String[]{});
+        JacocoExecutionApplication.main(new String[]{});
     }
 }

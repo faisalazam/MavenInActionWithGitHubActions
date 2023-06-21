@@ -1,4 +1,4 @@
-package au.com.lucidtech.testsexecution.model;
+package au.com.lucidtech.jacocoexecution.model;
 
 public record Greeting(long id, String content) {
 }

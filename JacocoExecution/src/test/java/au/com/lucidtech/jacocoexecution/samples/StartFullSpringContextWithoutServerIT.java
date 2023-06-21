@@ -1,6 +1,6 @@
-package au.com.lucidtech.testsexecution.samples;
+package au.com.lucidtech.jacocoexecution.samples;
 
-import au.com.lucidtech.testsexecution.controller.GreetingController;
+import au.com.lucidtech.jacocoexecution.controller.GreetingController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,11 +1,11 @@
-package au.com.lucidtech.testsexecution;
+package au.com.lucidtech.jacocoexecution;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestsExecutionApplication {
+public class JacocoExecutionApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TestsExecutionApplication.class, args);
+        SpringApplication.run(JacocoExecutionApplication.class, args);
     }
 }
