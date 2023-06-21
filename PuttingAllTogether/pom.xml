@@ -5,79 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>au.com.lucidtech.maveninactionwithgithubactions</groupId>
+        <artifactId>maveninactionwithgithubactions</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.${organization.name.lowercased}.${scm.repo.name.lowercased}</groupId>
-    <artifactId>${scm.repo.name.lowercased}</artifactId>
+    <groupId>au.com.lucidtech.maveninactionwithgithubactions.puttingitalltogether</groupId>
+    <artifactId>puttingitalltogether</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>User CRUD with JWT Security</name>
-    <description>User CRUD with JWT Security</description>
+    <name>Putting it all together</name>
+    <description>Combining all small projects</description>
     <url>${scm.repo.link}</url>
-
-    <organization>
-        <name>${organization.name}</name>
-        <url>${scm.user.link}</url>
-    </organization>
-
-    <scm>
-        <url>${scm.repo.link}</url>
-        <connection>scm:git:${scm.repo.link}.git</connection>
-        <developerConnection>scm:git:${scm.repo.link}.git</developerConnection>
-    </scm>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>${scm.repo.link}/issues/</url>
-    </issueManagement>
-
-    <ciManagement>
-        <system>github-actions</system>
-        <url>${scm.repo.link}/actions</url>
-    </ciManagement>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>${owner.name}</name>
-            <organization>${project.organization.name}</organization>
-            <organizationUrl>${scm.user.link}</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>GMT</timezone>
-        </developer>
-    </developers>
 
     <properties>
         <badges.skip>false</badges.skip>
-        <java.version>20</java.version>
-        <maven.compiler.release>20</maven.compiler.release>
 
-        <owner.name>Muhammad Faisal</owner.name>
-        <organization.name>LucidTech</organization.name>
-        <organization.name.lowercased>lucidtech</organization.name.lowercased>
-        <owner.twitter.handle>mfa1616</owner.twitter.handle>
-        <scm.user.name>faisalazam</scm.user.name>
-        <scm.repo.name>MavenInActionWithGitHubActions</scm.repo.name>
-        <scm.repo.name.lowercased>maveninactionwithgithubactions</scm.repo.name.lowercased>
-        <scm.user.link>https://github.com/${scm.user.name}</scm.user.link>
-        <scm.repo.link>${scm.user.link}/${scm.repo.name}</scm.repo.link>
         <scm.package.url>https://maven.pkg.github.com/${scm.user.name}/${scm.repo.name}</scm.package.url>
 
-        <target.directory>${project.build.directory}</target.directory>
-        <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
         <tests.results.directory>${target.directory}/test-results</tests.results.directory>
 
         <jacoco.execs.directory>${tests.results.directory}/jacoco-execs</jacoco.execs.directory>
@@ -87,8 +31,6 @@
         <jacoco.ut.reporting.directory>${target.site.directory}/jacoco</jacoco.ut.reporting.directory>
         <jacoco.it.reporting.directory>${target.site.directory}/jacoco-it</jacoco.it.reporting.directory>
         <jacoco.merged.reporting.directory>${target.site.directory}/jacoco-merged</jacoco.merged.reporting.directory>
-
-        <copy.right.info><![CDATA[Copyright© 2023 <a href="${scm.user.link}">${organization.name}</a>. All Rights Reserved.]]></copy.right.info>
 
         <skip.unit.tests>false</skip.unit.tests>
         <skip.integration.tests>false</skip.integration.tests>
@@ -193,18 +135,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--     Start -> Plugin for mvn site       -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>4.0.0-M8</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.4.5</version>
-            </plugin>
-            <!--     End -> Plugin for mvn site       -->
             <!--     Start -> Plugin for mvn jacoco:report -> to generate the code coverage report       -->
             <plugin>
                 <groupId>org.jacoco</groupId>

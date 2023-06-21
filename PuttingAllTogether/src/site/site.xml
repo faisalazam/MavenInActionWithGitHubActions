@@ -55,10 +55,10 @@
 
         <breadcrumbs>
             <!-- NOTE: see these `$$` in `href? they are not by mistake -->
-            <!-- They are there because no matter what you try, href wont get the value of the variable -->
+            <!-- They are there because no matter what you try, href won't get the value of the variable -->
             <!-- With this double `$$`, variable will get evaluated but their value will start with a `$` -->
             <!-- So, a piece of javascript has been added to remove that unnecessary `$` from the hrefs. -->
-            <item name="${organization.name}" href="$${scm.user.link}"/>
+            <item name="${organization.name}" href="$${organization.url}"/>
             <item name="${owner.name}" href="$${scm.user.link}"/>
             <item name="${scm.repo.name}" href="$${scm.repo.link}"/>
         </breadcrumbs>

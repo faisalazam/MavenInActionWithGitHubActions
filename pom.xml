@@ -86,7 +86,7 @@
         <target.site.directory>${project.reporting.outputDirectory}</target.site.directory>
         <src.site.directory>src/site</src.site.directory>
         <markdown.directory>markdown</markdown.directory>
-        <target.markdown.directory>${src.site.directory}/${markdown.directory}</target.markdown.directory>
+        <src.markdown.directory>${src.site.directory}/${markdown.directory}</src.markdown.directory>
 
         <copy.right.info>
             <![CDATA[Copyright© 2023 <a href="${organization.url}">${organization.name}</a>. All Rights Reserved.]]></copy.right.info>
