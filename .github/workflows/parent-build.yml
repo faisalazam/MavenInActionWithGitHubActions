@@ -1,0 +1,77 @@
+name: 'JAVA CI/CD'
+on: push
+env:
+  JAVA_VERSION: 20
+  UPLOADED_ARTIFACTS_DIR: 'gh-pages'
+  SITE_DIR: 'gh-pages/staging'
+
+jobs:
+  setup-env:
+    runs-on: ubuntu-latest
+    outputs:
+      JAVA_VERSION: ${{steps.setup-env.outputs.JAVA_VERSION}}
+    steps:
+      - name: 'Setup Environment'
+        id: setup-env
+        run: |
+          echo "JAVA_VERSION=${{ env.JAVA_VERSION }}" >> $GITHUB_OUTPUT
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
+        uses: actions/checkout@v3
+      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
+        uses: './.github/actions/install-java'
+        with:
+          JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
+      - name: 'Cache Maven packages'
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2-*
+      - name: 'Run the unit tests'
+        run: mvn clean test -P ut --file pom.xml
+      - name: 'Run the integration tests'
+        run: mvn verify -P it --file pom.xml
+      - name: 'Generate the project site'
+        run: mvn site site:stage -P nt --file pom.xml
+      - name: 'Uploads the results to ${{ env.UPLOADED_ARTIFACTS_DIR }} folder'
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          retention-days: 1
+          path: target/staging
+
+  deploy-to-gh-pages:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
+        uses: actions/checkout@v3
+      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
+        uses: './.github/actions/install-java'
+        with:
+          JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
+      - name: 'Download the uploaded artifacts to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+      - name: 'Log folder'
+        run: ls -lart ${{ env.UPLOADED_ARTIFACTS_DIR }}
+      - name: 'Copy the `README.md` file to `${{ env.SITE_DIR }}` folder'
+        run: cp README.md ${{ env.SITE_DIR }}
+      - name: 'Copy the `LICENSE` file to `${{ env.SITE_DIR }}` folder'
+        run: cp LICENSE ${{ env.SITE_DIR }}
+      - name: 'Deploy to GitHub Pages'
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          CLEAN: true # Automatically remove deleted files from the deploy branch
