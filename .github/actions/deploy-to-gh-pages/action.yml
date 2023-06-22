@@ -1,0 +1,44 @@
+name: 'Tests the application Code and uploads the results'
+description: 'composite run action'
+
+inputs:
+  JAVA_VERSION_TO_INSTALL:
+    required: true
+    description: 'Java version to be installed'
+  UPLOADED_ARTIFACTS_DIR:
+    required: true
+    description: 'Uploads artifacts directory'
+  MODULE_DIR:
+    required: true
+    description: 'Directory containing the module code'
+  JACOCO_BADGES_DIR:
+    required: false
+    description: 'Directory where Jacoco badges should reside'
+
+runs:
+  using: "composite"
+  steps:
+    - name: 'Set up the Oracle JDK `${{ inputs.JAVA_VERSION_TO_INSTALL }}`'
+      uses: './.github/actions/install-java'
+      with:
+        JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
+    - name: 'Download the uploaded artifacts to `${{ inputs.UPLOADED_ARTIFACTS_DIR }}` folder'
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
+        path: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
+    - name: 'Copy the Jacoco badges file to the relevant folder'
+      if: ${{ inputs.JACOCO_BADGES_DIR != '' }}
+      run: |
+        mkdir -p ${{ inputs.JACOCO_BADGES_DIR }}
+        cp ${{ inputs.UPLOADED_ARTIFACTS_DIR }}/svgs/* ${{ inputs.JACOCO_BADGES_DIR }}
+        rm -rf ${{ inputs.UPLOADED_ARTIFACTS_DIR }}/svgs
+      shell: bash
+    - name: 'Deploy to GitHub Pages'
+      if: ${{ github.ref == 'refs/heads/master' }}
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: ${{ inputs.SITE_DIR }}
+        # to push the contents of the deployment folder into a specific directory on the deployment branch
+        target-folder: INDIVIDUAL_MODULES/${{ inputs.MODULE_DIR }}
+        clean-exclude: staging

@@ -13,26 +13,14 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
-        uses: './.github/actions/install-java'
+      - name: 'Generates the project''s site'
+        uses: './.github/actions/generate-reports'
         with:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
-      - name: 'Cache Maven packages'
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-site-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2-*
-      - name: 'Generates the project''s site'
-        run: mvn site -P nt --file ${{ env.MODULE_DIR }}/pom.xml
-      - name: 'Uploads the results to ${{ env.UPLOADED_ARTIFACTS_DIR }} folder'
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          retention-days: 1
-          path: target
+          UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          MODULE_DIR: ${{ env.MODULE_DIR }}
 
-  deploy-mvn-site-to-gh-pages:
+  deploy-to-gh-pages:
     needs: generate-project-site
     runs-on: ubuntu-latest
     permissions:
@@ -41,20 +29,10 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
-        uses: './.github/actions/install-java'
+      - name: 'Deploy the project''s site to GitHub Pages'
+        uses: './.github/actions/deploy-to-gh-pages'
         with:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
-      - name: 'Download the uploaded artifacts to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Deploy to GitHub Pages'
-        if: ${{ github.ref == 'refs/heads/master' }}
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: ${{ env.SITE_DIR }}
-          # to push the contents of the deployment folder into a specific directory on the deployment branch
-          target-folder: INDIVIDUAL_MODULES/${{ env.MODULE_DIR }}
-          clean-exclude: staging
+          UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          MODULE_DIR: ${{ env.MODULE_DIR }}
+          SITE_DIR: ${{ env.SITE_DIR }}

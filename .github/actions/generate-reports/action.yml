@@ -11,6 +11,9 @@ inputs:
   MODULE_DIR:
     required: true
     description: 'Directory containing the module code'
+  REQUIRES_TESTS:
+    required: false
+    description: 'True means prepare the test directories for site, and false means ignore them'
 
 runs:
   using: "composite"
@@ -20,10 +23,12 @@ runs:
       with:
         JAVA_VERSION_TO_INSTALL: ${{ inputs.JAVA_VERSION_TO_INSTALL }}
     - name: 'Download the uploaded `ut` and `it` artifacts'
+      if: ${{ inputs.REQUIRES_TESTS == 'true' }}
       uses: actions/download-artifact@v3
       with:
         path: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
     - name: 'Copy the `ut` and `it` artifacts into the `target` folder'
+      if: ${{ inputs.REQUIRES_TESTS == 'true' }}
       run: |
         mkdir ${{ inputs.MODULE_DIR }}/target
         cp -r ${{ env.UPLOADED_ARTIFACTS_DIR }}/${{ env.UPLOADED_ARTIFACTS_DIR }}-ut/* ${{ inputs.MODULE_DIR }}/target

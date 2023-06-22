@@ -120,6 +120,7 @@ jobs:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           MODULE_DIR: ${{ env.MODULE_DIR }}
+          REQUIRES_TESTS: true
 
   generate-code-coverage-badge:
     if: ${{ github.ref == 'refs/heads/master' }}
@@ -161,28 +162,14 @@ jobs:
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
         uses: actions/checkout@v3
-      - name: 'Set up the Oracle JDK `${{ env.JAVA_VERSION }}`'
-        uses: './.github/actions/install-java'
+      - name: 'Deploy the project''s site to GitHub Pages'
+        uses: './.github/actions/deploy-to-gh-pages'
         with:
           JAVA_VERSION_TO_INSTALL: ${{ env.JAVA_VERSION }}
-      - name: 'Download the uploaded artifacts to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Copy the Jacoco badges file to the relevant folder'
-        run: |
-          mkdir -p ${{ env.JACOCO_BADGES_DIR }}
-          cp ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs/* ${{ env.JACOCO_BADGES_DIR }}
-          rm -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs
-      - name: 'Deploy to GitHub Pages'
-        if: ${{ github.ref == 'refs/heads/master' }}
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: ${{ env.SITE_DIR }}
-          # to push the contents of the deployment folder into a specific directory on the deployment branch
-          target-folder: INDIVIDUAL_MODULES/${{ env.MODULE_DIR }}
-          clean-exclude: staging
+          UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          MODULE_DIR: ${{ env.MODULE_DIR }}
+          SITE_DIR: ${{ env.SITE_DIR }}
+          JACOCO_BADGES_DIR: ${{ env.JACOCO_BADGES_DIR }}
 
   deploy-to-gh-packages:
     needs:
