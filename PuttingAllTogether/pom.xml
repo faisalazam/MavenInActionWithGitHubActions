@@ -10,8 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>au.com.lucidtech.maveninactionwithgithubactions.puttingitalltogether</groupId>
-    <artifactId>puttingitalltogether</artifactId>
+    <artifactId>puttingalltogether</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Putting it all together</name>
     <description>Combining all small projects</description>
