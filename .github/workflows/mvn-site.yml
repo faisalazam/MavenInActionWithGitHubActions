@@ -3,6 +3,9 @@ on: push
 env:
   UPLOADED_ARTIFACTS_DIR: 'gh-pages'
   SITE_DIR: 'gh-pages/site'
+  MODULE_DIR: 'SiteGeneration'
+  TARGET_DIR: 'SiteGeneration/target'
+  MAVEN_SITE_IN_ACTION_DIR: 'gh-pages/maven-site-in-action'
 
 jobs:
   setup-env:
@@ -17,13 +20,54 @@ jobs:
           echo "UPLOADED_ARTIFACTS_DIR=${{ env.UPLOADED_ARTIFACTS_DIR }}" >> $GITHUB_OUTPUT
           echo "SITE_DIR=${{ env.SITE_DIR }}" >> $GITHUB_OUTPUT
 
+  generate-project-site:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
+        uses: actions/checkout@v3
+      - name: 'Cache Maven packages'
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-site-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2-*
+      - name: 'Generates the project''s site'
+        run: mvn site -P nt --file pom.xml
+      - name: 'Uploads the results to ${{ env.UPLOADED_ARTIFACTS_DIR }} folder'
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          retention-days: 1
+          path: target
+
   deploy-mvn-site-to-gh-pages:
     needs:
      - setup-env
+     - generate-project-site
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-    uses: 'SiteGeneration/.github/workflows/build.yml@master'
-    with:
-      UPLOADED_ARTIFACTS_DIR: ${{ needs.setup-env.outputs.UPLOADED_ARTIFACTS_DIR }}
-      SITE_DIR: ${{ needs.setup-env.outputs.SITE_DIR }}
+
+    steps:
+      - name: 'Get the latest code from the `${{ github.repository }}` repository'
+        uses: actions/checkout@v3
+      - name: 'Download the uploaded artifacts to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+      - name: 'Copy the `README.md` file to `${{ env.SITE_DIR }}` folder'
+        run: cp README.md ${{ env.SITE_DIR }}
+      - name: 'Copy the `LICENSE` file to `${{ env.SITE_DIR }}` folder'
+        run: cp ../LICENSE ${{ env.SITE_DIR }}
+      - name: 'Rename `${{ env.SITE_DIR }}` to `${{ env.MAVEN_SITE_IN_ACTION_DIR }}`'
+        run: |
+          mv -f ${{ env.SITE_DIR }} ${{ env.MAVEN_SITE_IN_ACTION_DIR }}
+      - name: 'Deploy to GitHub Pages'
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ${{ env.UPLOADED_ARTIFACTS_DIR }}
+          CLEAN: true # Automatically remove deleted files from the deploy branch
