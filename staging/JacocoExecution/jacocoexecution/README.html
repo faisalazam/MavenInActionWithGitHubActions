@@ -128,7 +128,27 @@
         </header>
         <main id="bodyColumn"  class="span10" >
 <section><section>
-<h2>Jacoco in action with Maven</h2></section></section>
+<h2>Jacoco in action with Maven</h2></section><section>
+<h2>Running the tests</h2>
+<p>See <code>TestsExecution</code> project</p></section><section>
+<h2>Jacoco's Code Coverage Reports</h2>
+<ul>
+
+<li>Code coverage reports for
+<ul>
+
+<li>units tests are generated right after the execution of unit tests and can be found at <code>target/site/jacoco</code> directory.</li>
+<li>integration tests are generated right after the execution of integration tests and can be found at <code>target/site/jacoco-it</code> directory.</li>
+</ul></li>
+<li>Combined or merged report for both the unit and the integration tests' will also be generated right after the execution of integration tests.</li>
+<li>Once the reports are generated, point a browser at the output in any of the following directories to see:
+<ul>
+
+<li>unit tests' coverage report: <code>target/site/jacoco/index.html</code></li>
+<li>integration tests' coverage report: <code>target/site/jacoco-it/index.html</code></li>
+<li>all tests' coverage report: <code>target/site/jacoco-merged/index.html</code></li>
+</ul></li>
+</ul></section></section>
         </main>
       </div>
     </div>
