@@ -1,4 +1,4 @@
-name: 'JAVA CI/CD'
+name: 'PuttingAllTogether CI/CD'
 on: push
 env:
   JAVA_VERSION: 20

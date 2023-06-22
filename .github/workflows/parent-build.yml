@@ -1,4 +1,4 @@
-name: 'JAVA CI/CD'
+name: 'Parent CI/CD'
 on: push
 env:
   JAVA_VERSION: 20
@@ -38,12 +38,17 @@ jobs:
         run: mvn verify -P it --file pom.xml
       - name: 'Generate the project site'
         run: mvn site site:stage -P nt --file pom.xml
+      - name: 'Prepare a temp folder to contain `README.md` and `staging` folder'
+        run: |
+          mkdir target-staging
+          mv target/staging target-staging
+          cp README.md target-staging
       - name: 'Uploads the results to ${{ env.UPLOADED_ARTIFACTS_DIR }} folder'
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           retention-days: 1
-          path: target/staging
+          path: target-staging
 
   deploy-to-gh-pages:
     needs: build
@@ -63,8 +68,6 @@ jobs:
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Copy the `README.md` file to `${{ env.UPLOADED_ARTIFACTS_DIR }}` folder'
-        run: cp README.md ${{ env.UPLOADED_ARTIFACTS_DIR }}
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4

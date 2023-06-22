@@ -24,7 +24,7 @@ jobs:
     needs: generate-project-site
     runs-on: ubuntu-latest
     permissions:
-      packages: write
+      contents: write
 
     steps:
       - name: 'Get the latest code from the `${{ github.repository }}` repository'
