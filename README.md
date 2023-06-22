@@ -17,7 +17,7 @@
 </p>
 <p>
     <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/actions/workflows/putting-all-together.yml">
-        <img src="https://github.com/faisalazam/MavenInActionWithGitHubActions/tree/master/.github/assets/putting-all-together.png" alt="">
+        <img src="https://github.com/faisalazam/MavenInActionWithGitHubActions/tree/master/.github/assets/putting-all-together.png" alt="" />
     </a>
 </p>
 
