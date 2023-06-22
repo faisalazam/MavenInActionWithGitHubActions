@@ -8,6 +8,7 @@ env:
   TARGET_DIR: 'PuttingAllTogether/target'
   TEST_RESULTS_DIR: 'PuttingAllTogether/target/test-results'
   JACOCO_EXECS_DIR: 'PuttingAllTogether/target/gh-pages-*t/test-results/jacoco-execs'
+  JACOCO_BADGES_DIR: 'gh-pages/site/jacoco-merged/jacoco-resources/badges'
   BRANCHES_COVERAGE_THRESHOLD: '60%'
   INSTRUCTIONS_COVERAGE_THRESHOLD: '60%'
 
@@ -169,14 +170,10 @@ jobs:
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           path: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-      - name: 'Copy the `README.md` file to `${{ env.SITE_DIR }}` folder'
-        run: cp README.md ${{ env.SITE_DIR }}
-      - name: 'Copy the `LICENSE` file to `${{ env.SITE_DIR }}` folder'
-        run: cp LICENSE ${{ env.SITE_DIR }}
       - name: 'Copy the Jacoco badges file to the relevant folder'
         run: |
-          mkdir -p ${{ env.SITE_DIR }}/jacoco-merged/jacoco-resources/badges
-          cp ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs/* ${{ env.SITE_DIR }}/jacoco-merged/jacoco-resources/badges
+          mkdir -p ${{ env.JACOCO_BADGES_DIR }}
+          cp ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs/* ${{ env.JACOCO_BADGES_DIR }}
           rm -rf ${{ env.UPLOADED_ARTIFACTS_DIR }}/svgs
       - name: 'Deploy to GitHub Pages'
         if: ${{ github.ref == 'refs/heads/master' }}
