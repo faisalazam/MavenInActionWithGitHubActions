@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.lucidtech.maveninactionwithgithubactions.model","l":"Greeting"},{"p":"com.lucidtech.maveninactionwithgithubactions.controller","l":"GreetingController"},{"p":"com.lucidtech.maveninactionwithgithubactions","l":"MavenInActionWithGitHubActionsApplication"}];updateSearchResults();
