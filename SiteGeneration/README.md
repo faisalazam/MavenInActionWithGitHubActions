@@ -1,3 +1,14 @@
+<!-- TOC -->
+  * [Maven Site In Action](#maven-site-in-action)
+  * [Generating the Project Site](#generating-the-project-site)
+  * [Plugins to use](#plugins-to-use)
+  * [Configuring the project site](#configuring-the-project-site)
+  * [Setting custom css or javascript site descriptor file](#setting-custom-css-or-javascript-site-descriptor-file)
+  * [Copying the README.md file](#copying-the-readmemd-file)
+  * [Generating the Project Site for multimodule project](#generating-the-project-site-for-multimodule-project)
+  * [Configuring Reports](#configuring-reports)
+<!-- TOC -->
+
 ## Maven Site In Action
 
 The purpose of this small project is to utilize the [maven's site][maven-site-plugin-url] plugin to generate the project reports.

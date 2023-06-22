@@ -1,3 +1,16 @@
+<!-- TOC -->
+  * [Testing in action with Maven](#testing-in-action-with-maven)
+  * [Plugin Configurations](#plugin-configurations)
+  * [Maven profiles](#maven-profiles)
+  * [Conventions](#conventions)
+  * [Running the tests](#running-the-tests)
+  * [Running a single test](#running-a-single-test)
+  * [Configure test reporting](#configure-test-reporting)
+      * [Using the `reportSets` Tag](#using-the-reportsets-tag)
+  * [Binding the goals and phases to achieve something different](#binding-the-goals-and-phases-to-achieve-something-different)
+  * [Read further if you want to set custom paths for tests' results](#read-further-if-you-want-to-set-custom-paths-for-tests-results)
+<!-- TOC -->
+
 ## Testing in action with Maven
 
 The purpose of this small project is to utilize the maven's [surefire][surefire-url], [failsafe][failsafe-url],
@@ -42,7 +55,7 @@ Learn more about [Configuring plugins][configuring-plugins-url]
     * Configured profiles (in [pom.xml](pom.xml) file) are:
 
       | Profile ID | Profile Description                                          |
-          |------------|--------------------------------------------------------------|
+      |------------|--------------------------------------------------------------|
       | `ut`       | It'll run only the unit tests                                |
       | `it`       | It'll run only the integration tests                         |
       | `uit`      | It'll run both the unit and the integration tests            |
