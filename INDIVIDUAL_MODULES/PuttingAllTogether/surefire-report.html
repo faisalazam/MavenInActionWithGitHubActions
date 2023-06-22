@@ -63,6 +63,9 @@
                   <li><a href="pmd.html" title="PMD">PMD</a></li>
                   <li><a href="checkstyle.html" title="Checkstyle">Checkstyle</a></li>
                   <li><a title="Surefire">Surefire</a></li>
+                  <li><a href="failsafe-report.html" title="Failsafe">Failsafe</a></li>
+                  <li><a href="jacoco/index.html" title="JaCoCo">JaCoCo</a></li>
+                  <li><a href="jacoco-it/index.html" title="JaCoCo IT">JaCoCo IT</a></li>
                   <li><a href="xref/index.html" title="Source Xref">Source Xref</a></li>
                   <li><a href="xref-test/index.html" title="Test Source Xref">Test Source Xref</a></li>
                   <li><a href="apidocs/index.html" title="Javadoc">Javadoc</a></li>
@@ -125,6 +128,9 @@
       <li><a href="pmd.html" title="PMD"><span class="none"></span>PMD</a></li>
       <li><a href="checkstyle.html" title="Checkstyle"><span class="none"></span>Checkstyle</a></li>
       <li class="active"><a><span class="none"></span>Surefire</a></li>
+      <li><a href="failsafe-report.html" title="Failsafe"><span class="none"></span>Failsafe</a></li>
+      <li><a href="jacoco/index.html" title="JaCoCo"><span class="none"></span>JaCoCo</a></li>
+      <li><a href="jacoco-it/index.html" title="JaCoCo IT"><span class="none"></span>JaCoCo IT</a></li>
       <li><a href="xref/index.html" title="Source Xref"><span class="none"></span>Source Xref</a></li>
       <li><a href="xref-test/index.html" title="Test Source Xref"><span class="none"></span>Test Source Xref</a></li>
       <li><a href="apidocs/index.html" title="Javadoc"><span class="none"></span>Javadoc</a></li>
@@ -176,7 +182,8 @@ function toggleDisplay(elementId) {
  }
  }</script><section>
 <h1>Surefire Report</h1></section><section><a id="Summary"></a>
-<h1>Summary</h1><br />
+<h1>Summary</h1>
+<p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br />
 <table class="table table-striped">
 <tr class="a">
 <th>Tests</th>
@@ -186,13 +193,141 @@ function toggleDisplay(elementId) {
 <th>Success Rate</th>
 <th>Time</th></tr>
 <tr class="b">
-<td style="text-align: left;">0</td>
+<td style="text-align: left;">8</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
-<td>0%</td>
-<td>0 s</td></tr></table><br />
-<p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p><br /></section>
+<td>100%</td>
+<td>5.778 s</td></tr></table><br />
+<p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p><br /></section><section><a id="Package_List"></a>
+<h1>Package List</h1>
+<p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br />
+<table class="table table-striped">
+<tr class="a">
+<th>Package</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#com.lucidtech.maveninactionwithgithubactions.samples">com.lucidtech.maveninactionwithgithubactions.samples</a></td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>4.552 s</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#com.lucidtech.maveninactionwithgithubactions">com.lucidtech.maveninactionwithgithubactions</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>1.226 s</td></tr></table><br />
+<p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p><section><a id="com.lucidtech.maveninactionwithgithubactions.samples"></a>
+<h2>com.lucidtech.maveninactionwithgithubactions.samples</h2>
+<table class="table table-striped">
+<tr class="a">
+<th>-</th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#com.lucidtech.maveninactionwithgithubactions.samples.SimpleUnitTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.lucidtech.maveninactionwithgithubactions.samples.SimpleUnitTest">SimpleUnitTest</a></td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.026 s</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#com.lucidtech.maveninactionwithgithubactions.samples.StartSpringContextWithWebLayerOnlyAndWithoutServerTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.lucidtech.maveninactionwithgithubactions.samples.StartSpringContextWithWebLayerOnlyAndWithoutServerTest">StartSpringContextWithWebLayerOnlyAndWithoutServerTest</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.396 s</td></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#com.lucidtech.maveninactionwithgithubactions.samples.StartSpringContextWithSpecificClassAndWithWebLayerOnlyButWithoutServerTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.lucidtech.maveninactionwithgithubactions.samples.StartSpringContextWithSpecificClassAndWithWebLayerOnlyButWithoutServerTest">StartSpringContextWithSpecificClassAndWithWebLayerOnlyButWithoutServerTest</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>4.130 s</td></tr></table></section><section><a id="com.lucidtech.maveninactionwithgithubactions"></a>
+<h2>com.lucidtech.maveninactionwithgithubactions</h2>
+<table class="table table-striped">
+<tr class="a">
+<th>-</th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#com.lucidtech.maveninactionwithgithubactions.MavenInActionWithGitHubActionsApplicationTests"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.lucidtech.maveninactionwithgithubactions.MavenInActionWithGitHubActionsApplicationTests">MavenInActionWithGitHubActionsApplicationTests</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>1.226 s</td></tr></table></section><br /></section><section><a id="Test_Cases"></a>
+<h1>Test Cases</h1>
+<p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><section><a id="com.lucidtech.maveninactionwithgithubactions.MavenInActionWithGitHubActionsApplicationTests"></a>
+<h2>MavenInActionWithGitHubActionsApplicationTests</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td><a id="TC_com.lucidtech.maveninactionwithgithubactions.MavenInActionWithGitHubActionsApplicationTests.applicationStarts"></a>applicationStarts</td>
+<td>0.687 s</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td><a id="TC_com.lucidtech.maveninactionwithgithubactions.MavenInActionWithGitHubActionsApplicationTests.contextLoads"></a>contextLoads</td>
+<td>0.004 s</td></tr></table></section><section><a id="com.lucidtech.maveninactionwithgithubactions.samples.SimpleUnitTest"></a>
+<h2>SimpleUnitTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td><a id="TC_com.lucidtech.maveninactionwithgithubactions.samples.SimpleUnitTest.shouldTestGreeting"></a>shouldTestGreeting</td>
+<td>0.010 s</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td><a id="TC_com.lucidtech.maveninactionwithgithubactions.samples.SimpleUnitTest.shouldTestGreeting1"></a>shouldTestGreeting1</td>
+<td>0.001 s</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td><a id="TC_com.lucidtech.maveninactionwithgithubactions.samples.SimpleUnitTest.shouldTestGreeting2"></a>shouldTestGreeting2</td>
+<td>0.001 s</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td><a id="TC_com.lucidtech.maveninactionwithgithubactions.samples.SimpleUnitTest.shouldTestGreeting3"></a>shouldTestGreeting3</td>
+<td>0.001 s</td></tr></table></section><section><a id="com.lucidtech.maveninactionwithgithubactions.samples.StartSpringContextWithWebLayerOnlyAndWithoutServerTest"></a>
+<h2>StartSpringContextWithWebLayerOnlyAndWithoutServerTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td><a id="TC_com.lucidtech.maveninactionwithgithubactions.samples.StartSpringContextWithWebLayerOnlyAndWithoutServerTest.shouldReturnDefaultMessage"></a>shouldReturnDefaultMessage</td>
+<td>0.011 s</td></tr></table></section><section><a id="com.lucidtech.maveninactionwithgithubactions.samples.StartSpringContextWithSpecificClassAndWithWebLayerOnlyButWithoutServerTest"></a>
+<h2>StartSpringContextWithSpecificClassAndWithWebLayerOnlyButWithoutServerTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td><a id="TC_com.lucidtech.maveninactionwithgithubactions.samples.StartSpringContextWithSpecificClassAndWithWebLayerOnlyButWithoutServerTest.greetingShouldReturnMessageFromService"></a>greetingShouldReturnMessageFromService</td>
+<td>1.323 s</td></tr></table></section><br /></section>
         </main>
       </div>
     </div>
