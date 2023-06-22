@@ -80,33 +80,6 @@
                 </configuration>
             </plugin>
             <!--     End -> This plugin will be used to run Integration tests separately from unit tests      -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <!-- Copy the readme file to the site markdown directory so that a page is generated from it. -->
-                        <id>copy-readme</id>
-                        <phase>pre-site</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <overwrite>true</overwrite>
-                            <outputDirectory>${src.markdown.directory}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}</directory>
-                                    <includes>
-                                        <include>README.md</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
