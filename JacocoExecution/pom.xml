@@ -21,6 +21,8 @@
         <ignore.test.failures>false</ignore.test.failures>
         <skip.integration.tests>false</skip.integration.tests>
 
+        <jacoco.merged.exec>${project.build.directory}/merged.exec</jacoco.merged.exec>
+
         <!--   Plugin Versions   -->
         <maven-jxr-plugin.version>3.3.0</maven-jxr-plugin.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
@@ -112,6 +114,24 @@
                         <goals>
                             <goal>report-integration</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>merge-unit-and-integration</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>merge</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${jacoco.merged.exec}</destFile>
+                            <fileSets>
+                                <fileSet>
+                                    <directory>${project.build.directory}</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </fileSet>
+                            </fileSets>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
