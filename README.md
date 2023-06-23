@@ -8,7 +8,7 @@
 
 
 <h1 style="text-align:center">
-  Maven, Plugins, GitHub Pages, and GitHub Workflows/Actions
+  Maven, Plugins, GitHub Pages, and GitHub Workflows/Actions ![Awesome](https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/.github/assets/awesome-badge.svg)
 </h1>
 
 <p>
@@ -40,7 +40,7 @@
 </ul>
 
 ## Modules
-Following are the sub-modules of this [parent project][parent-project-url]:
+Following are the submodules of this [parent project][parent-project-url]:
 
 | Module                                         | Status                                                                                                                                                                                      |
 |------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -49,7 +49,27 @@ Following are the sub-modules of this [parent project][parent-project-url]:
 | [JacocoExecution][jacoco-execution-url]        |                                                                                                                                                                                             |
 | [PuttingAllTogether][putting-all-together-url] | [![PuttingAllTogether CI/CD][putting-all-together-badge-url]][putting-all-together-link-url] [![pages-build-deployment][pages-build-deployment-badge-url]][pages-build-deployment-link-url] |
 
+Every next submodule is built on top of the previous submodule. For exampple, [TestsExecution][tests-execution-url] is 
+built on top of [SiteGeneration][site-generation-url].
 
+Contributing
+------------
+
+We accept Pull Requests via GitHub. Comments on the PRs is the main channel of communication for contributors.
+There are some guidelines which will make applying PRs easier for us:
++ No tabs! Please use spaces for indentation.
++ Respect the code style.
++ Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
++ Provide [JUnit tests][junit-url] for your changes and ensure that your changes don't break any existing tests by running:
+    + ```mvn clean test verify```
++ You can check whether there are currently broken tests at the [Continuous Integration][parent-cicd-link-url] page.
+
+If you plan to contribute on a regular basis, please consider filing a [contributor license agreement][contributor-license-agreement-url].
+You can learn more about contributing via GitHub in our [contribution guidelines](CONTRIBUTING.md).
+
+License
+-------
+This code is under the [Apache Licence v2][apache-license-link-url].
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -65,7 +85,7 @@ Following are the sub-modules of this [parent project][parent-project-url]:
 [checkstyle-link-url]:https://faisalazam.github.io/MavenInActionWithGitHubActions/INDIVIDUAL_MODULES/PuttingAllTogether/checkstyle.html
 [known-vulnerabilities-badge-url]:https://snyk.io/test/github/faisalazam/maveninactionwithgithubactions/badge.svg
 [apache-license-badge-url]:https://img.shields.io/github/license/apache/maven.svg?label=License
-[apache-license-link-url]:https://faisalazam.github.io/MavenInActionWithGitHubActions/staging/licenses.html
+[apache-license-link-url]:https://www.apache.org/licenses/LICENSE-2.0
 [site-cicd-badge-url]:https://github.com/faisalazam/MavenInActionWithGitHubActions/actions/workflows/site-generation.yml/badge.svg
 [site-cicd-link-url]:https://github.com/faisalazam/MavenInActionWithGitHubActions/actions/workflows/site-generation.yml
 [putting-all-together-badge-url]:https://github.com/faisalazam/MavenInActionWithGitHubActions/actions/workflows/putting-all-together.yml/badge.svg
@@ -75,3 +95,5 @@ Following are the sub-modules of this [parent project][parent-project-url]:
 [tests-execution-url]:https://faisalazam.github.io/MavenInActionWithGitHubActions/staging/TestsExecution/testsexecution/index.html
 [jacoco-execution-url]:https://faisalazam.github.io/MavenInActionWithGitHubActions/staging/JacocoExecution/jacocoexecution/index.html
 [putting-all-together-url]:https://faisalazam.github.io/MavenInActionWithGitHubActions/staging/PuttingAllTogether/puttingalltogether/index.html
+[junit-url]:https://junit.org/junit5/docs/current/user-guide
+[contributor-license-agreement-url]:https://www.apache.org/licenses/#clas
