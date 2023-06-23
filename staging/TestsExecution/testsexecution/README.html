@@ -154,11 +154,11 @@ separate reports and include them in the generated project reports through <code
 <p>The generated site will be deployed automatically as part of every push to the GitHub Pages.
 The deployment will happen using <code>GitHub workflows/actions</code>.</p></section><section>
 <h2>Plugin Configurations</h2>
-<p>We basically need <code>groupId</code> and <code>artifactId</code> to declare a plugin in <a href="pom.xml">pom.xml</a> file.
+<p>We basically need <code>groupId</code> and <code>artifactId</code> to declare a plugin in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/TestsExecution/pom.xml" class="externalLink">pom.xml</a> file.
 Important Note: Always define the <code>version</code> of each plugin used to guarantee build reproducibility.</p>
 <p>But if we need more control over the plugin's configuration, then we can make use of the <code>configuration</code> element
 and the child elements (i.e. <code>skipTests</code> and <code>testFailureIgnore</code> in the code below) of the <code>configuration</code> element will be mapped
-to the properties/fields of the plugin's Mojo. So, we can set those fields like this (in <a href="pom.xml">pom.xml</a> file):</p>
+to the properties/fields of the plugin's Mojo. So, we can set those fields like this (in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/TestsExecution/pom.xml" class="externalLink">pom.xml</a> file):</p>
 
 <div class="verbatim">
 <pre><code>&lt;plugin&gt;
@@ -188,7 +188,7 @@ to the properties/fields of the plugin's Mojo. So, we can set those fields like 
 <ul>
 
 <li>
-<p>Configured profiles (in <a href="pom.xml">pom.xml</a> file) are:</p>
+<p>Configured profiles (in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/TestsExecution/pom.xml" class="externalLink">pom.xml</a> file) are:</p>
 <table class="table table-striped">
 <thead>
 <tr class="a">
@@ -272,7 +272,7 @@ each plugin specified in <code>&lt;build&gt;</code> (parameters from <code>&lt;b
 <p>Learn more about <a href="https://maven.apache.org/guides/mini/guide-configuring-plugins.html#configuring-reporting-plugins" class="externalLink">Site Reporting</a></p><section><section>
 <h4>Using the <code>reportSets</code> Tag</h4>
 <p>You can configure a reporting plugin using the <code>reportSets</code> tag. This is most commonly used to generate
-reports selectively when running <code>mvn site</code>. The following (in <a href="pom.xml">pom.xml</a> file) will generate only the <code>surefire</code> and <code>failsafe</code> reports:</p>
+reports selectively when running <code>mvn site</code>. The following (in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/TestsExecution/pom.xml" class="externalLink">pom.xml</a> file) will generate only the <code>surefire</code> and <code>failsafe</code> reports:</p>
 
 <div class="verbatim">
 <pre><code>&lt;reporting&gt;
@@ -298,14 +298,14 @@ reports selectively when running <code>mvn site</code>. The following (in <a hre
 We can make use of the <a href="https://maven.apache.org/guides/mini/guide-configuring-plugins.html#configuring-build-plugins" class="externalLink">executions</a> tag, which is most commonly used for mojos that are intended to
 participate in some phases of the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html" class="externalLink">build lifecycle</a>.</p>
 <p>In the following example, we are binding the <a href="https://maven.apache.org/surefire/maven-surefire-report-plugin/report-only-mojo.html" class="externalLink">report-only goal</a> of the <a href="https://maven.apache.org/surefire/maven-surefire-report-plugin/" class="externalLink">surefire-report</a>
-plugin to the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">tset phase</a> (<a href="https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html" class="externalLink">surefire:test goal</a>
-of <a href="https://maven.apache.org/surefire/maven-surefire-plugin/" class="externalLink">surefire</a> plugin binds to the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">tset phase</a> by default) and
+plugin to the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">test phase</a> (<a href="https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html" class="externalLink">surefire:test goal</a>
+of <a href="https://maven.apache.org/surefire/maven-surefire-plugin/" class="externalLink">surefire</a> plugin binds to the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">test phase</a> by default) and
 then the <a href="https://maven.apache.org/surefire/maven-surefire-report-plugin/failsafe-report-only-mojo.html" class="externalLink">failsafe-report-only goal</a> of the <a href="https://maven.apache.org/surefire/maven-surefire-report-plugin/" class="externalLink">surefire-report</a> plugin
 to the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">integration-test phase</a> (<a href="https://maven.apache.org/surefire/maven-failsafe-plugin/integration-test-mojo.html" class="externalLink">failsafe:integration-test goal</a>
 of <a href="https://maven.apache.org/surefire/maven-failsafe-plugin/" class="externalLink">failsafe</a> plugin binds to the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">integration-test phase</a> by default).
 That configuration will trigger the <a href="https://maven.apache.org/surefire/maven-surefire-report-plugin/report-only-mojo.html" class="externalLink">report-only goal</a> once the tests are run to generate the
 surefire report and then, the <a href="https://maven.apache.org/surefire/maven-surefire-report-plugin/failsafe-report-only-mojo.html" class="externalLink">failsafe-report-only goal</a> once the integration tests
-are run to generate the failsafe report. See in <a href="pom.xml">pom.xml</a> file.</p>
+are run to generate the failsafe report. See in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/TestsExecution/pom.xml" class="externalLink">pom.xml</a> file.</p>
 
 <div class="verbatim">
 <pre><code>&lt;build&gt;
@@ -350,7 +350,7 @@ are run to generate the failsafe report. See in <a href="pom.xml">pom.xml</a> fi
 </code></pre></div></section><section>
 <h2>Read further if you want to set custom paths for tests' results</h2>
 <p>If you want to set the custom output directories for the tests' results, then continue reading.</p>
-<p>Following is what should go in the build section for custom paths (in <a href="pom.xml">pom.xml</a> file):</p>
+<p>Following is what should go in the build section for custom paths (in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/TestsExecution/pom.xml" class="externalLink">pom.xml</a> file):</p>
 
 <div class="verbatim">
 <pre><code>&lt;build&gt;
@@ -380,7 +380,7 @@ are run to generate the failsafe report. See in <a href="pom.xml">pom.xml</a> fi
 </code></pre></div>
 <p>Now, as the generated tests' summaries as part of the tests' run are not in their default locations, so we have to tell
 the reporting plugin to where to look for the test summaries to generate reports and hence, following is what should go
-in the reporting section (in <a href="pom.xml">pom.xml</a> file):</p>
+in the reporting section (in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/TestsExecution/pom.xml" class="externalLink">pom.xml</a> file):</p>
 
 <div class="verbatim">
 <pre><code>&lt;reporting&gt;

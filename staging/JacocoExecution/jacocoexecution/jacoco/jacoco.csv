@@ -1,0 +1,4 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Jacoco with Maven,au.com.lucidtech.jacocoexecution,JacocoExecutionApplication,0,8,0,0,0,3,0,2,0,2
+Jacoco with Maven,au.com.lucidtech.jacocoexecution.controller,GreetingController,0,23,0,0,0,3,0,2,0,2
+Jacoco with Maven,au.com.lucidtech.jacocoexecution.model,Greeting,0,9,0,0,0,1,0,1,0,1

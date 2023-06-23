@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0-M10" />
-    <title>Jacoco with Maven – Jacoco in action with Maven</title>
+    <title>Jacoco with Maven</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M6.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -92,7 +92,8 @@
       <li><a href="$https://github.com/faisalazam" class="externalLink" title="LucidTech">LucidTech</a><span class="divider">/</span></li>
       <li><a href="$https://github.com/faisalazam" class="externalLink" title="Muhammad Faisal">Muhammad Faisal</a><span class="divider">/</span></li>
       <li><a href="$https://github.com/faisalazam/MavenInActionWithGitHubActions" class="externalLink" title="MavenInActionWithGitHubActions">MavenInActionWithGitHubActions</a><span class="divider">/</span></li>
-    <li class="active ">Jacoco in action with Maven</li>
+
+    <li class="active ">Jacoco with Maven</li>
         <li id="publishDate" class="pull-right"><span class="divider">|</span> Last Published: 2023-06-23</li>
           <li id="projectVersion" class="pull-right">Version: 0.0.1-SNAPSHOT</li>
           </ul>
@@ -127,30 +128,303 @@
           </div>
         </header>
         <main id="bodyColumn"  class="span10" >
-<section><section>
-<h2>Jacoco in action with Maven</h2>
+<!-- TOC -->
+<ul>
+
+<li><a href="#goals-utilization">Goals utilization</a></li>
+<li><a href="#running-the-tests">Running the tests</a></li>
+<li><a href="#jacoco-code-coverage-reports">Jacoco Code Coverage Reports</a></li>
+<li><a href="#how-to-set-up-jacoco-plugin-with-maven">How to set up JaCoCo Plugin with Maven?</a>
+<ul>
+
+<li><a href="#configuration-for-unit-tests-with-custom-paths">Configuration for unit tests with custom paths</a></li>
+<li><a href="#configuration-for-integration-tests">Configuration for integration tests</a></li>
+</ul></li>
+<li><a href="#merge-the-dataexec-files">Merge the data/exec files</a></li>
+<li><a href="#generate-the-merged-coverage-report">Generate the merged coverage report</a></li>
+<li><a href="#add-code-coverage-check">Add code coverage check</a></li>
+<li><a href="#how-to-set-up-jacoco-plugin-with-maven-for-parallel-execution">How to set up JaCoCo Plugin with Maven for parallel execution?</a></li>
+</ul><!-- TOC -->
+<section>
+<h1 style="text-align:center">
+  Jacoco in action with Maven
+  <img src="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/.github/assets/awesome-badge.svg" alt="" />
+</h1>
+
+<p><a href="https://www.eclemma.org/jacoco/trunk/doc/maven.html" class="externalLink">Jacoco-Maven</a> (abbreviation for Java Code Coverage) plugin is an open-source code coverage tool for Java.
+It creates code coverage reports and integrates well with IDEs(Integrated development environments) like Eclipse IDE.</p>
 <p>The purpose of this small project (built on top of <a href="https://faisalazam.github.io/MavenInActionWithGitHubActions/staging/TestsExecution/testsexecution/index.html" class="externalLink">TestsExecution</a>) is to utilize the
-<a href="https://www.eclemma.org/jacoco/trunk/doc/maven.html" class="externalLink">Jacoco</a> plugin for code coverage reports. Individual reports for the code covered by unit tests as well as
+<a href="https://www.eclemma.org/jacoco/trunk/doc/maven.html" class="externalLink">Jacoco</a> plugin for code coverage reports.</p><section>
+<h2>Goals utilization</h2>
+<p>Following goals of the <a href="https://www.eclemma.org/jacoco/trunk/doc/maven.html" class="externalLink">Jacoco</a> plugin can be used to generate coverage reports:</p>
+<ul>
+
+<li>The <a href="https://www.eclemma.org/jacoco/trunk/doc/report-mojo.html" class="externalLink">report goal</a> can be used to generate the coverage report for unit tests only with little bit of config.</li>
+<li>The <a href="https://www.eclemma.org/jacoco/trunk/doc/report-integration-mojo.html" class="externalLink">report-integration goal</a> can be used to generate the coverage report for integration
+tests only with little bit of config.</li>
+<li>The <a href="https://www.eclemma.org/jacoco/trunk/doc/merge-mojo.html" class="externalLink">merge goal</a> can be used to generate the combined/merged coverage report for all the tests.</li>
+</ul>
+<p>Individual reports for the code covered by unit tests as well as
 integration tests will be generated. And then, a combined coverage report will also be generated to show the total coverage.
 These generated coverage reports will then be included in the project reports through <code>mvn site</code>.</p></section><section>
 <h2>Running the tests</h2>
 <p>See <a href="https://faisalazam.github.io/MavenInActionWithGitHubActions/staging/TestsExecution/testsexecution/README.html" class="externalLink">TestsExecution</a> project</p></section><section>
-<h2>Jacoco's Code Coverage Reports</h2>
+<h2>Jacoco Code Coverage Reports</h2>
 <ul>
 
 <li>Code coverage reports for
 <ul>
 
-<li>units tests are generated right after the execution of unit tests and can be found at <code>target/site/jacoco</code> directory.</li>
-<li>integration tests are generated right after the execution of integration tests and can be found at <code>target/site/jacoco-it</code> directory.</li>
+<li>units tests are generated right after the execution of unit tests and can be found in <code>target/site/jacoco</code> directory.</li>
+<li>integration tests are generated right after the execution of integration tests and can be found in <code>target/site/jacoco-it</code> directory.</li>
+<li>Combined or merged report for both the unit and the integration tests' will also be generated right after the
+execution of integration tests and can be found in <code>target/site/jacoco-merged</code> directory.</li>
 </ul></li>
-<li>Combined or merged report for both the unit and the integration tests' will also be generated right after the execution of integration tests.</li>
 <li>Once the reports are generated, point a browser at the output in any of the following directories to see:
 <ul>
 
 <li>unit tests' coverage report: <code>target/site/jacoco/index.html</code></li>
 <li>integration tests' coverage report: <code>target/site/jacoco-it/index.html</code></li>
 <li>all tests' coverage report: <code>target/site/jacoco-merged/index.html</code></li>
+</ul></li>
+</ul></section><section>
+<h2>How to set up JaCoCo Plugin with Maven?</h2>
+<p>Here are the steps to integrate JaCoCo Maven plugin with a Maven project:</p>
+<ul>
+
+<li>Declare the <a href="https://www.eclemma.org/jacoco/trunk/doc/maven.html" class="externalLink">Jacoco-Maven</a> plugin in the <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/JacocoExecution/pom.xml" class="externalLink">pom.xml</a> file as follows:
+
+<div class="verbatim">
+<pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.jacoco&lt;/groupId&gt;
+            &lt;artifactId&gt;jacoco-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;${jacoco-maven-plugin.version}&lt;/version&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre></div></li>
+<li>The above declaration won't be of much use without further configuration, so after the <code>version</code> tag, we add the
+<a href="https://maven.apache.org/guides/mini/guide-configuring-plugins.html#configuring-build-plugins" class="externalLink">executions</a> tag. This tag prepares the properties or execution to point to the JaCoCo agent
+and is passed as a VM (in this case, JVM) argument.</li>
+<li>The bare minimum for running simple unit tests (<code>mvn test</code>) is to set up a <a href="https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html" class="externalLink">prepare-agent goal</a>
+and <a href="https://www.eclemma.org/jacoco/trunk/doc/report-mojo.html" class="externalLink">report goal</a>. The following config will run the JaCoCo <a href="https://www.eclemma.org/jacoco/trunk/doc/report-mojo.html" class="externalLink">report goal</a>
+during the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">test phase</a> of the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html" class="externalLink">build lifecycle</a>:
+
+<div class="verbatim">
+<pre><code>&lt;plugin&gt;
+    &lt;groupId&gt;org.jacoco&lt;/groupId&gt;
+    &lt;artifactId&gt;jacoco-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;${jacoco-maven-plugin.version}&lt;/version&gt;
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;id&gt;before-unit-test-execution&lt;/id&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;prepare-agent&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+        &lt;execution&gt;
+            &lt;id&gt;after-unit-test-execution&lt;/id&gt;
+            &lt;phase&gt;test&lt;/phase&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;report&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;
+</code></pre></div>
+<ul>
+
+<li><section><section>
+<h4>Prepare-agent goal:</h4>The <a href="https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html" class="externalLink">prepare-agent goal</a> prepares the JaCoCo runtime agent to record
+the execution data. It records the number of lines executed, backtracked, etc. By default, the execution data is
+written to the file <code>target/jacoco.exec</code>.</li>
+<li></section><section>
+<h4>Report goal:</h4>The <a href="https://www.eclemma.org/jacoco/trunk/doc/report-mojo.html" class="externalLink">report goal</a> creates code coverage reports from the execution data recorded by
+the JaCoCo runtime agent. Since we have specified the phase property, so the reports will be created after the
+compilation of the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">test phase</a> of the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html" class="externalLink">build lifecycle</a>.
+By default, the execution data is read from the file <code>target/jacoco.exec</code>, and the code coverage report is written
+to the directory <code>target/site/jacoco/index.html</code>.</li>
+</ul></li>
+</ul></section><section>
+<h4>Configuration for unit tests with custom paths</h4>
+<p>The following configuration inside the <code>&lt;id&gt;before-unit-test-execution&lt;/id&gt;</code> execution block, will set the data execution
+file for the unit tests' coverage to be stored in <code>target/jacoco-execs/ut.exec</code> file and we achieve that by overwriting
+the <code>surefire.jacoco.exec.file.name.arg</code> property used while running unit tests.</p>
+
+<div class="verbatim">
+<pre><code>&lt;configuration&gt;
+    &lt;destFile&gt;target/jacoco-execs/ut.exec&lt;/destFile&gt;
+    &lt;propertyName&gt;surefire.jacoco.exec.file.name.arg&lt;/propertyName&gt;
+&lt;/configuration&gt;
+</code></pre></div>
+<p>We also need to tell where to find the data execution file while running the <a href="https://www.eclemma.org/jacoco/trunk/doc/report-mojo.html" class="externalLink">report goal</a>, so we'll use
+the following configuration in <code>after-unit-test-execution</code> execution block. We've also set the <code>outputDirectory</code> which
+is an optional setting, and thats where the generated report will be stored.</p>
+
+<div class="verbatim">
+<pre><code>&lt;configuration&gt;
+    &lt;destFile&gt;target/jacoco-execs/ut.exec&lt;/destFile&gt;
+    &lt;outputDirectory&gt;${jacoco.ut.reporting.directory}&lt;/outputDirectory&gt;
+&lt;/configuration&gt;
+</code></pre></div>
+<p>So, the full configuration for running the unit tests will look like this and we're all set as far as running and
+generating report for unit tests:</p>
+
+<div class="verbatim">
+<pre><code>&lt;execution&gt;
+    &lt;id&gt;before-unit-test-execution&lt;/id&gt;
+    &lt;goals&gt;
+        &lt;goal&gt;prepare-agent&lt;/goal&gt;
+    &lt;/goals&gt;
+    &lt;configuration&gt;
+        &lt;destFile&gt;target/jacoco-execs/ut.exec&lt;/destFile&gt;
+        &lt;propertyName&gt;surefire.jacoco.exec.file.name.arg&lt;/propertyName&gt;
+    &lt;/configuration&gt;
+&lt;/execution&gt;
+&lt;execution&gt;
+    &lt;id&gt;after-unit-test-execution&lt;/id&gt;
+    &lt;phase&gt;test&lt;/phase&gt;
+    &lt;goals&gt;
+        &lt;goal&gt;report&lt;/goal&gt;
+    &lt;/goals&gt;
+    &lt;configuration&gt;
+        &lt;destFile&gt;target/jacoco-execs/ut.exec&lt;/destFile&gt;
+        &lt;outputDirectory&gt;${jacoco.ut.reporting.directory}&lt;/outputDirectory&gt;
+    &lt;/configuration&gt;
+&lt;/execution&gt;
+</code></pre></div></section><section>
+<h4>Configuration for integration tests</h4>
+<p>Now we gonna need the exact same configuration for integration tests as follows:</p>
+
+<div class="verbatim">
+<pre><code>&lt;execution&gt;
+    &lt;id&gt;before-integration-test-execution&lt;/id&gt;
+    &lt;phase&gt;pre-integration-test&lt;/phase&gt;
+    &lt;goals&gt;
+        &lt;goal&gt;prepare-agent-integration&lt;/goal&gt;
+    &lt;/goals&gt;
+    &lt;configuration&gt;
+        &lt;destFile&gt;target/jacoco-execs/it.exec&lt;/destFile&gt;
+        &lt;propertyName&gt;failsafe.jacoco.exec.file.name.arg&lt;/propertyName&gt;
+    &lt;/configuration&gt;
+&lt;/execution&gt;
+&lt;execution&gt;
+    &lt;id&gt;after-integration-test-execution&lt;/id&gt;
+    &lt;phase&gt;post-integration-test&lt;/phase&gt;
+    &lt;goals&gt;
+        &lt;goal&gt;report-integration&lt;/goal&gt;
+    &lt;/goals&gt;
+    &lt;configuration&gt;
+        &lt;destFile&gt;target/jacoco-execs/it.exec&lt;/destFile&gt;
+        &lt;outputDirectory&gt;${jacoco.it.reporting.directory}&lt;/outputDirectory&gt;
+    &lt;/configuration&gt;
+&lt;/execution&gt;
+</code></pre></div>
+<p>In the above configuration, instead of using <a href="https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html" class="externalLink">prepare-agent goal</a> and <a href="https://www.eclemma.org/jacoco/trunk/doc/report-mojo.html" class="externalLink">report goal</a>,
+we used <a href="https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-integration-mojo.html" class="externalLink">prepare-agent-integration goal</a> and
+<a href="https://www.eclemma.org/jacoco/trunk/doc/report-integration-mojo.html" class="externalLink">report integration goal</a> which are more related to the execution of integration tests.</p>
+<p>The above config will run the JaCoCo <a href="https://www.eclemma.org/jacoco/trunk/doc/report-integration-mojo.html" class="externalLink">report integration goal</a> during the
+<a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">post-integration-test phase</a> of the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html" class="externalLink">build lifecycle</a>.</p></section></section></section><section>
+<h2>Merge the data/exec files</h2>
+<p>Add the following config after <code>&lt;id&gt;after-integration-test-execution&lt;/id&gt;</code> execution block:</p>
+
+<div class="verbatim">
+<pre><code>&lt;execution&gt;
+    &lt;id&gt;merge-unit-and-integration&lt;/id&gt;
+    &lt;phase&gt;post-integration-test&lt;/phase&gt;
+    &lt;goals&gt;
+        &lt;goal&gt;merge&lt;/goal&gt;
+    &lt;/goals&gt;
+    &lt;configuration&gt;
+        &lt;destFile&gt;target/jacoco-execs/merged.exec&lt;/destFile&gt;
+        &lt;fileSets&gt;
+            &lt;fileSet&gt;
+                &lt;directory&gt;target/jacoco-execs&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;ut.exec&lt;/include&gt;
+                    &lt;include&gt;it.exec&lt;/include&gt;
+                &lt;/includes&gt;
+            &lt;/fileSet&gt;
+        &lt;/fileSets&gt;
+    &lt;/configuration&gt;
+&lt;/execution&gt;
+</code></pre></div>
+<p>In the above configuration, we've bound the <a href="https://www.eclemma.org/jacoco/trunk/doc/merge-mojo.html" class="externalLink">merge goal</a> to the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">post-integration-test phase</a>
+of the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html" class="externalLink">build lifecycle</a>, which will merge the included <code>exec</code> files into one single combined <code>exec</code> file.</p></section><section>
+<h2>Generate the merged coverage report</h2>
+<p>Add the following config after <code>&lt;id&gt;merge-unit-and-integration&lt;/id&gt;</code> execution block:</p>
+
+<div class="verbatim">
+<pre><code>&lt;execution&gt;
+    &lt;id&gt;create-merged-report&lt;/id&gt;
+    &lt;phase&gt;post-integration-test&lt;/phase&gt;
+    &lt;goals&gt;
+        &lt;goal&gt;report&lt;/goal&gt;
+    &lt;/goals&gt;
+    &lt;configuration&gt;
+        &lt;dataFile&gt;${jacoco.merged.exec}&lt;/dataFile&gt;
+        &lt;outputDirectory&gt;${jacoco.merged.reporting.directory}&lt;/outputDirectory&gt;
+    &lt;/configuration&gt;
+&lt;/execution&gt;
+</code></pre></div>
+<p>In the above configuration, we've bound the <a href="https://www.eclemma.org/jacoco/trunk/doc/report-mojo.html" class="externalLink">report goal</a> to the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">post-integration-test phase</a>
+of the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html" class="externalLink">build lifecycle</a>, which will generate the combined coverage report from the provided <code>exec</code> file.</p></section><section>
+<h2>Add code coverage check</h2>
+<p>Add the following config after <code>&lt;id&gt;create-merged-report&lt;/id&gt;</code> execution block:</p>
+
+<div class="verbatim">
+<pre><code>&lt;execution&gt;
+    &lt;id&gt;jacoco-check&lt;/id&gt;
+    &lt;phase&gt;verify&lt;/phase&gt;
+    &lt;goals&gt;
+        &lt;goal&gt;check&lt;/goal&gt;
+    &lt;/goals&gt;
+    &lt;configuration&gt;
+        &lt;rules&gt;
+            &lt;rule&gt;
+                &lt;element&gt;CLASS&lt;/element&gt;
+                &lt;excludes&gt;
+                    &lt;exclude&gt;*Test&lt;/exclude&gt;
+                    &lt;exclude&gt;*IT&lt;/exclude&gt;
+                &lt;/excludes&gt;
+                &lt;limits&gt;
+                    &lt;limit&gt;
+                        &lt;counter&gt;LINE&lt;/counter&gt;
+                        &lt;value&gt;COVEREDRATIO&lt;/value&gt;
+                        &lt;minimum&gt;${jacoco.minimum.line.coverage}&lt;/minimum&gt;
+                    &lt;/limit&gt;
+                &lt;/limits&gt;
+            &lt;/rule&gt;
+        &lt;/rules&gt;
+        &lt;dataFile&gt;${jacoco.merged.exec}&lt;/dataFile&gt;
+    &lt;/configuration&gt;
+&lt;/execution&gt;
+</code></pre></div>
+<p>In the above configuration, we've bound the <a href="https://www.eclemma.org/jacoco/trunk/doc/check-mojo.html" class="externalLink">check goal</a> to the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference" class="externalLink">verify phase</a>
+of the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html" class="externalLink">build lifecycle</a>, which will perform the verification checks according the specified rules
+on the provided <code>exec</code> file, and will fail the build if the checks are not met.</p></section><section>
+<h2>How to set up JaCoCo Plugin with Maven for parallel execution?</h2>
+<p>More configuration is required if we want to run the unit tests and integration tests parallel/simultaneously on multiple
+machines. For example, in CI/CD environment, we usually want parallel execution of jobs as much as possible to speed up
+the build process. So, in order to achieve that, let's first have separate execution data files for unit and
+integration tests.</p>
+<p>To achieve the parallel execution, use the following commands:</p>
+<ul>
+
+<li>One job can run <code>mvn test -P ut</code>, which will generate a file named <code>jacoco.exec</code> or <code>jacoco-ut.exec</code>, store or
+upload that file somewhere for later use</li>
+<li>Another job can run <code>mvn integration-test -P it</code>, which will generate a file named <code>jacoco-it.exec</code>, store or
+upload that file somewhere for later use. <strong>NOTE</strong>: you might be wondering why we just didn't do <code>mvn verify -P nt</code>,
+that's because all the data files won't be present and hence the generated report won't be correct</li>
+<li>Then in the report generation job:
+<ul>
+
+<li>Download the <code>jacoco-ut.exec</code> and <code>jacoco-it.exec</code> data files</li>
+<li>Place them in the <code>target/jacoco-execs</code> directory or whichever directory you're using for the data files</li>
+<li>Run the <code>mvn post-integration-test -P nt</code> or <code>mvn verify -P nt</code>, and the generated reports will be there in the
+<code>target/site</code> directory</li>
 </ul></li>
 </ul><!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.lucidtech.maveninactionwithgithubactions"},{"l":"com.lucidtech.maveninactionwithgithubactions.controller"},{"l":"com.lucidtech.maveninactionwithgithubactions.model"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.lucidtech.puttingalltogether"},{"l":"com.lucidtech.puttingalltogether.controller"},{"l":"com.lucidtech.puttingalltogether.model"}];updateSearchResults();
