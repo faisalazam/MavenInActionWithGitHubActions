@@ -22,12 +22,12 @@ The generated site will be deployed automatically as part of every push to the G
 The deployment will happen using `GitHub workflows/actions`.
 
 ## Plugin Configurations
-We basically need `groupId` and `artifactId` to declare a plugin in [pom.xml](pom.xml) file.
+We basically need `groupId` and `artifactId` to declare a plugin in [pom.xml][pom-xml-url] file.
 Important Note: Always define the `version` of each plugin used to guarantee build reproducibility.
 
 But if we need more control over the plugin's configuration, then we can make use of the `configuration` element
 and the child elements (i.e. `skipTests` and `testFailureIgnore` in the code below) of the `configuration` element will be mapped
-to the properties/fields of the plugin's Mojo. So, we can set those fields like this (in [pom.xml](pom.xml) file):
+to the properties/fields of the plugin's Mojo. So, we can set those fields like this (in [pom.xml][pom-xml-url] file):
 
 ```
 <plugin>
@@ -52,7 +52,7 @@ Learn more about [Configuring plugins][configuring-plugins-url]
 ## Maven profiles
 * There are some profiles setup which can be used switch on/off certain things.
 * To see the list of configured profiles, run `mvn help:all-profiles`
-    * Configured profiles (in [pom.xml](pom.xml) file) are:
+    * Configured profiles (in [pom.xml][pom-xml-url] file) are:
 
       | Profile ID | Profile Description                                          |
       |------------|--------------------------------------------------------------|
@@ -102,7 +102,7 @@ Learn more about [Site Reporting][site-reporting-url]
 
 #### Using the `reportSets` Tag
 You can configure a reporting plugin using the `reportSets` tag. This is most commonly used to generate
-reports selectively when running `mvn site`. The following (in [pom.xml](pom.xml) file) will generate only the `surefire` and `failsafe` reports:
+reports selectively when running `mvn site`. The following (in [pom.xml][pom-xml-url] file) will generate only the `surefire` and `failsafe` reports:
 ```
 <reporting>
     <plugins>
@@ -136,7 +136,7 @@ to the [integration-test phase][integration-test-phase-url] ([failsafe:integrati
 of [failsafe][failsafe-url] plugin binds to the [integration-test phase][integration-test-phase-url] by default). 
 That configuration will trigger the [report-only goal][report-only-goal-url] once the tests are run to generate the 
 surefire report and then, the [failsafe-report-only goal][failsafe-report-only-goal-url] once the integration tests 
-are run to generate the failsafe report. See in [pom.xml](pom.xml) file.
+are run to generate the failsafe report. See in [pom.xml][pom-xml-url] file.
 ```
 <build>
     <plugins>
@@ -182,7 +182,7 @@ are run to generate the failsafe report. See in [pom.xml](pom.xml) file.
 ## Read further if you want to set custom paths for tests' results
 If you want to set the custom output directories for the tests' results, then continue reading.
 
-Following is what should go in the build section for custom paths (in [pom.xml](pom.xml) file):
+Following is what should go in the build section for custom paths (in [pom.xml][pom-xml-url] file):
 ```
 <build>
     <plugins>
@@ -212,7 +212,7 @@ Following is what should go in the build section for custom paths (in [pom.xml](
 
 Now, as the generated tests' summaries as part of the tests' run are not in their default locations, so we have to tell
 the reporting plugin to where to look for the test summaries to generate reports and hence, following is what should go
-in the reporting section (in [pom.xml](pom.xml) file):
+in the reporting section (in [pom.xml][pom-xml-url] file):
 ```
 <reporting>
     <plugins>
@@ -273,3 +273,4 @@ in the reporting section (in [pom.xml](pom.xml) file):
 [test-phase-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
 [integration-test-phase-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
 [site-generation-url]:https://faisalazam.github.io/MavenInActionWithGitHubActions/staging/SiteGeneration/sitegeneration/index.html
+[pom-xml-url]:https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/TestsExecution/pom.xml

@@ -51,7 +51,7 @@ See [TestsExecution][tests-execution-readme-url] project
 
 ## How to set up JaCoCo Plugin with Maven?
 Here are the steps to integrate JaCoCo Maven plugin with a Maven project:
-* Declare the [Jacoco-Maven][jacoco-url] plugin in the [pom.xml](pom.xml) file as follows:
+* Declare the [Jacoco-Maven][jacoco-url] plugin in the [pom.xml][pom-xml-url] file as follows:
     ```
     <build>
         <plugins>
@@ -294,3 +294,4 @@ To achieve the parallel execution, use the following commands:
 [executions-url]:https://maven.apache.org/guides/mini/guide-configuring-plugins.html#configuring-build-plugins
 [test-phase-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
 [build-lifecycle-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+[pom-xml-url]:https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/JacocoExecution/pom.xml
