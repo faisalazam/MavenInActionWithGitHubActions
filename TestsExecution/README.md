@@ -13,7 +13,7 @@
 
 ## Testing in action with Maven
 
-The purpose of this small project is to utilize the maven's [surefire][surefire-url], [failsafe][failsafe-url],
+The purpose of this small project (built on top of [SiteGeneration][site-generation-url]) is to utilize the maven's [surefire][surefire-url], [failsafe][failsafe-url],
 and [surefire-report][surefire-report-url] plugins
 to run the unit tests as well as integration tests both separately and running them together, as well as generate their
 separate reports and include them in the generated project reports through `mvn site`.
@@ -272,3 +272,4 @@ in the reporting section (in [pom.xml](pom.xml) file):
 [failsafe-report-only-goal-url]:https://maven.apache.org/surefire/maven-surefire-report-plugin/failsafe-report-only-mojo.html
 [test-phase-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
 [integration-test-phase-url]:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
+[site-generation-url]:https://faisalazam.github.io/MavenInActionWithGitHubActions/staging/SiteGeneration/sitegeneration/index.html
