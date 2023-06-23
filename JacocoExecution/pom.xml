@@ -22,6 +22,7 @@
         <skip.integration.tests>false</skip.integration.tests>
 
         <jacoco.merged.exec>${project.build.directory}/merged.exec</jacoco.merged.exec>
+        <jacoco.merged.reporting.directory>${target.site.directory}/jacoco-merged</jacoco.merged.reporting.directory>
 
         <!--   Plugin Versions   -->
         <maven-jxr-plugin.version>3.3.0</maven-jxr-plugin.version>
@@ -131,6 +132,17 @@
                                     </includes>
                                 </fileSet>
                             </fileSets>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-merged-report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${jacoco.merged.exec}</dataFile>
+                            <outputDirectory>${jacoco.merged.reporting.directory}</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
