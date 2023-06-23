@@ -21,6 +21,7 @@
         <ignore.test.failures>false</ignore.test.failures>
         <skip.integration.tests>false</skip.integration.tests>
 
+        <jacoco.minimum.line.coverage>80%</jacoco.minimum.line.coverage>
         <jacoco.merged.exec>${project.build.directory}/merged.exec</jacoco.merged.exec>
         <jacoco.merged.reporting.directory>${target.site.directory}/jacoco-merged</jacoco.merged.reporting.directory>
 
@@ -145,6 +146,36 @@
                             <outputDirectory>${jacoco.merged.reporting.directory}</outputDirectory>
                         </configuration>
                     </execution>
+                    <!--   Start -> To set the minimum code coverage threshold  -->
+                    <!--   The jacoco:check goal is bound to verify,
+                    so we can run the Maven command mvn clean verify to check whether the rules are respected or not.-->
+                    <execution>
+                        <id>jacoco-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>CLASS</element>
+                                    <excludes>
+                                        <exclude>*Test</exclude>
+                                        <exclude>*IT</exclude>
+                                    </excludes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.minimum.line.coverage}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                            <dataFile>${jacoco.merged.exec}</dataFile>
+                        </configuration>
+                    </execution>
+                    <!--   End -> To set the minimum code coverage threshold  -->
                 </executions>
             </plugin>
         </plugins>
