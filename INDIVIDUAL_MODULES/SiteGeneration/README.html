@@ -124,7 +124,7 @@
 <li><a href="#generating-the-project-site">Generating the Project Site</a></li>
 <li><a href="#plugins-to-use">Plugins to use</a></li>
 <li><a href="#configuring-the-project-site">Configuring the project site</a></li>
-<li><a href="#setting-custom-css-or-javascript-site-descriptor-file">Setting custom css or javascript site descriptor file</a></li>
+<li>[Setting custom css or javascript <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/SiteGeneration/src/site/site.xml" class="externalLink">site descriptor</a> file](#setting-custom-css-or-javascript-site-descriptorsite-xml-url-file)</li>
 <li><a href="#copying-the-readmemd-file">Copying the README.md file</a></li>
 <li><a href="#generating-the-project-site-for-multimodule-project">Generating the Project Site for multimodule project</a></li>
 <li><a href="#configuring-reports">Configuring Reports</a></li>
@@ -152,7 +152,7 @@
 </ul></li>
 </ul></section><section>
 <h2>Plugins to use</h2>
-<p>We need to add the following couple of plugins (in <a href="pom.xml">pom.xml</a> file):</p>
+<p>We need to add the following couple of plugins (in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/SiteGeneration/pom.xml" class="externalLink">pom.xml</a> file):</p>
 
 <div class="verbatim">
 <pre><code>&lt;build&gt;
@@ -173,14 +173,14 @@
 <p>The generated site will be deployed automatically as part of every push to the GitHub Pages. The deployment will happen using GitHub workflows/actions.</p>
 <p>Learn more about <a href="https://maven.apache.org/guides/mini/guide-site.html" class="externalLink">create the documentation for your project</a></p></section><section>
 <h2>Configuring the project site</h2>
-<p><a href="https://maven.apache.org/guides/mini/guide-site.html#creating-a-site-descriptor" class="externalLink">Site descriptor</a> is the <a href="src/site/site.xml">site.xml</a> file located in <code>src/site</code>. It's a xml file used to configure
+<p><a href="https://maven.apache.org/guides/mini/guide-site.html#creating-a-site-descriptor" class="externalLink">Site descriptor</a> is the <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/SiteGeneration/src/site/site.xml" class="externalLink">site.xml</a> file located in <code>src/site</code>. It's a xml file used to configure
 the project site. Resources like images, css, js required for the site can be placed in <code>src/site/resources/*</code>.
 After the site generation, these resources will be in their respective folders in <code>target/site/*</code>.</p>
-<p>Maven site can also be generated without the <a href="src/site/site.xml">site descriptor</a> file, but adding it will give better control
+<p>Maven site can also be generated without the <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/SiteGeneration/src/site/site.xml" class="externalLink">site descriptor</a> file, but adding it will give better control
 over the content of the site, i.e. adding customisations as well as more links to the generated site; just as we
 added the <a href="README.html">README.md</a> file to it.</p></section><section>
-<h2>Setting custom css or javascript <a href="src/site/site.xml">site descriptor</a> file</h2>
-<p>Below is just some sample code to set custom css or javascript in the <a href="src/site/site.xml">site descriptor</a> file:</p>
+<h2>Setting custom css or javascript <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/SiteGeneration/src/site/site.xml" class="externalLink">site descriptor</a> file</h2>
+<p>Below is just some sample code to set custom css or javascript in the <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/SiteGeneration/src/site/site.xml" class="externalLink">site descriptor</a> file:</p>
 
 <div class="verbatim">
 <pre><code>&lt;body&gt;
@@ -198,7 +198,7 @@ added the <a href="README.html">README.md</a> file to it.</p></section><section>
 <h2>Copying the <a href="README.html">README.md</a> file</h2>
 <p>In order to include the <a href="README.html">README.md</a> file in the generated site, it has to be copied to the right location first.
 We'll use the <a href="https://maven.apache.org/plugins/maven-resources-plugin/" class="externalLink">maven-resources-plugin</a> to copy the <a href="README.html">README.md</a> file to
-the desired location as (in <a href="pom.xml">pom.xml</a> file):</p>
+the desired location as (in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/SiteGeneration/pom.xml" class="externalLink">pom.xml</a> file):</p>
 
 <div class="verbatim">
 <pre><code>&lt;build&gt;
@@ -243,7 +243,7 @@ for each of the modules, but the problem is, when we try to navigate to the subm
 parent's site, those links will be broken. In order to fix that issue, a simple solution would be to
 configure the stage goal. It will automatically aggregate the documentation of each module in
 the <code>${project.baseURI}/target/staging</code> folder. The trick is to add <a href="https://maven.apache.org/pom.html#Site_Distribution" class="externalLink">distributionManagement</a>
-to the <a href="../pom.xml">parent pom</a> of all the submodules:</p>
+to the <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/pom.xml" class="externalLink">parent pom</a> of all the submodules:</p>
 
 <div class="verbatim">
 <pre><code>&lt;distributionManagement&gt;
@@ -254,7 +254,7 @@ to the <a href="../pom.xml">parent pom</a> of all the submodules:</p>
 &lt;/distributionManagement&gt;
 </code></pre></div></section><section>
 <h2>Configuring Reports</h2>
-<p>In order to configure a subset of the standard reports which are included by default, include the reporting in <a href="pom.xml">pom.xml</a> file:</p>
+<p>In order to configure a subset of the standard reports which are included by default, include the reporting in <a href="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/SiteGeneration/pom.xml" class="externalLink">pom.xml</a> file:</p>
 
 <div class="verbatim">
 <pre><code>&lt;reporting&gt;
