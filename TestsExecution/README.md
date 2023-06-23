@@ -129,8 +129,8 @@ We can make use of the [executions][executions-url] tag, which is most commonly 
 participate in some phases of the [build lifecycle][build-lifecycle-url].
 
 In the following example, we are binding the [report-only goal][report-only-goal-url] of the [surefire-report][surefire-report-url]
-plugin to the [tset phase][test-phase-url] ([surefire:test goal][surefire-test-goal-url] 
-of [surefire][surefire-url] plugin binds to the [tset phase][test-phase-url] by default) and 
+plugin to the [test phase][test-phase-url] ([surefire:test goal][surefire-test-goal-url] 
+of [surefire][surefire-url] plugin binds to the [test phase][test-phase-url] by default) and 
 then the [failsafe-report-only goal][failsafe-report-only-goal-url] of the [surefire-report][surefire-report-url] plugin 
 to the [integration-test phase][integration-test-phase-url] ([failsafe:integration-test goal][failsafe-integration-test-goal-url]
 of [failsafe][failsafe-url] plugin binds to the [integration-test phase][integration-test-phase-url] by default). 

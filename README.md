@@ -8,7 +8,8 @@
 
 
 <h1 style="text-align:center">
-  Maven, Plugins, GitHub Pages, and GitHub Workflows/Actions ![Awesome](https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/.github/assets/awesome-badge.svg)
+  Maven/Plugins & GitHub Pages/Workflows/Actions
+  <img src="https://github.com/faisalazam/MavenInActionWithGitHubActions/raw/master/.github/assets/awesome-badge.svg" alt="" />
 </h1>
 
 <p>
@@ -51,6 +52,16 @@ Following are the submodules of this [parent project][parent-project-url]:
 
 Every next submodule is built on top of the previous submodule. For exampple, [TestsExecution][tests-execution-url] is 
 built on top of [SiteGeneration][site-generation-url].
+
+## Maven and Java Version
+Following are the versions which are installed and used to develop these projects:
+```
+Apache Maven 3.9.2 (c9616018c7a021c1c39be70fb2843d6f5f9b8a1c)
+Maven home: /usr/local/Cellar/maven/3.9.2/libexec
+Java version: 20.0.1, vendor: Homebrew, runtime: /usr/local/Cellar/openjdk/20.0.1/libexec/openjdk.jdk/Contents/Home
+Default locale: en_AU, platform encoding: UTF-8
+OS name: "mac os x", version: "13.4", arch: "x86_64", family: "mac"
+```
 
 Contributing
 ------------
