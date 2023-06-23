@@ -1,10 +1,10 @@
-package com.lucidtech.maveninactionwithgithubactions;
+package com.lucidtech.puttingalltogether;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MavenInActionWithGitHubActionsApplicationTests {
+class PuttingAllTogetherApplicationTests {
 
     @Test
     void contextLoads() {
@@ -12,6 +12,6 @@ class MavenInActionWithGitHubActionsApplicationTests {
 
     @Test
     public void applicationStarts() {
-        MavenInActionWithGitHubActionsApplication.main(new String[]{});
+        PuttingAllTogetherApplication.main(new String[]{});
     }
 }

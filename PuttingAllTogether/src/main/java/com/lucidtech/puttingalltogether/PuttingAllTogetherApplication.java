@@ -1,11 +1,11 @@
-package com.lucidtech.maveninactionwithgithubactions;
+package com.lucidtech.puttingalltogether;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MavenInActionWithGitHubActionsApplication {
+public class PuttingAllTogetherApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MavenInActionWithGitHubActionsApplication.class, args);
+        SpringApplication.run(PuttingAllTogetherApplication.class, args);
     }
 }

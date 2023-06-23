@@ -1,6 +1,6 @@
-package com.lucidtech.maveninactionwithgithubactions.samples;
+package com.lucidtech.puttingalltogether.samples;
 
-import com.lucidtech.maveninactionwithgithubactions.controller.GreetingController;
+import com.lucidtech.puttingalltogether.controller.GreetingController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

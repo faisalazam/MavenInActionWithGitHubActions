@@ -1,6 +1,6 @@
-package com.lucidtech.maveninactionwithgithubactions.samples;
+package com.lucidtech.puttingalltogether.samples;
 
-import com.lucidtech.maveninactionwithgithubactions.controller.GreetingController;
+import com.lucidtech.puttingalltogether.controller.GreetingController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

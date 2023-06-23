@@ -1,6 +1,6 @@
-package com.lucidtech.maveninactionwithgithubactions.controller;
+package com.lucidtech.puttingalltogether.controller;
 
-import com.lucidtech.maveninactionwithgithubactions.model.Greeting;
+import com.lucidtech.puttingalltogether.model.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,4 +1,4 @@
-package com.lucidtech.maveninactionwithgithubactions.samples;
+package com.lucidtech.puttingalltogether.samples;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
