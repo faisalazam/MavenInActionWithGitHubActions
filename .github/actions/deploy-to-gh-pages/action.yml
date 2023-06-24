@@ -8,6 +8,9 @@ inputs:
   UPLOADED_ARTIFACTS_DIR:
     required: true
     description: 'Uploads artifacts directory'
+  SITE_DIR:
+    required: true
+    description: 'Directory containing the contents of the site'
   MODULE_DIR:
     required: true
     description: 'Directory containing the module code'

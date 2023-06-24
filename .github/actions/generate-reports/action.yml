@@ -47,5 +47,4 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.UPLOADED_ARTIFACTS_DIR }}
-        retention-days: 1
         path: ${{ inputs.MODULE_DIR }}/target

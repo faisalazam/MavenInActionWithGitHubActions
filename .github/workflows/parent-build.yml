@@ -47,7 +47,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          retention-days: 1
           path: target-staging
 
   deploy-to-gh-pages:
@@ -75,3 +74,15 @@ jobs:
           folder: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           # to push the contents of the deployment folder into a specific directory on the deployment branch
           clean-exclude: INDIVIDUAL_MODULES
+
+  cleanup:
+    name: 'Cleanup actions'
+    needs:
+      - deploy-to-gh-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: "♻️ remove build artifacts"
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}*
+          failOnError: false

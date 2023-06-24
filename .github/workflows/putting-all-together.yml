@@ -104,7 +104,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          retention-days: 1
           path: ${{ env.TARGET_DIR }}
 
   generate-project-site:
@@ -150,7 +149,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.UPLOADED_ARTIFACTS_DIR }}
-          retention-days: 1
           path: 'site/badges/jacoco'
 
   deploy-to-gh-pages:
@@ -183,3 +181,15 @@ jobs:
     with:
       JAVA_VERSION_TO_INSTALL: ${{ needs.setup-env.outputs.JAVA_VERSION }}
       MODULE_DIR: ${{ needs.setup-env.outputs.MODULE_DIR }}
+
+  cleanup:
+    name: 'Cleanup actions'
+    needs:
+      - deploy-to-gh-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: "♻️ remove build artifacts"
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}*
+          failOnError: false

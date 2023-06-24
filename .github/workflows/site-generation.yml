@@ -36,3 +36,15 @@ jobs:
           UPLOADED_ARTIFACTS_DIR: ${{ env.UPLOADED_ARTIFACTS_DIR }}
           MODULE_DIR: ${{ env.MODULE_DIR }}
           SITE_DIR: ${{ env.SITE_DIR }}
+
+  cleanup:
+    name: 'Cleanup actions'
+    needs:
+      - deploy-to-gh-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: "♻️ remove build artifacts"
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: ${{ env.UPLOADED_ARTIFACTS_DIR }}*
+          failOnError: false
